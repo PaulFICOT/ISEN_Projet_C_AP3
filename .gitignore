@@ -6,3 +6,5 @@ gtk/
 # ignore all .out files
 *.out
 *.o
+# ignore all .bin files
+*.bin
