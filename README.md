@@ -1,5 +1,5 @@
 # Simulateur d'interaction électrostatiques
-**Deadline : 20/06 à 0h00**
+**Deadline : 20/06 à 0h00**  
 **À envoyer par mail à olivier.cros@yncrea.fr et yannick.lambert@yncrea.fr**
 
 Protocole à suivre -> ANSSI C (C89)  
