@@ -2,6 +2,8 @@
 **Deadline : 20/06 à 0h00**  
 **À envoyer par mail à olivier.cros@yncrea.fr et yannick.lambert@yncrea.fr**
 
+Lien de la librairie GTK (3.20) : [ici](https://download.gnome.org/sources/gtk+/3.20/gtk+-3.20.0.tar.xz "GTK 3.20")
+
 Protocole à suivre -> ANSSI C (C89)  
 Librairie graphique -> OpenGL | GTK  
 
