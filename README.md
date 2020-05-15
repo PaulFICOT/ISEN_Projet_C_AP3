@@ -2,10 +2,13 @@
 **Deadline : 20/06 à 0h00**  
 **À envoyer par mail à olivier.cros@yncrea.fr et yannick.lambert@yncrea.fr**
 
-Lien de la librairie GTK (3.20) : [ici](https://download.gnome.org/sources/gtk+/3.20/gtk+-3.20.0.tar.xz "GTK 3.20")  
-Sur Mac OS, il faut lancer la commande `brew install gtk+3`  
-### Ubuntu
+Lien de la librairie GTK (3.20) : [ici](https://download.gnome.org/sources/gtk+/3.20/gtk+-3.20.0.tar.xz "GTK 3.20") 
 
+### Mac OS
+* Lancer la commande  
+`brew install gtk+3`
+
+### Ubuntu
 * Installer gtk
   ```
   sudo apt install libgtk-3-dev
