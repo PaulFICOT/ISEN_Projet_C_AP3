@@ -1,5 +1,5 @@
 # ISEN_Projet_C_AP3
-Simulateur d'interaction électrostatiques
+## Simulateur d'interaction électrostatiques
 
 Protocole à suivre -> ANSSI C (C89)  
 Librairie graphique -> OpenGL | GTK  
@@ -11,7 +11,7 @@ Objectif -> calculer numériquement les intéractions électrostatiques entre pl
 
 A partir d'un modèle électrostatique simple, le programme calculera et affichera le mouvement des charges mobiles ainsi que les forces de Coulomb.
 
-Votre outil devra permettre les fonctionnalités suivantes
+## Les fonctionnalités
 * Représenter les outils et interactions électromagnétiques dans un moteur de simulation dédié
 * Ajouter une charge fixe
 * Ajouter une charge mobile
@@ -22,7 +22,7 @@ Votre outil devra permettre les fonctionnalités suivantes
 * La visualisation du mouvement des charges mobiles
 * En bonus vous pourrez afficher également les lignes de champ et le potentiel électrostatique
 
-Les contraintes :
+## Les contraintes
 * On ne considérera que des charges électriques ponctuelles. Une masse et un nombre fini de charges élémentaires seront affectés à chaque point.
 * Le programme devra permettre la saisie du nombre et de la position des charges ainsi que leur état (fixe ou mobile).
 * Afin de modéliser les interactions entre les charges, on prendra un modèle simple en deux parties :
