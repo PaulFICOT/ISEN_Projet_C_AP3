@@ -1,14 +1,11 @@
 CC=gcc
-CFLAGS=-W -Wall -ansi -pedantic
-EXEC= projetc
+CFLAGS= -Wall -ansi -W
 
-all: $(EXEC)
+all : main.o
+	$(CC) -o main.out main.o
 
-$(EXEC): main.o 
-    $(CC) -o $(EXEC) main.o
+td.o : main.c
+	$(CC) -c main.c $(CFLAGS)
 
-main.o: main.c 
-    $(CC) -o main.o -c main.c $(CFLAGS)
-
-clean:
-    rm -rf *.o
+clean :
+	rm -rf *.o
