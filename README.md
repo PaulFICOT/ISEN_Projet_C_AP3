@@ -1,5 +1,6 @@
-# ISEN_Projet_C_AP3
-## Simulateur d'interaction électrostatiques
+# Simulateur d'interaction électrostatiques
+**Deadline : 20/06 à 0h00**
+**À envoyer par mail à olivier.cros@yncrea.fr et yannick.lambert@yncrea.fr**
 
 Protocole à suivre -> ANSSI C (C89)  
 Librairie graphique -> OpenGL | GTK  
@@ -29,4 +30,7 @@ A partir d'un modèle électrostatique simple, le programme calculera et affiche
   * Une partie statique ou l'on calaculera les forces s'appliquant sur chaque charge dans le cadre de l'électrostatique
   * Une partie dynamique où l'on calculera le déplacement des charges par appalication du principe fondamental de la dynamique.
 * Pour que le point précédent reste valable, il faudra tenir compte des petites variations temporelles et spatiales. L'échelle de temps sera donc un élément à prendre en compte (via une variable, par exemple).
+* Rendre un fichier de documentation décrivant les étapes nécessaires pour compiler le binaire de l'outil.
+
+
 
