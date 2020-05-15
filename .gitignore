@@ -3,3 +3,5 @@
 *.exe
 # ignore gtk directory
 gtk/
+# ignore all .out files
+*.out
