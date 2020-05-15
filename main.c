@@ -1,7 +1,7 @@
-//Headers
+/*Headers*/
 #include <stdio.h>
 #include <stdlib.h>
-//#include <gtk.h>
+/*#include <gtk.h>*/
 
 int main()
 {
