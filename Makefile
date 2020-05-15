@@ -1,11 +1,14 @@
 CC=gcc
-CFLAGS= -Wall -ansi -W
+CFLAGS=-W -Wall -ansi
+EXEC=projetc
 
-all : main.o
-	$(CC) -o main.out main.o
+all: $(EXEC)
 
-td.o : main.c
-	$(CC) -c main.c $(CFLAGS)
+$(EXEC) : main.o
+	$(CC) -o $(EXEC) main.o
 
-clean :
+main.o: main.c
+	$(CC) -o main.o -c main.c $(CFLAGS)
+
+clean:
 	rm -rf *.o
