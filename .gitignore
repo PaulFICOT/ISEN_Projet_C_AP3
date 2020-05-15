@@ -1,1 +1,5 @@
 .idea/*
+# ignore all .exe files
+*.exe
+# ignore gtk directory
+gtk/
