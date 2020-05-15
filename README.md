@@ -4,7 +4,13 @@
 
 Lien de la librairie GTK (3.20) : [ici](https://download.gnome.org/sources/gtk+/3.20/gtk+-3.20.0.tar.xz "GTK 3.20")  
 Sur Mac OS, il faut lancer la commande `brew install gtk+3`  
+### Ubuntu
 
+* Installer gtk
+  ```
+  sudo apt install libgtk-3-dev
+  gcc `pkg-config --cflags gtk+-3.0` -o projetc main.c `pkg-config --libs gtk+-3.0`
+  ```
 Protocole à suivre -> ANSSI C (C89)  
 Librairie graphique -> OpenGL | GTK  
 
