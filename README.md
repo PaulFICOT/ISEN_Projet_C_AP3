@@ -25,7 +25,7 @@ Il y a différentes charges (fixes et mobiles)
 
 Objectif -> calculer numériquement les intéractions électrostatiques entre plusieurs particules chargées afin de déterminer les grandeurs physiques caractéristiques (champ électrique, force de Coulomb, mouvement d'une ou plusieurs particules etc...) d'une géométrie donnée.
 
-A partir d'un modèle électrostatique simple, le programme calculera et affichera le mouvement des charges mobiles ainsi que les forces de Coulomb.
+À partir d'un modèle électrostatique simple, le programme calculera et affichera le mouvement des charges mobiles ainsi que les forces de Coulomb.
 
 ## Les fonctionnalités
 * Représenter les outils et interactions électromagnétiques dans un moteur de simulation dédié
