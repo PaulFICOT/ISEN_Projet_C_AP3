@@ -10,7 +10,7 @@ charge_system charge_system_create(int min_abscissa, int max_abscissa, int min_o
 }
 
 double coulomb_law(double a, double b, double r) {
-    return (1 / (4*PI*EPSILON_0))*((a*b)/(r*r));
+    return COULOMB_CONST * (fabs(a*b)/pow(r, 2));
 }
 
 double two_points_distance(coordinate a, coordinate b) {

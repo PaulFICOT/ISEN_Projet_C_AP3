@@ -25,10 +25,9 @@ static void activate (GtkApplication *app, gpointer user_data) {
   g_signal_connect_swapped (button, "clicked", G_CALLBACK (gtk_widget_destroy), window);
   gtk_container_add (GTK_CONTAINER (button_box), button);
 
-  fixed_charge c1 = fixed_charge_create(0.0, 0.0, POSITIVE, 50);
-  fixed_charge c2 = fixed_charge_create(3.0, 7.0, NEGATIVE, 63);
-  printf("%f\n", two_points_distance(c1.position, c2.position));
-  printf("%f\n", coulomb_law(c1.force, c2.force, two_points_distance(c1.position, c2.position)));
+  fixed_charge c1 = fixed_charge_create(0.0, 0.0, POSITIVE, 0.25E-6);
+  fixed_charge c2 = fixed_charge_create(3.0, 7.0, NEGATIVE, -0.5E-6);
+  printf("%f\n", coulomb_law(c1.force, c2.force, 0.075));
 
   gtk_widget_show_all (window);
 }
