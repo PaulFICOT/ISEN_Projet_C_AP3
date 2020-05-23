@@ -8,3 +8,5 @@ gtk/
 *.o
 # ignore all .bin files
 *.bin
+
+.vscode/*
