@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "gtk/gtk.h"
+#include "logic/sources/coordinate.c"
 
 static void print_hello (GtkWidget *widget, gpointer data) {
   g_print ("Hello World\n");
@@ -23,6 +24,10 @@ static void activate (GtkApplication *app, gpointer user_data) {
   g_signal_connect (button, "clicked", G_CALLBACK (print_hello), NULL);
   g_signal_connect_swapped (button, "clicked", G_CALLBACK (gtk_widget_destroy), window);
   gtk_container_add (GTK_CONTAINER (button_box), button);
+
+  coordinate c = coordinate_create(33.4, 2.6);
+
+  printf("%f, %f\n", c.x, c.y);
 
   gtk_widget_show_all (window);
 }
