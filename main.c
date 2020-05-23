@@ -25,8 +25,10 @@ static void activate (GtkApplication *app, gpointer user_data) {
   g_signal_connect_swapped (button, "clicked", G_CALLBACK (gtk_widget_destroy), window);
   gtk_container_add (GTK_CONTAINER (button_box), button);
 
-  coordinate c = coordinate_create(33.4, 2.6);
-  charge_system s = charge_system_create(0, 50, 0, 50);
+  fixed_charge c1 = fixed_charge_create(0.0, 0.0, POSITIVE, 50);
+  fixed_charge c2 = fixed_charge_create(3.0, 7.0, NEGATIVE, 63);
+  printf("%f\n", two_points_distance(c1.position, c2.position));
+  printf("%f\n", coulomb_law(c1.force, c2.force, two_points_distance(c1.position, c2.position)));
 
   gtk_widget_show_all (window);
 }

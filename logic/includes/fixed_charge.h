@@ -5,8 +5,8 @@ typedef struct fixed_charge_ fixed_charge;
 
 struct fixed_charge_ {
     coordinate position;
-    double charge;
+    charge charge;
     double force;
 };
 
-fixed_charge fixed_charge_create(double x, double y, double charge, double force);
+fixed_charge fixed_charge_create(double x, double y, charge charge, double force);
