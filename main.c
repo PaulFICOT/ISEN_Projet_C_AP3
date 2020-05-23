@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "gtk/gtk.h"
-#include "logic/sources/coordinate.c"
+#include "logic/includes/charge_system.h"
 
 static void print_hello (GtkWidget *widget, gpointer data) {
   g_print ("Hello World\n");
@@ -26,8 +26,7 @@ static void activate (GtkApplication *app, gpointer user_data) {
   gtk_container_add (GTK_CONTAINER (button_box), button);
 
   coordinate c = coordinate_create(33.4, 2.6);
-
-  printf("%f, %f\n", c.x, c.y);
+  charge_system s = charge_system_create(0, 50, 0, 50);
 
   gtk_widget_show_all (window);
 }
