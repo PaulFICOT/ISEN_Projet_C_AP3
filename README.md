@@ -3,49 +3,42 @@
 **À envoyer par mail à olivier.cros@yncrea.fr et yannick.lambert@yncrea.fr**
 
 Lien de la librairie GTK (3.20) : [ici](https://download.gnome.org/sources/gtk+/3.20/gtk+-3.20.0.tar.xz "GTK 3.20") 
+## How to install GTK
 
 ### Mac OS
-* Lancer la commande 
-  ```
+  ```shell
   brew install gtk+3
-  gcc `pkg-config --cflags gtk+-3.0` -o projetc main.c `pkg-config --libs gtk+-3.0`
   ```
 
 ### Ubuntu
-* Installer gtk
-  ```
+  ```shell
   sudo apt install libgtk-3-dev
-  gcc `pkg-config --cflags gtk+-3.0` -o projetc main.c `pkg-config --libs gtk+-3.0`
   ```
+
+__To ensure you've correctly installed GTK, try the following command inside the project's root directory:__ 
+```
+make
+```
 Protocole à suivre -> ANSSI C (C89)  
-Librairie graphique -> OpenGL | GTK  
+Librairie graphique -> GTK  
 
-Un champ complet (représenté par un rectangle)
-Il y a différentes charges (fixes et mobiles)
+## Good practices
 
-Objectif -> calculer numériquement les intéractions électrostatiques entre plusieurs particules chargées afin de déterminer les grandeurs physiques caractéristiques (champ électrique, force de Coulomb, mouvement d'une ou plusieurs particules etc...) d'une géométrie donnée.
+### Architecture
+* There is 2 main directories: __logic__, which refers to the physic part of the project, and __graphic__, which contains all the graphical part of the project.
+* Both of these directories contains 2 directories: __includes__, which contains every headers file, ans __sources__, which contains the source files.
 
-À partir d'un modèle électrostatique simple, le programme calculera et affichera le mouvement des charges mobiles ainsi que les forces de Coulomb.
+### Makefile
+* When creating a new file, be sure to add its path to the __SOURCE_FILES__ variable and the __O_FILES__ variable, otherwise they won't be compiled.
 
-## Les fonctionnalités
-* Représenter les outils et interactions électromagnétiques dans un moteur de simulation dédié
-* Ajouter une charge fixe
-* Ajouter une charge mobile
-* Lancer une simulation pour un temps donné
-* Afficher le résultat au moyen d’une interface graphique
-* Générer un champ et des charges placées manuellement ou aléatoirement
-* L’affichage de la force de Coulomb associé à chaque charge en sélectionnant la charge en question
-* La visualisation du mouvement des charges mobiles
-* En bonus vous pourrez afficher également les lignes de champ et le potentiel électrostatique
+### Miscellaneous
 
-## Les contraintes
-* On ne considérera que des charges électriques ponctuelles. Une masse et un nombre fini de charges élémentaires seront affectés à chaque point.
-* Le programme devra permettre la saisie du nombre et de la position des charges ainsi que leur état (fixe ou mobile).
-* Afin de modéliser les interactions entre les charges, on prendra un modèle simple en deux parties :
-  * Une partie statique ou l'on calaculera les forces s'appliquant sur chaque charge dans le cadre de l'électrostatique
-  * Une partie dynamique où l'on calculera le déplacement des charges par appalication du principe fondamental de la dynamique.
-* Pour que le point précédent reste valable, il faudra tenir compte des petites variations temporelles et spatiales. L'échelle de temps sera donc un élément à prendre en compte (via une variable, par exemple).
-* Rendre un fichier de documentation décrivant les étapes nécessaires pour compiler le binaire de l'outil.
+* You __never__ should include a .c file. The only files which should be included are the headers (.h) files.
 
+* Every "class-like" functions (constructors, getter/setter, toString, etc...) should start with the name of the struct to prevent struct mismatches.
 
+Example:
+```
+my_struct_to_string(my_truct a);
+```
 
