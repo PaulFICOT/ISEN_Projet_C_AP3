@@ -23,6 +23,8 @@ charge_system charge_system_create(int min_abscissa, int max_abscissa, int min_o
 
 double coulomb_law(charge a, charge b);
 
+double superposition_law(charge fixed_charges[], int fixed_charges_index, charge mobile_charge);
+
 void add_fixed_charge(charge_system c_s, charge ch);
 
 void add_mobile_charge(charge_system c_s, charge ch);

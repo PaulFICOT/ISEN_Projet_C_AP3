@@ -12,6 +12,7 @@ LDFLAGS = $(ERROR_FLAGS) $(GTK_LDFLAGS) $(LIB_FLAGS)
 
 # Add \ at the end of the line to put each filename on a newline
 SOURCE_FILES = logic/sources/coordinate.c \
+logic/sources/vector.c \
 logic/sources/range.c \
 logic/sources/charge_system.c \
 logic/sources/charge.c \
@@ -19,10 +20,12 @@ main.c
 
 # Add \ at the end of the line to put each filename on a newline
 O_FILES = coordinate.o \
+vector.o \
 range.o \
 charge.o \
 charge_system.o \
 main.o
+
 all: $(EXEC)
 
 $(EXEC): $(SOURCE_FILES)
