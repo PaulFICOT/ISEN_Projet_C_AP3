@@ -8,11 +8,13 @@ CFLAGS = $(ERROR_FLAGS) $(GTK_CFLAGS)
 GTK_LDFLAGS = `pkg-config --libs gtk+-3.0`
 LDFLAGS = $(ERROR_FLAGS) $(GTK_LDFLAGS)
 
-# Add \ at the end of the line to put each filename on a newline
-SOURCE_FILES = main.c 
+SOURCE_FILES = window/sources/config.c \
+window/sources/draw.c \
+main.c
 
-# Add \ at the end of the line to put each filename on a newline
-O_FILES = main.o
+O_FILES = config.o \
+draw.o \
+main.o
 
 all: $(EXEC)
 
