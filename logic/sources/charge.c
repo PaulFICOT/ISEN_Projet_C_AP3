@@ -1,10 +1,11 @@
 #include "../includes/charge.h"
 
-charge charge_create(double x, double y, symbol symbol, double force) {
-    charge f_c;
+charge charge_create(double x, double y, symbol symbol, double force, short is_fixed) {
+    charge ch;
     coordinate c = coordinate_create(x, y);
-    f_c.position = c;
-    f_c.symbol = symbol;
-    f_c.force = force;
-    return f_c;
+    ch.position = c;
+    ch.symbol = symbol;
+    ch.force = force;
+    ch.is_fixed = is_fixed;
+    return ch;
 }
