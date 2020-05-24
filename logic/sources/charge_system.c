@@ -20,5 +20,5 @@ void add_fixed_charge(charge_system c_s, charge ch) {
 }
 
 void add_mobile_charge(charge_system c_s, charge ch) {
-        c_s.mobile_charges[c_s.mobile_charges_index++] = ch;
+    c_s.mobile_charges[c_s.mobile_charges_index++] = ch;
 }
