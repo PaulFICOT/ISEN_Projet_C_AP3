@@ -11,19 +11,20 @@ static void print_hello (GtkWidget *widget, gpointer data) {
 static void activate (GtkApplication *app, gpointer user_data) {
   GtkWidget *window;
   GtkWidget *button;
-  GtkWidget *button_box;
+  GtkWidget *grid_box;
 
-  window = gtk_application_window_new (app);
-  gtk_window_set_title (GTK_WINDOW (window), "Window");
-  gtk_window_set_default_size (GTK_WINDOW (window), 200, 200);
+  window = gtk_application_window_new(app);
+  gtk_window_set_title(GTK_WINDOW (window), "Simulateur d'interaction électrostatiques");
+  gtk_window_set_default_size(GTK_WINDOW (window), 800, 600);
 
-  button_box = gtk_button_box_new (GTK_ORIENTATION_HORIZONTAL);
-  gtk_container_add (GTK_CONTAINER (window), button_box);
+  grid_box = gtk_grid_new();
+  gtk_container_add (GTK_CONTAINER (window), grid_box);
 
   button = gtk_button_new_with_label ("Hello World");
   g_signal_connect (button, "clicked", G_CALLBACK (print_hello), NULL);
   g_signal_connect_swapped (button, "clicked", G_CALLBACK (gtk_widget_destroy), window);
-  gtk_container_add (GTK_CONTAINER (button_box), button);
+
+  gtk_grid_attach(GTK_GRID (grid_box), button, 1, 1, 2, 2);
 
   fixed_charge c1 = fixed_charge_create(0.0, 0.0, POSITIVE, 0.25E-6);
   fixed_charge c2 = fixed_charge_create(3.0, 7.0, NEGATIVE, -0.5E-6);
