@@ -1,0 +1,12 @@
+#include "coordinate.h"
+#include "enums.h"
+
+typedef struct charge_ charge;
+
+struct charge_ {
+    coordinate position;
+    symbol symbol;
+    double force;
+};
+
+charge charge_create(double x, double y, symbol symbol, double force);

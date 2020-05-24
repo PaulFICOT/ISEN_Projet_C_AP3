@@ -14,13 +14,13 @@ LDFLAGS = $(ERROR_FLAGS) $(GTK_LDFLAGS) $(LIB_FLAGS)
 SOURCE_FILES = logic/sources/coordinate.c \
 logic/sources/range.c \
 logic/sources/charge_system.c \
-logic/sources/fixed_charge.c \
+logic/sources/charge.c \
 main.c
 
 # Add \ at the end of the line to put each filename on a newline
 O_FILES = coordinate.o \
 range.o \
-fixed_charge.o \
+charge.o \
 charge_system.o \
 main.o
 all: $(EXEC)
@@ -33,5 +33,6 @@ clean:
 	rm -rf *.o
 
 rebuild:
-	rm -rf *.o $(EXEC)
+	rm -f $(EXEC)
 	make all
+	make clean

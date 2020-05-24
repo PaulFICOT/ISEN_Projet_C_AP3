@@ -9,4 +9,4 @@ struct coordinate_ {
 
 coordinate coordinate_create(double x, double y);
 
-char* coordinate_to_string(coordinate c);
+double two_points_distance(coordinate a, coordinate b);

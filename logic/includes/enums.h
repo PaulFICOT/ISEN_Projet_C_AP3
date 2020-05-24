@@ -1,7 +1,7 @@
 
-typedef enum charge_ charge;
+typedef enum symbol_ symbol;
 
-enum charge_ {
+enum symbol_ {
     POSITIVE,
     NEGATIVE,
     NEUTRAL

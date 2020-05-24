@@ -26,9 +26,9 @@ static void activate (GtkApplication *app, gpointer user_data) {
 
   gtk_grid_attach(GTK_GRID (grid_box), button, 1, 1, 2, 2);
 
-  fixed_charge c1 = fixed_charge_create(0.0, 0.0, POSITIVE, 0.25E-6);
-  fixed_charge c2 = fixed_charge_create(3.0, 7.0, NEGATIVE, -0.5E-6);
-  printf("%f\n", coulomb_law(c1.force, c2.force, 0.075));
+  charge c1 = charge_create(0.0, 0.0, POSITIVE, 0.25E-6);
+  charge c2 = charge_create(0.052704364, 0.052704364, NEGATIVE, -0.5E-6);
+  printf("%f\n", coulomb_law(c1, c2));
 
   gtk_widget_show_all (window);
 }
