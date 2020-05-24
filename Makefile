@@ -18,9 +18,13 @@ main.o
 
 all: $(EXEC)
 
-$(EXEC): main.c
+$(EXEC): $(SOURCE_FILES)
 	$(CC) -c $(SOURCE_FILES) $(CFLAGS)
 	$(CC) -o $(EXEC) $(O_FILES) $(LDFLAGS) && make clean
 
 clean:
 	rm -rf *.o
+
+rebuild:
+	rm -rf *.o $(EXEC)
+	make all
