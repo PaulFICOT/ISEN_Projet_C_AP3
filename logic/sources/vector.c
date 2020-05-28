@@ -5,6 +5,7 @@ vector vector_create(coordinate c, double direction, double magnitude) {
     v.start = c;
     v.direction = direction;
     v.magnitude = magnitude;
+    return v;
 }
 
 double get_direction(coordinate a, coordinate b) {

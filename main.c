@@ -3,7 +3,6 @@
 #include <stdlib.h>
 #include "gtk/gtk.h"
 #include "logic/includes/charge_system.h"
-#include "logic/includes/quadratic_polynomial.h"
 
 static void print_hello (GtkWidget *widget, gpointer data) {
   g_print ("Hello World\n");

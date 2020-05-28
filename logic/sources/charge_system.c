@@ -1,5 +1,5 @@
 #include "../includes/charge_system.h"
-#include "../includes/vector.h"
+#include <stdio.h>
 
 charge_system charge_system_create(int min_abscissa, int max_abscissa, int min_ordinate, int max_ordinate) {
     charge_system s;
