@@ -15,3 +15,5 @@ struct quadratic_polynomial_ {
 
     roots roots;
 };
+
+void calcuate_roots(quadratic_polynomial* q_p);
