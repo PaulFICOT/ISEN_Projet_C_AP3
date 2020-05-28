@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include "gtk/gtk.h"
 #include "logic/includes/charge_system.h"
+#include "logic/includes/quadratic_polynomial.h"
 
 static void print_hello (GtkWidget *widget, gpointer data) {
   g_print ("Hello World\n");
@@ -26,10 +27,10 @@ static void activate (GtkApplication *app, gpointer user_data) {
 
   gtk_grid_attach(GTK_GRID (grid_box), button, 1, 1, 2, 2);
 
-  charge c1 = charge_create(0.0, 0.0, POSITIVE, 0.25E-6, 0, 1);
-  charge c2 = charge_create(0.052704364, 0.052704364, NEGATIVE, -0.5E-6, 0, 0);
-  printf("%f\n", coulomb_law(c1, c2));
-
+  // charge c1 = charge_create(0.0, 0.0, POSITIVE, 0.25E-6, 0, 1);
+  // charge c2 = charge_create(0.052704364, 0.052704364, NEGATIVE, -0.5E-6, 0, 0);
+  // printf("%f\n", coulomb_law(c1, c2));
+  
   gtk_widget_show_all (window);
 }
 
