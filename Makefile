@@ -19,19 +19,19 @@ main.o: charge_system.o
 	$(CC) -o $(EXEC) charge_system.o main.o $(LDFLAGS)
 
 charge_system.o: range.o vector.o charge.o
-	$(CC) -c charge.o range.o vector.o logic/sources/charge_system.c $(LDFLAGS)
+	$(CC) -o charge_system.o -c charge.o range.o vector.o logic/sources/charge_system.c $(LDFLAGS)
 
 range.o:
-	$(CC) -c logic/sources/range.c $(LDFLAGS)
+	$(CC) -o range.o -c logic/sources/range.c $(LDFLAGS)
 
 vector.o: coordinate.o
-	$(CC) -c coordinate.o logic/sources/vector.c $(LDFLAGS)
+	$(CC) -o vector.o -c coordinate.o logic/sources/vector.c $(LDFLAGS)
 
 charge.o: coordinate.o
-	$(CC) -c coordinate.o logic/sources/charge.c $(LDFLAGS)
+	$(CC) -o charge.o -c coordinate.o logic/sources/charge.c $(LDFLAGS)
 
 coordinate.o:
-	$(CC) -c logic/sources/coordinate.c $(LDFLAGS)
+	$(CC) -o coordinate.o -c logic/sources/coordinate.c $(LDFLAGS)
 
 clean:
 	rm -rf *.o
