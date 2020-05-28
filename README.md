@@ -8,6 +8,7 @@ Lien de la librairie GTK (3.20) : [ici](https://download.gnome.org/sources/gtk+/
 ### Mac OS
   ```shell
   brew install gtk+3
+  brew install gnome-icon-theme
   ```
 
 ### Ubuntu

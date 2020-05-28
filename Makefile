@@ -9,10 +9,12 @@ GTK_LDFLAGS = `pkg-config --libs gtk+-3.0`
 LDFLAGS = $(ERROR_FLAGS) $(GTK_LDFLAGS)
 
 SOURCE_FILES = window/sources/config.c \
+window/sources/button.c \
 window/sources/draw.c \
 main.c
 
 O_FILES = config.o \
+button.o \
 draw.o \
 main.o
 
