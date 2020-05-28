@@ -1,3 +1,6 @@
+#ifndef CHARGE
+#define CHARGE
+
 #include "coordinate.h"
 #include "enums.h"
 
@@ -12,3 +15,5 @@ struct charge_ {
 };
 
 charge charge_create(double x, double y, symbol symbol, double force, double weight, short is_fixed);
+
+#endif

@@ -1,3 +1,5 @@
+#ifndef VECTOR
+#define VECTOR
 #include "coordinate.h"
 
 typedef struct vector_ vector;
@@ -11,3 +13,5 @@ struct vector_ {
 vector vector_create(coordinate c, double direction, double magnitude);
 
 double get_direction(coordinate first_point, coordinate second_point);
+
+#endif

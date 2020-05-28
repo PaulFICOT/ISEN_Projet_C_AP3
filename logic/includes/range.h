@@ -1,3 +1,6 @@
+#ifndef RANGE
+#define RANGE
+
 typedef struct range_ range;
 
 struct range_ {
@@ -6,3 +9,5 @@ struct range_ {
 };
 
 range range_create(int min, int max);
+
+#endif
