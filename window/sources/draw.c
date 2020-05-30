@@ -21,17 +21,10 @@ gboolean init_surface(GtkWidget *widget, GdkEventConfigure *event, gpointer data
   /* Paint all surface to white */
   cairo_paint(cr);
 
-  cairo_set_source_rgb(cr, 0.5, 0.5, 0.5);
-  cairo_move_to(cr, 0, WINDOW_HEIGHT/2);
-  cairo_line_to(cr, WINDOW_WIDTH, WINDOW_HEIGHT/2);
-  cairo_stroke(cr);
-
-  cairo_move_to(cr, WINDOW_WIDTH/2, 0);
-  cairo_line_to(cr, WINDOW_WIDTH/2, WINDOW_HEIGHT);
-  cairo_stroke(cr);
-
-  cairo_move_to(cr, 300, 200);
-  cairo_show_text(cr, "Test");
+  /* Add graduation background on surface */
+  cairo_surface_t* image = cairo_image_surface_create_from_png("graduation.png");
+  cairo_set_source_surface(cr, image, 0, 0);
+  cairo_paint(cr); 
 
   cairo_destroy(cr);
 
