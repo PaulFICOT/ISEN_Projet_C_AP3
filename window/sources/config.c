@@ -16,7 +16,7 @@ void activate (GtkApplication *app, gpointer data) {
   window = gtk_application_window_new(app);
   gtk_window_set_title(GTK_WINDOW (window), "Simulateur d'interaction électrostatiques");
   gtk_widget_set_size_request(window, WINDOW_WIDTH, WINDOW_HEIGHT);
-  gtk_window_set_has_resize_grip(GTK_WINDOW(window), FALSE);
+  gtk_window_set_resizable (GTK_WINDOW(window), FALSE);
 
   area = gtk_drawing_area_new();
   gtk_widget_set_size_request(area, WINDOW_WIDTH, WINDOW_HEIGHT);
