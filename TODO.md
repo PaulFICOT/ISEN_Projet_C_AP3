@@ -20,7 +20,7 @@ Objectif -> calculer numériquement les intéractions électrostatiques entre pl
 * On ne considérera que des charges électriques ponctuelles. Une masse et un nombre fini de charges élémentaires seront affectés à chaque point.
 * Le programme devra permettre la saisie du nombre et de la position des charges ainsi que leur état (fixe ou mobile).
 * Afin de modéliser les interactions entre les charges, on prendra un modèle simple en deux parties :
-  * Une partie statique ou l'on calaculera les forces s'appliquant sur chaque charge dans le cadre de l'électrostatique
-  * Une partie dynamique où l'on calculera le déplacement des charges par appalication du principe fondamental de la dynamique.
+  * Une partie statique ou l'on calculera les forces s'appliquant sur chaque charge dans le cadre de l'électrostatique
+  * Une partie dynamique où l'on calculera le déplacement des charges par application du principe fondamental de la dynamique.
 * Pour que le point précédent reste valable, il faudra tenir compte des petites variations temporelles et spatiales. L'échelle de temps sera donc un élément à prendre en compte (via une variable, par exemple).
 * Rendre un fichier de documentation décrivant les étapes nécessaires pour compiler le binaire de l'outil.
