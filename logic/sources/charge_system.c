@@ -19,7 +19,7 @@ double coulomb_law(charge a, charge b) {
 vector superposition_law(charge fixed_charges[], int fixed_charges_index, charge mobile_charge) {
     vector v;
     v.start = mobile_charge.position;
-    double magnitude;
+    double magnitude = 0.0;
     double sum_directions = 0;
     for (int index = 0; index < fixed_charges_index; index++) {
         magnitude += coulomb_law(fixed_charges[index], mobile_charge) * mobile_charge.symbol == fixed_charges[index].symbol ? -1 : 1;
