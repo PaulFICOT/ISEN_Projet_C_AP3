@@ -10,6 +10,7 @@ void activate (GtkApplication *app, gpointer data) {
   GtkWidget *area;
   GtkWidget *grid;
   GtkWidget *hbtnbox;
+  GtkWidget *btn_reset;
   GtkWidget *btn_create;
   GtkWidget *btn_start;
 
@@ -32,14 +33,18 @@ void activate (GtkApplication *app, gpointer data) {
   gtk_widget_set_margin_bottom(GTK_WIDGET(hbtnbox), 10); 
   gtk_widget_set_margin_top(GTK_WIDGET(hbtnbox), 10);
 
+  btn_reset = gtk_button_new_with_label("Reset");
   btn_create = gtk_button_new_with_label("Create charge");
   btn_start = gtk_button_new_with_label("Start");
 
+  g_signal_connect(btn_reset, "clicked", G_CALLBACK(clearSurface), area);
   g_signal_connect(btn_create, "clicked", G_CALLBACK(displayWindowCreateCharge), initCreateChargeWindow(area));
 
+  gtk_widget_set_size_request(GTK_WIDGET(btn_reset), 100, 45);
   gtk_widget_set_size_request(GTK_WIDGET(btn_create), 100, 45);
   gtk_widget_set_size_request(GTK_WIDGET(btn_start), 100, 45);
 
+  gtk_box_pack_start(GTK_BOX(hbtnbox), btn_reset, FALSE, FALSE, 0);
   gtk_box_pack_start(GTK_BOX(hbtnbox), btn_create, FALSE, FALSE, 0);
   gtk_box_pack_start(GTK_BOX(hbtnbox), btn_start, FALSE, FALSE, 0);
 
@@ -81,12 +86,12 @@ GtkWidget* initCreateChargeWindow(GtkWidget* area) {
   label_x = gtk_label_new("Coordinate x");
 
   spin_x = gtk_spin_button_new_with_range(G_MININT, G_MAXINT, 0.01);
-  gtk_spin_button_set_value(GTK_WIDGET(spin_x), 0);
+  gtk_spin_button_set_value(GTK_SPIN_BUTTON(spin_x), 0);
 
   label_y = gtk_label_new("Coordinate y");
 
   spin_y = gtk_spin_button_new_with_range(G_MININT, G_MAXINT, 0.01);
-  gtk_spin_button_set_value(GTK_WIDGET(spin_y), 0);
+  gtk_spin_button_set_value(GTK_SPIN_BUTTON(spin_y), 0);
 
   label_switch = gtk_label_new("Fixed charge ?");
 
@@ -105,8 +110,9 @@ GtkWidget* initCreateChargeWindow(GtkWidget* area) {
   gtk_grid_attach(GTK_GRID(grid), GTK_WIDGET(btn_switch), 0, 5, 2, 1);
   gtk_grid_attach(GTK_GRID(grid), GTK_WIDGET(btn_create), 0, 6, 2, 1);
 
-  g_object_set_data(btn_create, "grid", grid);
-  g_object_set_data(btn_create, "area", area);
+  g_object_set_data(G_OBJECT(btn_create), "grid", grid);
+  g_object_set_data(G_OBJECT(btn_create), "area", area);
+  g_object_set_data(G_OBJECT(btn_create), "window", window_create_charge);
   g_signal_connect(btn_create, "clicked", G_CALLBACK(createCharge), NULL);
 
   gtk_container_add(GTK_CONTAINER(window_create_charge), grid);

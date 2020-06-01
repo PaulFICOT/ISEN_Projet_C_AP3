@@ -47,6 +47,25 @@ gboolean prepare_surface(GtkWidget *widget, cairo_t *cr, gpointer data) {
 }
 
 /* 
+  Clear surface
+  Draw a new surface
+*/
+void clear_surface() {
+  cairo_t *cr = cairo_create (surface);
+
+  cairo_set_source_rgb(cr, 1, 1, 1);
+  /* Paint all surface to white */
+  cairo_paint(cr);
+
+  /* Add graduation background on surface */
+  cairo_surface_t* image = cairo_image_surface_create_from_png("graduation.png");
+  cairo_set_source_surface(cr, image, 0, 0);
+  cairo_paint(cr); 
+
+  cairo_destroy (cr);
+}
+
+/* 
   Draw fixed charge at given coordinate
   widget (GtkWidget *) -> Drawing area's widget
   x (gdouble) -> The coordinate x of the fixed charge

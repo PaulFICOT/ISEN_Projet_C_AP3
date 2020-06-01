@@ -5,7 +5,7 @@
 #include "config.h"
 
 void displayWindowCreateCharge(GtkWidget *widget, gpointer data);
-
 void createCharge(GtkWidget *widget, gpointer data);
+void clearSurface(GtkWidget *widget, gpointer data);
 
 #endif
