@@ -51,7 +51,7 @@ gboolean prepare_surface(GtkWidget *widget, cairo_t *cr, gpointer data) {
   Draw a new surface
 */
 void clear_surface() {
-  cairo_t *cr = cairo_create (surface);
+  cairo_t *cr = cairo_create(surface);
 
   cairo_set_source_rgb(cr, 1, 1, 1);
   /* Paint all surface to white */

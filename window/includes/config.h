@@ -2,8 +2,10 @@
 #define CONFIG
 
 #include "gtk/gtk.h"
+#include <regex.h> 
 #include "./draw.h"
 #include "./button.h"
+#include "../../logic/includes/charge_system.h"
 
 /*
     Window's size constant
@@ -15,6 +17,7 @@
 
 void activate (GtkApplication *app, gpointer user_data);
 gboolean createChargeWindowClosed(GtkWidget *widget, GdkEvent *event, gpointer data);
+void checkInsertNumber(GtkWidget *widget, gchar *new_text, gint new_text_length, gpointer position, gpointer user_data);
 GtkWidget* initCreateChargeWindow();
 
 #endif
