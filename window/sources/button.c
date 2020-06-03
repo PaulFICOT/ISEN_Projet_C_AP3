@@ -23,7 +23,7 @@ void createCharge(GtkWidget *widget, gpointer data) {
     double weight = strtod(gtk_entry_get_text(GTK_ENTRY(entry_weight)), NULL);
     gboolean is_fixed = gtk_switch_get_active(GTK_SWITCH(btn_switch));
 
-    symbol symbol;
+    enum symbol symbol;
 
     if (force > 0) {
         symbol = POSITIVE;

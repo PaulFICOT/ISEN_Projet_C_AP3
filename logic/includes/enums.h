@@ -1,7 +1,5 @@
 
-typedef enum symbol_ symbol;
-
-enum symbol_ {
+enum symbol {
     POSITIVE,
     NEGATIVE,
     NEUTRAL

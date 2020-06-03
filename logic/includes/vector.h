@@ -5,13 +5,14 @@
 typedef struct vector_ vector;
 
 struct vector_ {
-    coordinate start;
+    coordinate* start;
+    coordinate* end;
     double direction;
     double magnitude;
 };
 
-vector vector_create(coordinate c, double direction, double magnitude);
+vector* vector_create(coordinate* c, double direction, double magnitude);
 
-double get_direction(coordinate first_point, coordinate second_point);
+double get_direction(coordinate* first_point, coordinate* second_point);
 
 #endif

@@ -8,8 +8,8 @@ struct coordinate_ {
     double y;
 };
 
-coordinate coordinate_create(double x, double y);
+coordinate* coordinate_create(double x, double y);
 
-double two_points_distance(coordinate a, coordinate b);
+double two_points_distance(coordinate* a, coordinate* b);
 
 #endif

@@ -16,10 +16,10 @@ struct quadratic_polynomial_ {
     double b;
     double c;
     double delta;
-    roots roots;
+    roots* roots;
 };
 
-quadratic_polynomial quadratic_polynomial_create(double a, double b, double c);
+quadratic_polynomial* quadratic_polynomial_create(double a, double b, double c);
 
 void calculate_delta(quadratic_polynomial* q_p);
 

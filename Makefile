@@ -17,7 +17,6 @@ window/sources/draw.c \
 logic/sources/coordinate.c \
 logic/sources/quadratic_polynomial.c \
 logic/sources/vector.c \
-logic/sources/range.c \
 logic/sources/charge_system.c \
 logic/sources/charge.c \
 main.c
@@ -29,7 +28,6 @@ draw.o \
 coordinate.o \
 quadratic_polynomial.o \
 vector.o \
-range.o \
 charge.o \
 charge_system.o \
 main.o
