@@ -2,7 +2,7 @@ CC=gcc
 ERROR_FLAGS = -Wall -W -pedantic
 EXEC=projetc.bin
 
-# LIB_FLAGS = -lm -ldl
+LIB_FLAGS = -lm -ldl
 
 GTK_CFLAGS = `pkg-config --cflags gtk+-3.0`
 CFLAGS = $(ERROR_FLAGS) $(GTK_CFLAGS) $(LIB_FLAGS)
