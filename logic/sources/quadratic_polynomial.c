@@ -19,7 +19,6 @@ void calculate_roots(quadratic_polynomial* q_p) {
     if (q_p == 0) {
         q_p->roots.x_c = - q_p->b / 2 * q_p->a;
     } else {
-        printf("%f, %f, %f\n", -q_p->b, sqrtf(q_p->delta), (2 * q_p->a));
         q_p->roots.x_a = (-q_p->b - sqrtf(q_p->delta)) / (2 * q_p->a);
         q_p->roots.x_b = (-q_p->b + sqrtf(q_p->delta)) / (2 * q_p->a);
     }
