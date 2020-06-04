@@ -18,8 +18,8 @@ void createCharge(GtkWidget *widget) {
     GtkWidget *btn_switch = gtk_grid_get_child_at(GTK_GRID(grid), 0, 9);
 
     /* Get all widgets' value */
-    gdouble coord_x = (WINDOW_WIDTH/2) + (gtk_spin_button_get_value(GTK_SPIN_BUTTON(spin_x)) * 8);
-    gdouble coord_y = (WINDOW_HEIGHT/2) - (gtk_spin_button_get_value(GTK_SPIN_BUTTON(spin_y)) * 8);
+    gdouble coord_x = gtk_spin_button_get_value(GTK_SPIN_BUTTON(spin_x));
+    gdouble coord_y = gtk_spin_button_get_value(GTK_SPIN_BUTTON(spin_y));
     double force = strtod(gtk_entry_get_text(GTK_ENTRY(entry_force)), NULL);
     double weight = strtod(gtk_entry_get_text(GTK_ENTRY(entry_weight)), NULL);
     gboolean is_fixed = gtk_switch_get_active(GTK_SWITCH(btn_switch));
@@ -35,8 +35,8 @@ void createCharge(GtkWidget *widget) {
     }
 
     charge* new_charge = charge_create(
-        gtk_spin_button_get_value(GTK_SPIN_BUTTON(spin_x)),
-        gtk_spin_button_get_value(GTK_SPIN_BUTTON(spin_y)),
+        coord_x,
+        coord_y,
         symbol,
         force,
         weight,
@@ -68,7 +68,7 @@ void clearSurface(GtkWidget *widget, gpointer data) {
 }
 
 void startProcess(GtkWidget *widget, gpointer data) {
-    charge_system* main_charge_system = data;
+    charge_system* main_charge_system = g_object_get_data(G_OBJECT(widget), "charge_system");
     charge* a = charge_create(0, 0, POSITIVE, 5E-4, 5, 1);
     charge* b = charge_create(3, 6, NEGATIVE, 3.7E-4, 5, 1);
     charge* c = charge_create(5, 4, POSITIVE, 1E-4, 5, 1);
@@ -81,6 +81,7 @@ void startProcess(GtkWidget *widget, gpointer data) {
     add_charge(main_charge_system, d);
     add_charge(main_charge_system, e);
     add_charge(main_charge_system, f);
+    redraw_surface(g_object_get_data(G_OBJECT(widget), "area"), main_charge_system);
     vector* sup = superposition_law(main_charge_system->charges, main_charge_system->charges_index, f);
     printf("------\n%f - %f\n------\n", sup->direction, sup->magnitude);
     // calculate_next_pose(f, sup);
