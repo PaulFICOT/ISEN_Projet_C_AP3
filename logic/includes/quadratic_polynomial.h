@@ -19,10 +19,29 @@ struct quadratic_polynomial_ {
     roots* roots;
 };
 
+/**
+ * quadratic_polynomial constructor.
+ *
+ * @param a
+ * @param b
+ * @param c
+ * 
+ * @return a new quadratic_polynomial instance
+ */
 quadratic_polynomial* quadratic_polynomial_create(double a, double b, double c);
 
+/**
+ * calulate the delta of a quadratic polynomial
+ * 
+ * @param q_p a quadratic polynomial
+ */
 void calculate_delta(quadratic_polynomial* q_p);
 
+/**
+ * calulate the roots of a quadratic polynomial
+ * 
+ * @param q_p a quadratic polynomial
+ */
 void calculate_roots(quadratic_polynomial* q_p);
 
 #endif
