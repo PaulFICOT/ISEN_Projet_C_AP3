@@ -14,7 +14,7 @@ void activate (GtkApplication *app) {
   GtkWidget *btn_create;
   GtkWidget *btn_start;
 
-  charge_system* main_charge_system = charge_system_create(-50, 50, -30, 30);
+  charge_system* main_charge_system = charge_system_create();
 
   window = gtk_application_window_new(app);
   gtk_window_set_title(GTK_WINDOW (window), "Simulateur d'interaction électrostatiques");

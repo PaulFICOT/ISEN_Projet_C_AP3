@@ -27,7 +27,10 @@ vector* superposition_law(charge* charges[], int charges_index, charge* mobile_c
 }
 
 void add_charge(charge_system* c_s, charge* ch) {
-    c_s->charges[c_s->charges_index++] = ch;
+    printf("Coucou\n");
+    printf("%f\n", c_s->charges_index);
+    printf("Plus maintenant\n");
+    // c_s->charges[c_s->charges_index++] = ch;
 }
 
 void calculate_next_speed(charge* c, vector* s_l) {
