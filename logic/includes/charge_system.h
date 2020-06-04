@@ -6,27 +6,23 @@
 #include "charge.h"
 #include "vector.h"
 
-#define MAX_CHARGES_NUMBER 50
+#define MAX_CHARGES_NUMBER 100
 #define COULOMB_CONST 8.987551787368176E9
 
 typedef struct charge_system_ charge_system;
 
 struct charge_system_ {
-    charge* fixed_charges[MAX_CHARGES_NUMBER];
-    int fixed_charges_index;
-    charge* mobile_charges[MAX_CHARGES_NUMBER];
-    int mobile_charges_index;
+    charge* charges[MAX_CHARGES_NUMBER];
+    int charges_index;
 };
 
 charge_system* charge_system_create();
 
 double coulomb_law(charge *a, charge *b);
 
-vector* superposition_law(charge *fixed_charges[], int fixed_charges_index, charge *mobile_charge);
+vector* superposition_law(charge *charges[], int charges_index, charge *mobile_charge);
 
-void add_fixed_charge(charge_system* c_s, charge* ch);
-
-void add_mobile_charge(charge_system* c_s, charge* ch);
+void add_charge(charge_system* c_s, charge* ch);
 
 void calculate_next_speed(charge* c, vector* s_l);
 

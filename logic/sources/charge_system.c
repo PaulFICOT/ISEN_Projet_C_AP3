@@ -4,8 +4,7 @@
 
 charge_system* charge_system_create() {
     charge_system* s = malloc(sizeof(charge_system));
-    s->fixed_charges_index = 0;
-    s->mobile_charges_index = 0;
+    s->charges_index = 0;
     return s;
 }
 
@@ -13,26 +12,22 @@ double coulomb_law(charge* a, charge* b) {
     return COULOMB_CONST * (fabs(a->force * b->force)/pow(two_points_distance(a->position, b->position), 2));
 }
 
-vector* superposition_law(charge* charges[], int fixed_charges_index, charge* mobile_charge) {
+vector* superposition_law(charge* charges[], int charges_index, charge* mobile_charge) {
     vector* v = malloc(sizeof(vector));
     v->start = mobile_charge->position;
     double magnitude = 0.0;
     double sum_directions = 0;
-    for (int index = 0; index < fixed_charges_index; index++) {
-        magnitude += coulomb_law(fixed_charges[index], mobile_charge) * mobile_charge->symbol == fixed_charges[index]->symbol ? -1 : 1;
-        sum_directions += get_direction(mobile_charge->position, fixed_charges[index]->position);
+    for (int index = 0; index < charges_index; index++) {
+        magnitude += coulomb_law(charges[index], mobile_charge) * mobile_charge->symbol == charges[index]->symbol ? -1 : 1;
+        sum_directions += get_direction(mobile_charge->position, charges[index]->position);
     }
     v->magnitude = magnitude;
-    v->direction = sum_directions / fixed_charges_index;
+    v->direction = sum_directions / charges_index;
     return v;
 }
 
-void add_fixed_charge(charge_system* c_s, charge* ch) {
-    c_s->fixed_charges[c_s->fixed_charges_index++] = ch;
-}
-
-void add_mobile_charge(charge_system* c_s, charge* ch) {
-    c_s->mobile_charges[c_s->mobile_charges_index++] = ch;
+void add_charge(charge_system* c_s, charge* ch) {
+    c_s->charges[c_s->charges_index++] = ch;
 }
 
 void calculate_next_speed(charge* c, vector* s_l) {
