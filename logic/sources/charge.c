@@ -15,6 +15,6 @@ charge* charge_create(double x, double y, enum symbol symbol, double force, doub
     return ch;
 }
 
-short charge_is_itself(charge* ca, charge* cb) {
-    return ca->position->x == cb->position->x && ca->position->y == cb->position->y;
+short charge_is_itself(charge* a, charge* b) {
+    return two_points_distance(a->position, b->position) != 0;
 }

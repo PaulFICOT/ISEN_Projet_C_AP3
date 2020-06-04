@@ -41,4 +41,5 @@ charge* charge_create(double x, double y, enum symbol symbol, double force, doub
  * 
  * @return true if the two charges are the same, false otherwise
  */
+short charge_is_itself(charge* a, charge* b);
 #endif
