@@ -21,7 +21,5 @@ struct charge_ {
 
 charge* charge_create(double x, double y, enum symbol symbol, double force, double weight, short is_fixed);
 
-short charge_is_itself(charge* ca, charge* cb) {
-    return ca->position->x == cb->position->x && ca->position->y == cb->position->y;
-}
+short charge_is_itself(charge* ca, charge* cb);
 #endif
