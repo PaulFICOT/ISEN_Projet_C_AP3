@@ -9,6 +9,7 @@ charge* charge_create(double x, double y, enum symbol symbol, double force, doub
     ch->force = force;
     ch->weight = weight;
     ch->is_fixed = is_fixed;
+    ch->positions[0] = c;
     ch->positions_index = 0;
     ch->speeds_index = 0;
     return ch;

@@ -84,9 +84,7 @@ void startProcess(GtkWidget *widget, gpointer data) {
     add_charge(main_charge_system, e);
     add_charge(main_charge_system, f);
     for (int i = 0; i < 20; i++) {
-        printf("%i: calculate\n", i);
         calculate_next_pose(f, main_charge_system->charges, main_charge_system->charges_index);
-        printf("%i: sortie", i);
-        // printf("%i: (%f, %f)\n", i, f->positions[f->positions_index]->x, f->positions[f->positions_index]->y);
+        printf("%i: (%f, %f)\n", i, f->positions[f->positions_index]->x, f->positions[f->positions_index]->y);
     }
 }

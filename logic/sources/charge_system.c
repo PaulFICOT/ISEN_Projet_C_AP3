@@ -38,20 +38,13 @@ void calculate_next_speed(charge* c, charge* charges[], int charges_index) {
 }
 
 void calculate_next_pose(charge* c, charge* charges[], int charges_index) {
-    printf("while");
     while (c->positions_index != c->speeds_index) {
         calculate_next_speed(c, charges, charges_index);
     }
-    printf("sup");
     vector* v = superposition_law(c, charges, charges_index);
-    printf("create");
     c->positions[c->positions_index+1] = coordinate_create(
         0.5 * (v->magnitude / c->weight) * pow(c->positions_index, 2) + c->speeds[c->speeds_index] * c->positions_index + c->positions[c->positions_index]->x,
         0.5 * (v->magnitude / c->weight) * pow(c->positions_index, 2) + c->speeds[c->speeds_index] * c->positions_index + c->positions[c->positions_index]->y
     );
-    // c->positions[c->positions_index+1]->x = 0.5 * (v->magnitude / c->weight) * pow(c->positions_index, 2) + c->speeds[c->speeds_index] * c->positions_index + c->positions[c->positions_index]->x;
-    // c->positions[c->positions_index+1]->y = 0.5 * (v->magnitude / c->weight) * pow(c->positions_index, 2) + c->speeds[c->speeds_index] * c->positions_index + c->positions[c->positions_index]->y;
-    printf("inc");
     c->positions_index++;
-    printf("end");
 }
