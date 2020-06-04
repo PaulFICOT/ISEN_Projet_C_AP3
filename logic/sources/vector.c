@@ -11,5 +11,6 @@ vector* vector_create(coordinate* c, double direction, double magnitude) {
 }
 
 double get_direction(coordinate* a, coordinate* b) {
-    return atan((b->x - a->x) / (a->y - b->y));
+    double result = atan((b->x - a->x) / (a->y - b->y));
+    return isfinite(result) && !isnan(result) ? result : 0;
 }

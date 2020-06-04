@@ -40,7 +40,7 @@ void activate (GtkApplication *app) {
   btn_start = gtk_button_new_with_label("Start");
 
   g_signal_connect(btn_reset, "clicked", G_CALLBACK(clearSurface), area);
-  g_signal_connect(btn_start, "clicked", G_CALLBACK(startProcess), NULL);
+  g_signal_connect(btn_start, "clicked", G_CALLBACK(startProcess), main_charge_system);
   g_signal_connect(btn_create, "clicked", G_CALLBACK(displayWindowCreateCharge), initCreateChargeWindow(area, main_charge_system));
 
   gtk_widget_set_size_request(GTK_WIDGET(btn_reset), 100, 45);
