@@ -65,5 +65,21 @@ void clearSurface(GtkWidget *widget, gpointer data) {
 }
 
 void startProcess(GtkWidget *widget, gpointer data) {
-    return;
+    charge_system* main_charge_system = g_object_get_data(G_OBJECT(widget), "charge_system");
+    charge* a = charge_create(0, 0, POSITIVE, 5E-4, 5, 1);
+    charge* b = charge_create(3, 6, NEGATIVE, 3.7E-4, 5, 1);
+    charge* c = charge_create(5, 4, POSITIVE, 1E-4, 5, 1);
+    charge* d = charge_create(5, 4, NEGATIVE, 3.2E-4, 5, 1);
+    charge* e = charge_create(3, 1, POSITIVE, 2.4E-4, 5, 1);
+    charge* f = charge_create(8, 1, NEGATIVE, 1.7E-4, 5, 0);
+    printf("ici\n");
+    add_charge(main_charge_system, a);
+    printf("pas la\n");
+    add_charge(main_charge_system, b);
+    add_charge(main_charge_system, c);
+    add_charge(main_charge_system, d);
+    add_charge(main_charge_system, e);
+    add_charge(main_charge_system, f);
+    vector* sup = superposition_law(main_charge_system->charges, main_charge_system->charges_index, f);
+    printf("%f - %f\n", sup->direction, sup->magnitude);
 }
