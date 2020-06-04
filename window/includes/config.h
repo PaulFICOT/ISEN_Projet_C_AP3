@@ -16,7 +16,7 @@
 #define WINDOW_CREATE_CHARGE_HEIGHT 300
 
 void activate (GtkApplication *app);
-gboolean createChargeWindowClosed(GtkWidget *widget, GdkEvent *event);
+gboolean createChargeWindowClosed(GtkWidget *widget);
 void checkInsertNumber(GtkWidget *widget, gchar *new_text);
 GtkWidget* initCreateChargeWindow();
 

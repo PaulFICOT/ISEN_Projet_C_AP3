@@ -1,6 +1,8 @@
 #include "../includes/button.h"
 
 void displayWindowCreateCharge(GtkWidget *widget, gpointer data) {
+    /* Unused parameter but required field */
+    (void) widget;
     gtk_widget_show_all(data);
 }
 
@@ -60,6 +62,8 @@ void createCharge(GtkWidget *widget) {
 }
 
 void clearSurface(GtkWidget *widget, gpointer data) {
+    /* Unused parameter but required field */
+    (void) widget;
     clear_surface();
     gtk_widget_queue_draw(data);
 }

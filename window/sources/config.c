@@ -62,7 +62,7 @@ void activate (GtkApplication *app) {
   gtk_widget_show_all(window);
 }
 
-gboolean createChargeWindowClosed(GtkWidget *widget, GdkEvent *event) {
+gboolean createChargeWindowClosed(GtkWidget *widget) {
     gtk_widget_hide(widget);
     return TRUE;
 }

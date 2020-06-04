@@ -36,6 +36,8 @@ gboolean init_surface(GtkWidget *widget) {
   cr (cairo_t *) -> The cairo context to draw to
 */
 gboolean prepare_surface(GtkWidget *widget, cairo_t *cr) {
+  /* Unused parameter but required field */
+  (void) widget;
   cairo_set_source_surface(cr, surface, 0, 0);
   cairo_paint(cr);
 
