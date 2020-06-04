@@ -64,6 +64,6 @@ void clearSurface(GtkWidget *widget, gpointer data) {
     gtk_widget_queue_draw(data);
 }
 
-void start_process(GtkWidget *widget, gpointer data) {
-    
+void startProcess(GtkWidget *widget, gpointer data) {
+    return;
 }

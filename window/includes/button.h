@@ -7,5 +7,5 @@
 void displayWindowCreateCharge(GtkWidget *widget, gpointer data);
 void createCharge(GtkWidget *widget, gpointer data);
 void clearSurface(GtkWidget *widget, gpointer data);
-
+void startProcess(GtkWidget *widget, gpointer data);
 #endif
