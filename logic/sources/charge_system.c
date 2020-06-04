@@ -13,7 +13,7 @@ double coulomb_law(charge* a, charge* b) {
     return COULOMB_CONST * (fabs(a->force * b->force)/pow(two_points_distance(a->position, b->position), 2));
 }
 
-vector* superposition_law(charge* fixed_charges[], int fixed_charges_index, charge* mobile_charge) {
+vector* superposition_law(charge* charges[], int fixed_charges_index, charge* mobile_charge) {
     vector* v = malloc(sizeof(vector));
     v->start = mobile_charge->position;
     double magnitude = 0.0;
