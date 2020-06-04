@@ -20,11 +20,11 @@ charge_system* charge_system_create();
 
 double coulomb_law(charge *a, charge *b);
 
-vector* superposition_law(charge *charges[], int charges_index, charge *mobile_charge);
+vector* superposition_law(charge* mobile_charge, charge *charges[], int charges_index);
 
 void add_charge(charge_system* c_s, charge* ch);
 
-void calculate_next_speed(charge* c, vector* s_l);
+void calculate_next_speed(charge* c, charge* charges[], int charges_index);
 
-void calculate_next_pose(charge *c, vector *s_l);
+void calculate_next_pose(charge* c, charge* charges[], int charges_index);
 #endif
