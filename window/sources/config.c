@@ -5,7 +5,7 @@
   app (GtkApplication *) -> The application to start
   data (gpointer) -> Data set when the signal handler was connected
 */
-void activate (GtkApplication *app, gpointer data) {
+void activate (GtkApplication *app) {
   GtkWidget *window;
   GtkWidget *area;
   GtkWidget *grid;
@@ -62,17 +62,17 @@ void activate (GtkApplication *app, gpointer data) {
   gtk_widget_show_all(window);
 }
 
-gboolean createChargeWindowClosed(GtkWidget *widget, GdkEvent *event, gpointer data) {
+gboolean createChargeWindowClosed(GtkWidget *widget, GdkEvent *event) {
     gtk_widget_hide(widget);
     return TRUE;
 }
 
 
-void checkInsertNumber(GtkWidget *widget, gchar *new_text, gint new_text_length, gpointer position, gpointer user_data) {
+void checkInsertNumber(GtkWidget *widget, gchar *new_text) {
   regex_t regex;
   int reti;
 
-  reti = regcomp(&regex, "[0-9,Ee]", 0);
+  reti = regcomp(&regex, "[0-9,Ee+-]", 0);
   reti = regexec(&regex, new_text, 0, NULL, 0);
 
   if (reti == REG_NOMATCH) {

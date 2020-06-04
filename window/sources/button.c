@@ -4,7 +4,7 @@ void displayWindowCreateCharge(GtkWidget *widget, gpointer data) {
     gtk_widget_show_all(data);
 }
 
-void createCharge(GtkWidget *widget, gpointer data) {
+void createCharge(GtkWidget *widget) {
     GtkWidget *grid = g_object_get_data(G_OBJECT(widget), "grid");
     GtkWidget *area = g_object_get_data(G_OBJECT(widget), "area");
     charge_system* main_charge_system = g_object_get_data(G_OBJECT(widget), "charge_system");
@@ -42,11 +42,11 @@ void createCharge(GtkWidget *widget, gpointer data) {
         is_fixed
     );
 
+    add_charge(main_charge_system, new_charge);
+
     if (is_fixed) {
-        add_fixed_charge(main_charge_system, new_charge);
         draw_fixed_charge(area, coord_x, coord_y);
     }else {
-        add_mobile_charge(main_charge_system, new_charge);
         draw_mobile_charge(area, coord_x, coord_y);
     }
 

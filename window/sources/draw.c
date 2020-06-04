@@ -6,10 +6,8 @@ static cairo_surface_t *surface = NULL;
 /* 
   Initialize a surface
   widget (GtkWidget *) -> The object which received the signal
-  event (GdkEventConfigure *) -> The GdkEventConfigure which triggered this signal
-  data (gpointer) -> Data set when the signal handler was connected
 */
-gboolean init_surface(GtkWidget *widget, GdkEventConfigure *event, gpointer data) {
+gboolean init_surface(GtkWidget *widget) {
   surface = gdk_window_create_similar_surface(gtk_widget_get_window (widget),
                                                CAIRO_CONTENT_COLOR,
                                                gtk_widget_get_allocated_width (widget),
@@ -36,9 +34,8 @@ gboolean init_surface(GtkWidget *widget, GdkEventConfigure *event, gpointer data
   Prepare surface to draw on
   widget (GtkWidget *) -> The object which received the signal
   cr (cairo_t *) -> The cairo context to draw to
-  data (gpointer) -> Data set when the signal handler was connected
 */
-gboolean prepare_surface(GtkWidget *widget, cairo_t *cr, gpointer data) {
+gboolean prepare_surface(GtkWidget *widget, cairo_t *cr) {
   cairo_set_source_surface(cr, surface, 0, 0);
   cairo_paint(cr);
 
@@ -111,9 +108,8 @@ void draw_mobile_charge(GtkWidget *widget, gdouble x, gdouble y) {
   Draw charge in relation to the mouse click
   widget (GtkWidget *) -> The object which received the signal
   event (GdkEventButton *) -> The GdkEventButton which triggered this signal
-  data (gpointer) -> Data set when the signal handler was connected
 */
-gboolean clicked(GtkWidget *widget, GdkEventButton *event, gpointer data) {
+gboolean clicked(GtkWidget *widget, GdkEventButton *event) {
     /* Draw fixed charge if user uses primary button else draw mobile charge */
     if (event->button == GDK_BUTTON_PRIMARY) {
       draw_fixed_charge(widget, event->x, event->y);
