@@ -1,4 +1,5 @@
 #include "../includes/button.h"
+
 void displayWindowCreateCharge(GtkWidget *widget, gpointer data) {
     /* Unused parameter but required field */
     (void) widget;
@@ -68,6 +69,7 @@ void clearSurface(GtkWidget *widget, gpointer data) {
 }
 
 void startProcess(GtkWidget *widget, gpointer data) {
+    /* Unused parameter but required field */
     charge_system* main_charge_system = data;
     charge* a = charge_create(0, 0, POSITIVE, 5E-4, 5, 1);
     charge* b = charge_create(3, 6, NEGATIVE, 3.7E-4, 5, 1);
@@ -81,7 +83,10 @@ void startProcess(GtkWidget *widget, gpointer data) {
     add_charge(main_charge_system, d);
     add_charge(main_charge_system, e);
     add_charge(main_charge_system, f);
-    vector* sup = superposition_law(main_charge_system->charges, main_charge_system->charges_index, f);
-    printf("------\n%f - %f\n------\n", sup->direction, sup->magnitude);
-    // calculate_next_pose(f, sup);
+    for (int i = 0; i < 20; i++) {
+        printf("%i: calculate\n", i);
+        calculate_next_pose(f, main_charge_system->charges, main_charge_system->charges_index);
+        printf("%i: sortie", i);
+        // printf("%i: (%f, %f)\n", i, f->positions[f->positions_index]->x, f->positions[f->positions_index]->y);
+    }
 }
