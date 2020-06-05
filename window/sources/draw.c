@@ -123,12 +123,15 @@ void redraw_surface(GtkWidget *widget, charge_system *main_charge_system) {
   clear_surface();
   
   /* Draw every charges */
-  for (int i = 0; i < main_charge_system->charges_index; i++) {
-    if (main_charge_system->charges[i]->is_fixed) {
-      draw_fixed_charge(widget, main_charge_system->charges[i]->position->x, main_charge_system->charges[i]->position->y);
-    }else draw_mobile_charge(widget, main_charge_system->charges[i]->position->x, main_charge_system->charges[i]->position->y);
+  backtrack(&(main_charge_system->charges));
+  while (main_charge_system->charges != NULL) {
+    if (((charge*)main_charge_system->charges->value)->is_fixed) {
+      draw_fixed_charge(widget, ((charge*)main_charge_system->charges->value)->position->x, ((charge*)main_charge_system->charges->value)->position->y);
+    } else {
+      draw_mobile_charge(widget, ((charge*)main_charge_system->charges->value)->position->x, ((charge*)main_charge_system->charges->value)->position->y);
+    }
+    main_charge_system->charges = main_charge_system->charges->next;
   }
-  
 }
 
 /* 

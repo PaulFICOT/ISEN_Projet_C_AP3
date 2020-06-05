@@ -6,12 +6,12 @@
 #include "charge.h"
 #include "vector.h"
 #include "../../constant.h"
+#include "linked_list.h"
 
 typedef struct charge_system_ charge_system;
 
 struct charge_system_ {
-    charge* charges[MAX_CHARGES_NUMBER];
-    int charges_index;
+    linked_list* charges;
 };
 
 /**
@@ -22,16 +22,6 @@ struct charge_system_ {
 charge_system* charge_system_create();
 
 /**
- * Calculate the coulomb law of the charge b on the charge a
- * 
- * @param a a charge
- * @param b a charge
- * 
- * @return the coulomb law
- */
-double coulomb_law(charge *a, charge *b);
-
-/**
  * Calculate the superposition law of a group of charges on a charge
  * 
  * @param mobile_charge the charge which is subject to the law
@@ -40,7 +30,7 @@ double coulomb_law(charge *a, charge *b);
  * 
  * @return the vector representing the superposition law
  */
-vector* superposition_law(charge* mobile_charge, charge *charges[], int charges_index);
+vector* superposition_law(charge_system* c_s, charge* mobile_charge);
 
 /**
  * Append a charge to a charge_system charges array
@@ -57,7 +47,7 @@ void add_charge(charge_system* c_s, charge* ch);
  * @param charges the array containing all the charges which will apply a force
  * @param charges_index the index of the charges array
  */
-void calculate_next_speed(charge* c, charge* charges[], int charges_index);
+void calculate_next_speed(charge_system* c_s, charge* c);
 
 /**
  * Calculate the position of a charge
@@ -66,7 +56,7 @@ void calculate_next_speed(charge* c, charge* charges[], int charges_index);
  * @param charges the array containing all the charges which will apply a force
  * @param charges_index the index of the charges array
  */
-void calculate_next_pose(charge* c, charge* charges[], int charges_index);
+void calculate_next_pose(charge_system* c_s, charge* c);
 
 /**
  * Check if the charge is placeable at the coordinate

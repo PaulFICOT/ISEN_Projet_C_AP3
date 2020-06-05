@@ -109,11 +109,9 @@ void start_process_button(GtkWidget *widget, gpointer data) {
     add_charge(main_charge_system, e);
     add_charge(main_charge_system, f);
     redraw_surface(g_object_get_data(G_OBJECT(widget), "area"), main_charge_system);
-    sleep(4);
-    return;
-    for (int i = 0; i < 20; i++) {
+    for (int i = 0; i < 5; i++) {
         sleep(1);
-        calculate_next_pose(f, main_charge_system->charges, main_charge_system->charges_index);
+        calculate_next_pose(main_charge_system, f);
         printf("%i: (%f, %f)\n", i, f->positions[f->positions_index]->x, f->positions[f->positions_index]->y);
         f->position = f->positions[f->positions_index];
         redraw_surface(g_object_get_data(G_OBJECT(widget), "area"), main_charge_system);

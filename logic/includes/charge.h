@@ -34,6 +34,16 @@ struct charge_ {
 charge* charge_create(double x, double y, enum symbol symbol, double force, double weight, short is_fixed);
 
 /**
+ * Calculate the coulomb law of the charge b on the charge a
+ * 
+ * @param a a charge
+ * @param b a charge
+ * 
+ * @return the coulomb law
+ */
+double coulomb_law(charge *a, charge *b);
+
+/**
  * Check if two charges are the same
  * 
  * @param a a charge
