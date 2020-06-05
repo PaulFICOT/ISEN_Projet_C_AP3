@@ -36,6 +36,12 @@ void create_charge_button(GtkWidget *widget) {
     double weight = strtod(gtk_entry_get_text(GTK_ENTRY(entry_weight)), NULL);
     gboolean is_fixed = gtk_switch_get_active(GTK_SWITCH(btn_switch));
 
+    /* Check if the new charge is placeable in the charge system */
+    coordinate *coord = coordinate_create(coord_x, coord_y);
+    if (!charge_is_placeable(coord, main_charge_system)) {
+        return;
+    }
+
     /* Init variables for the new charge */
     enum symbol symbol;
 

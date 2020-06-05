@@ -48,3 +48,12 @@ void calculate_next_pose(charge* c, charge* charges[], int charges_index) {
     );
     c->positions_index++;
 }
+
+short charge_is_placeable(coordinate* coord, charge_system* main_charge_system) {
+    for (int i = 0; i < main_charge_system->charges_index; i++) {
+        if ((two_points_distance(main_charge_system->charges[i]->position, coord) - (CHARGE_RADIUS/8.0) * 2.0) < 0.0) {
+            return 0;
+        }
+    }
+    return 1;
+}

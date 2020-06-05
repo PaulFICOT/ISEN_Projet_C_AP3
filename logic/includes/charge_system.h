@@ -5,9 +5,7 @@
 
 #include "charge.h"
 #include "vector.h"
-
-#define MAX_CHARGES_NUMBER 100
-#define COULOMB_CONST 8.987551787368176E9
+#include "../../constant.h"
 
 typedef struct charge_system_ charge_system;
 
@@ -69,4 +67,12 @@ void calculate_next_speed(charge* c, charge* charges[], int charges_index);
  * @param charges_index the index of the charges array
  */
 void calculate_next_pose(charge* c, charge* charges[], int charges_index);
+
+/**
+ * Check if the charge is placeable at the coordinate
+ * 
+ * @param coord The coordinate to check
+ * @param main_charge_system The charge system with all coordinates charge
+ */
+short charge_is_placeable(coordinate* coord, charge_system* main_charge_system);
 #endif

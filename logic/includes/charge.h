@@ -3,7 +3,7 @@
 
 #include "coordinate.h"
 #include "enums.h"
-#define MAX_ENTRIES 50
+#include "../../constant.h"
 
 typedef struct charge_ charge;
 

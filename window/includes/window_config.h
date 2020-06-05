@@ -6,14 +6,7 @@
 #include "./draw.h"
 #include "./function_button.h"
 #include "../../logic/includes/charge_system.h"
-
-/*
-    Window's size constant
-*/
-#define WINDOW_WIDTH  800
-#define WINDOW_HEIGHT 480
-#define WINDOW_CREATE_CHARGE_WIDTH  200
-#define WINDOW_CREATE_CHARGE_HEIGHT 300
+#include "../../constant.h"
 
 void activate(GtkApplication *app);
 gboolean hide_create_charge_window(GtkWidget *widget);

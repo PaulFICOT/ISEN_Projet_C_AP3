@@ -4,8 +4,7 @@
 #include "gtk/gtk.h"
 #include "window_config.h"
 #include "../../logic/includes/charge_system.h"
-
-#define CHARGE_RADIUS 14
+#include "../../constant.h"
 
 gboolean init_surface(GtkWidget *widget);
 gboolean prepare_surface(GtkWidget *widget, cairo_t *cr);
