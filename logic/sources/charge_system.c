@@ -25,6 +25,8 @@ vector* superposition_law(charge_system* c_s, charge* mobile_charge) {
     v->start = mobile_charge->position;
     double magnitude = 0.0;
     double sum_directions = 0.0;
+
+    backtrack(&c_s->charges);
     int charges_length = length(c_s->charges);
     while (has_next(c_s->charges)) {
         magnitude += coulomb_law(current_charge(c_s), mobile_charge) * (mobile_charge->symbol == (current_charge(c_s))->symbol ? -1 : 1);
