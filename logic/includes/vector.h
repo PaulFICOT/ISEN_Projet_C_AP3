@@ -14,9 +14,9 @@ struct vector_ {
 /**
  * vector constructor.
  *
- * @param c
- * @param direction
- * @param magnitude
+ * @param c the coordinates of the starting point
+ * @param direction the direction of the vector (an angle)
+ * @param magnitude the length of the vector
  * 
  * @return a new vector instance
  */

@@ -22,9 +22,9 @@ struct quadratic_polynomial_ {
 /**
  * quadratic_polynomial constructor.
  *
- * @param a
- * @param b
- * @param c
+ * @param a the x² factor
+ * @param b the x factor
+ * @param c the constant
  * 
  * @return a new quadratic_polynomial instance
  */

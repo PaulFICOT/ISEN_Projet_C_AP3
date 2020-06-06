@@ -34,7 +34,6 @@ vector* superposition_law(charge_system* c_s, charge* mobile_charge) {
         forward(&(c_s->charges), 1);
     }
     v->magnitude = magnitude;
-    /* we substract 1 because the mobile charge is in c_s->charges */
     v->direction = sum_directions / (charges_length - 1);
     return v;
 }

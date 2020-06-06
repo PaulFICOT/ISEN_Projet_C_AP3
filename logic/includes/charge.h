@@ -22,12 +22,12 @@ struct charge_ {
 /**
  * charge constructor.
  * 
- * @param x
- * @param y
- * @param symbol
- * @param force
- * @param weight
- * @param is_fixed
+ * @param x the x coordinates
+ * @param y the y coordinates
+ * @param symbol if the charge is positive or negative
+ * @param force the force of the charge
+ * @param weight the weight of the charge
+ * @param is_fixed if the charge is fixed or mobile
  * 
  * @return a new charge instance
  */

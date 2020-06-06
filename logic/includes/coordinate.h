@@ -11,8 +11,8 @@ struct coordinate_ {
 /**
  * coordinate constructor.
  *
- * @param x
- * @param y
+ * @param x the abscissa
+ * @param y the ordinates
  * 
  * @return a new coordinate instance
  */
