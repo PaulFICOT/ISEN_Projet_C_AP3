@@ -38,7 +38,7 @@ void create_charge_button(GtkWidget *widget) {
 
     /* Check if the new charge is placeable in the charge system */
     coordinate *coord = coordinate_create(coord_x, coord_y);
-    if (!charge_is_placeable(coord, main_charge_system)) {
+    if (!charge_is_placeable(main_charge_system, coord)) {
         return;
     }
 
