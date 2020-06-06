@@ -130,12 +130,18 @@ void redraw_surface(GtkWidget *widget, charge_system *main_charge_system) {
   /* Draw every charges */
   backtrack(&(main_charge_system->charges));
   while (has_next(main_charge_system->charges)) {
-    if (((charge*)main_charge_system->charges->value)->is_fixed) {
-      draw_fixed_charge(widget, ((charge*)main_charge_system->charges->value)->position->x, ((charge*)main_charge_system->charges->value)->position->y);
+    if (current_charge(main_charge_system)->is_fixed) {
+      draw_fixed_charge(widget, current_charge(main_charge_system)->position->x, current_charge(main_charge_system)->position->y);
     } else {
-      draw_mobile_charge(widget, ((charge*)main_charge_system->charges->value)->position->x, ((charge*)main_charge_system->charges->value)->position->y);
+      draw_mobile_charge(widget, current_charge(main_charge_system)->position->x, current_charge(main_charge_system)->position->y);
     }
     forward(&(main_charge_system->charges), 1);
+  }
+
+  gtk_widget_queue_draw(widget);
+  
+  while (gtk_events_pending()) {
+    gtk_main_iteration();
   }
 }
 

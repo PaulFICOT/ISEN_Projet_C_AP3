@@ -37,7 +37,9 @@ void activate(GtkApplication *app) {
   gtk_widget_set_margin_top(GTK_WIDGET(hbtnbox), 10);
 
   btn_reset = gtk_button_new_with_label("Reset");
-  g_signal_connect(btn_reset, "clicked", G_CALLBACK(clear_surface_button), area);
+  g_object_set_data(G_OBJECT(btn_reset), "charge_system", main_charge_system);
+  g_object_set_data(G_OBJECT(btn_reset), "area", area);
+  g_signal_connect(btn_reset, "clicked", G_CALLBACK(clear_surface_button), NULL);
   gtk_widget_set_size_request(GTK_WIDGET(btn_reset), 100, 45);
 
   btn_create = gtk_button_new_with_label("Create charge");

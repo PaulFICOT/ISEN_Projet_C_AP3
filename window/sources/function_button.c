@@ -85,13 +85,11 @@ void create_charge_button(GtkWidget *widget) {
 /*
     Button's function to clear surface
     widget (GtkWidget *) -> Widget of reset button
-    area (GtkWidget *) -> Widget of drawing area
 */
-void clear_surface_button(GtkWidget *widget, GtkWidget *area) {
-    /* Unused parameter but required field */
-    (void) widget;
+void clear_surface_button(GtkWidget *widget) {
+    reset_charge_system(g_object_get_data(G_OBJECT(widget), "charge_system"));
     clear_surface();
-    gtk_widget_queue_draw(area);
+    gtk_widget_queue_draw(g_object_get_data(G_OBJECT(widget), "area"));
 }
 
 void start_process_button(GtkWidget *widget, gpointer data) {
@@ -116,4 +114,5 @@ void start_process_button(GtkWidget *widget, gpointer data) {
         f->position = f->positions[f->positions_index];
         redraw_surface(g_object_get_data(G_OBJECT(widget), "area"), main_charge_system);
     }
+    redraw_surface(g_object_get_data(G_OBJECT(widget), "area"), main_charge_system);
 }
