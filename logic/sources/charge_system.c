@@ -77,3 +77,7 @@ charge* get_charge(charge_system* c_s, coordinate* coord) {
     }
     return NULL;
 }
+
+void reset_charge_system(charge_system* c_s) {
+    c_s->charges = NULL;
+}

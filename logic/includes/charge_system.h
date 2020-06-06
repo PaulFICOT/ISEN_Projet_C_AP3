@@ -87,4 +87,11 @@ short charge_is_placeable(charge_system* c_s, coordinate* coord);
  * @param main_charge_system The charge system with all charges
  */
 charge* get_charge(charge_system* c_s, coordinate* coord);
+
+/**
+ * Reset the charges in the charge system
+ * 
+ * @param c_s the charge_system
+ */
+void reset_charge_system(charge_system* c_s);
 #endif
