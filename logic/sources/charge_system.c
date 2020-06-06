@@ -8,31 +8,35 @@ charge_system* charge_system_create() {
     return s;
 }
 
+charge* current_charge(charge_system* c_s) {
+    return (charge*) c_s->charges->value;
+}
+
+void add_charge(charge_system* c_s, charge* ch) {
+    printf("is_null : %i\n", is_null(c_s->charges));
+    if (is_null(c_s->charges)) {
+        c_s->charges = linked_list_create(ch);
+        return;
+    }
+    push(c_s->charges, ch);
+}
+
 vector* superposition_law(charge_system* c_s, charge* mobile_charge) {
     vector* v = malloc(sizeof(vector));
     v->start = mobile_charge->position;
     double magnitude = 0.0;
     double sum_directions = 0.0;
     int charges_length = length(c_s->charges);
-    printf("%i\n", charges_length);
-    while (c_s->charges != NULL) {
-        printf("%f\n", coulomb_law((charge*) c_s->charges->value, mobile_charge));
-        magnitude += coulomb_law((charge*) c_s->charges->value, mobile_charge) * (mobile_charge->symbol == ((charge*)c_s->charges->value)->symbol ? -1 : 1);
-        sum_directions += get_direction(mobile_charge->position, ((charge*)c_s->charges->value)->position);
-        c_s->charges = c_s->charges->next;
+    while (has_next(c_s->charges)) {
+        printf("%f\n", coulomb_law(current_charge(c_s), mobile_charge));
+        magnitude += coulomb_law(current_charge(c_s), mobile_charge) * (mobile_charge->symbol == (current_charge(c_s))->symbol ? -1 : 1);
+        sum_directions += get_direction(mobile_charge->position, (current_charge(c_s))->position);
+        forward(&(c_s->charges), 1);
     }
     v->magnitude = magnitude;
     /* we substract 1 because the mobile charge is in c_s->charges */
     v->direction = sum_directions / (charges_length - 1);
     return v;
-}
-
-void add_charge(charge_system* c_s, charge* ch) {
-    if (c_s->charges == NULL) {
-        c_s->charges = linked_list_create(ch);
-        return;
-    }
-    push(c_s->charges, ch);
 }
 
 void calculate_next_speed(charge_system* c_s, charge* c) {

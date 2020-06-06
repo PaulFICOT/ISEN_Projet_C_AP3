@@ -35,7 +35,7 @@ short is_tail(linked_list* l) {
 }
 
 short is_null(linked_list* l) {
-    return l == NULL || l->prev == NULL && l->value == NULL && l->next == NULL;
+    return l == NULL || (l->prev == NULL && l->value == NULL && l->next == NULL);
 }
 
 short has_prev(linked_list* l) {
@@ -158,34 +158,3 @@ void backward(linked_list **l, int n) {
         n--;
     }
 }
-
-// int main() {
-//     int a = 1;
-//     int b = 8;
-//     int c = 2;
-//     int d = 6;
-
-//     linked_list* l = linked_list_create(&a);
-//     push(l, &b);
-//     push(l, &c);
-//     push(l, &d);
-
-//     int e = 7;
-//     int f = 4;
-//     int g = 1;
-//     int h = 5;
-//     linked_list* m = linked_list_create(&e);
-//     push(m, &f);
-//     push(m, &g);
-//     push(m, &h);
-
-//     fusion(l, m);
-//     forward(&l, length(l) - 1);
-//     delete(&l);
-//     backtrack(&l);
-//     printf("while\n");
-//     while (has_next(l)) {
-//         printf("%i\n", * (int*) l->value);
-//         forward(&l, 1);
-//     }
-// }

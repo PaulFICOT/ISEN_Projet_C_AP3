@@ -22,6 +22,28 @@ struct charge_system_ {
 charge_system* charge_system_create();
 
 /**
+ * Fetch the current element of the linked_list's charges
+ * 
+ * @param c_s the charge system
+ * 
+ * @return the current charge
+ */
+charge* current_charge(charge_system* c_s);
+
+/**
+ * Append a charge to the charge system
+ * 
+ * @param c_s the charge_system
+ * @param ch a charge
+ */
+void add_charge(charge_system* c_s, charge* ch);
+
+/**
+ * Delete the given charge from the charge system
+ */
+void delete_charge(charge_system* c_s, charge* ch);
+
+/**
  * Calculate the superposition law of a group of charges on a charge
  * 
  * @param mobile_charge the charge which is subject to the law
@@ -31,14 +53,6 @@ charge_system* charge_system_create();
  * @return the vector representing the superposition law
  */
 vector* superposition_law(charge_system* c_s, charge* mobile_charge);
-
-/**
- * Append a charge to a charge_system charges array
- * 
- * @param c_s the charge_system
- * @param ch a charge
- */
-void add_charge(charge_system* c_s, charge* ch);
 
 /**
  * Calculate the speed of a charge
