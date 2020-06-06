@@ -76,7 +76,15 @@ void calculate_next_pose(charge_system* c_s, charge* c);
  * Check if the charge is placeable at the coordinate
  * 
  * @param c_s The charge system with all coordinates charge
- * @param c The coordinate to check
+ * @param coord The coordinate to check
  */
-short charge_is_placeable(charge_system* c_s, coordinate* c);
+short charge_is_placeable(charge_system* c_s, coordinate* coord);
+
+/**
+ * Get the charge in the charge system at the coordinate given
+ * 
+ * @param coord The coordinate to check
+ * @param main_charge_system The charge system with all charges
+ */
+charge* get_charge(charge_system* c_s, coordinate* coord);
 #endif

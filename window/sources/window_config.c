@@ -27,7 +27,7 @@ void activate(GtkApplication *app) {
   gtk_widget_set_size_request(area, WINDOW_WIDTH, WINDOW_HEIGHT);
   g_signal_connect(area, "draw", G_CALLBACK(prepare_surface), NULL);
   g_signal_connect(area, "configure-event", G_CALLBACK(init_surface), NULL);
-  g_signal_connect(area, "button-press-event", G_CALLBACK(clicked), NULL);
+  g_signal_connect(area, "button-press-event", G_CALLBACK(clicked), main_charge_system);
   gtk_widget_set_events(area, gtk_widget_get_events(area) | GDK_BUTTON_PRESS_MASK | GDK_POINTER_MOTION_MASK);
 
   hbtnbox = gtk_button_box_new(GTK_ORIENTATION_HORIZONTAL);

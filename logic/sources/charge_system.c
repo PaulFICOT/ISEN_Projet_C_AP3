@@ -58,11 +58,23 @@ void calculate_next_pose(charge_system* c_s, charge* c) {
 }
 
 short charge_is_placeable(charge_system* c_s, coordinate* coord) {
-    while (c_s->charges != NULL) {
+    backtrack(&(c_s->charges));
+    while (has_next(c_s->charges)) {
         if ((two_points_distance(((charge*) c_s->charges->value)->position, coord) - (CHARGE_RADIUS/8.0) * 2.0) < 0.0) {
             return 0;
         }
-        c_s->charges = c_s->charges->next;
+        forward(&(c_s->charges), 1);
     }
     return 1;
+}
+
+charge* get_charge(charge_system* c_s, coordinate* coord) {
+    backtrack(&(c_s->charges));
+    while (has_next(c_s->charges)) {
+        if ((two_points_distance(((charge*) c_s->charges->value)->position, coord) - (CHARGE_RADIUS/8.0)) < 0.0) {
+            return ((charge*) c_s->charges->value);
+        }
+        forward(&(c_s->charges), 1);
+    }
+    return NULL;
 }

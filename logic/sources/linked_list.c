@@ -64,6 +64,7 @@ void backtrack(linked_list **l) {
 }
 
 void push(linked_list *l, void* n) {
+    backtrack(&l);
     while(!is_last(l)) {
         forward(&l, 1);
     }
