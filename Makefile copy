@@ -10,25 +10,18 @@ CFLAGS = $(ERROR_FLAGS) $(GTK_CFLAGS) $(LIB_FLAGS)
 GTK_LDFLAGS = `pkg-config --libs gtk+-3.0`
 LDFLAGS = $(ERROR_FLAGS) $(GTK_LDFLAGS) $(LIB_FLAGS)
 
+SRC := $(wildcard logic/sources/*.c)
+OBJS := $(SRC:.c=.o)
+
 all: $(EXEC)
 
 $(EXEC): main.o
 
-main.o: charge_system.o
-	$(CC) -c main.c $(CFLAGS)
-	$(CC) -o $(EXEC) charge_system.o main.o $(LDFLAGS)
+main.o: $(OBJS)
+	$(CC) -o $@ $(OBJS) main.c $(LDFLAGS)
 
-charge_system.o: vector.o charge.o
-	$(CC) -o charge_system.o -c charge.o vector.o logic/sources/charge_system.c $(LDFLAGS)
-
-vector.o: coordinate.o
-	$(CC) -o vector.o -c coordinate.o logic/sources/vector.c $(LDFLAGS)
-
-charge.o: coordinate.o
-	$(CC) -o charge.o -c coordinate.o logic/sources/charge.c $(LDFLAGS)
-
-coordinate.o:
-	$(CC) -o coordinate.o -c logic/sources/coordinate.c $(LDFLAGS)
+%.o: %.c
+	$(CC) -c $< -o $@ -I. $(CFLAGS)
 
 clean:
 	rm -rf *.o
