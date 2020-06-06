@@ -26,22 +26,25 @@ linked_list* null_linked_list();
 linked_list* linked_list_create(void* n);
 
 /**
- * Checks if the element is the last of the list (excluding the tail)
+ * Checks if the element is the head of the list
  * 
- * @param l the element to check
- * 
- * @return true if the element is the last
+ * @param l the linked list
  */
-short is_last(linked_list* l);
+short is_head(linked_list* l);
 
 /**
- * Checks if the element is the first of the list (excluding the head)
+ * Checks if the element is the tail of the list
  * 
- * @param l the element to check
- * 
- * @return true if the element is the first
+ * @param l the linked list
  */
-short is_first(linked_list* l);
+short is_tail(linked_list* l);
+
+/**
+ * Checks if the linked list is null
+ * 
+ * @param l the linked list
+ */
+short is_null(linked_list* l);
 
 /**
  * Checks if the element has a predecessor (including the head)
@@ -60,6 +63,24 @@ short has_prev(linked_list* l);
  * @return true if the element has a successor
  */
 short has_next(linked_list* l);
+
+/**
+ * Checks if the element is the last of the list (excluding the tail)
+ * 
+ * @param l the element to check
+ * 
+ * @return true if the element is the last
+ */
+short is_last(linked_list* l);
+
+/**
+ * Checks if the element is the first of the list (excluding the head)
+ * 
+ * @param l the element to check
+ * 
+ * @return true if the element is the first
+ */
+short is_first(linked_list* l);
 
 /**
  * Rewind the linked list

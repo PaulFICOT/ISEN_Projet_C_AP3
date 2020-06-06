@@ -26,20 +26,32 @@ linked_list* linked_list_create(void* n) {
     return l;
 }
 
-short is_last(linked_list* l) {
-    return l->next->value == NULL;
+short is_head(linked_list* l) {
+    return l->prev == NULL && l->value == NULL && l->next != NULL;
 }
 
-short is_first(linked_list* l) {
-    return l->prev->value == NULL;
+short is_tail(linked_list* l) {
+    return l->prev != NULL && l->value == NULL && l->next == NULL;
+}
+
+short is_null(linked_list* l) {
+    return l == NULL || l->prev == NULL && l->value == NULL && l->next == NULL;
 }
 
 short has_prev(linked_list* l) {
-    return l->prev != NULL;
+    return !is_null(l) && l->prev != NULL;
 }
 
 short has_next(linked_list* l) {
-    return l->next != NULL;
+    return !is_null(l) && l->next != NULL;
+}
+
+short is_last(linked_list* l) {
+    return has_next(l) && l->next->value == NULL;
+}
+
+short is_first(linked_list* l) {
+    return has_prev(l) && l->prev->value == NULL;
 }
 
 void backtrack(linked_list **l) {
