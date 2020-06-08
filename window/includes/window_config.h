@@ -6,7 +6,7 @@
 #include "./draw.h"
 #include "./function_button.h"
 #include "../../logic/includes/charge_system.h"
-#include "../../constant.h"
+#include "../../constants.h"
 
 void activate(GtkApplication *app);
 gboolean hide_create_charge_window(GtkWidget *widget);
