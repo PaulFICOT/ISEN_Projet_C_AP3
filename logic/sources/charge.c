@@ -23,3 +23,14 @@ double coulomb_law(charge* a, charge* b) {
 short charge_is_itself(charge* a, charge* b) {
     return two_points_distance(a->position, b->position) != 0;
 }
+
+charge* random_charge() {
+    return charge_create(
+        rand() % 50 * (rand() % 2 == 1 ? -1 : 1),
+        rand() % 50 * (rand() % 2 == 1 ? -1 : 1),
+        rand() % 2 == 1 ? POSITIVE : NEGATIVE,
+        rand() % 9 * 10^(-rand()%4),
+        rand() % 9 * 10^(-rand()%4),
+        rand() % 2
+    );
+}

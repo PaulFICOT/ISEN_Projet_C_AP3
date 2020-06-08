@@ -52,4 +52,11 @@ double coulomb_law(charge *a, charge *b);
  * @return true if the two charges are the same, false otherwise
  */
 short charge_is_itself(charge* a, charge* b);
+
+/**
+ * Generates a charge generated randomly
+ * 
+ * @return a charge
+ */
+charge* random_charge();
 #endif

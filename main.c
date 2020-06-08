@@ -1,10 +1,13 @@
 /*Headers*/
+#include <time.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include "gtk/gtk.h"
 #include "window/includes/window_config.h"
 
 int main (int argc, char **argv) {
+  srand(time(NULL)); 
+
   GtkApplication *app;
   int status;
 
