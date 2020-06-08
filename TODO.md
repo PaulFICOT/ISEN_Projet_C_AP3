@@ -6,15 +6,15 @@ Objectif -> calculer numériquement les intéractions électrostatiques entre pl
 À partir d'un modèle électrostatique simple, le programme calculera et affichera le mouvement des charges mobiles ainsi que les forces de Coulomb.
 
 ## Les fonctionnalités
-- [] Représenter les outils et interactions électromagnétiques dans un moteur de simulation dédié
+- [ ] Représenter les outils et interactions électromagnétiques dans un moteur de simulation dédié
 - [x] Ajouter une charge fixe
 - [x] Ajouter une charge mobile
-- [] Lancer une simulation pour un temps donné
-- [] Afficher le résultat au moyen d’une interface graphique
+- [ ] Lancer une simulation pour un temps donné
+- [ ] Afficher le résultat au moyen d’une interface graphique
 - [x] Générer un champ et des charges placées manuellement ou aléatoirement
-- [] L’affichage de la force de Coulomb associé à chaque charge en sélectionnant la charge en question
+- [ ] L’affichage de la force de Coulomb associé à chaque charge en sélectionnant la charge en question
 - [x] La visualisation du mouvement des charges mobiles
-- [] En bonus vous pourrez afficher également les lignes de champ et le potentiel électrostatique
+- [ ] En bonus vous pourrez afficher également les lignes de champ et le potentiel électrostatique
 
 ## Les contraintes
 * On ne considérera que des charges électriques ponctuelles. Une masse et un nombre fini de charges élémentaires seront affectés à chaque point.
