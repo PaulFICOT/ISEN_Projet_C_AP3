@@ -1,3 +1,6 @@
+**Deadline : 20/06 à 0h00**  
+**À envoyer par mail à olivier.cros@yncrea.fr et yannick.lambert@yncrea.fr**
+
 Un champ complet (représenté par un rectangle)
 Il y a différentes charges (fixes et mobiles)
 
