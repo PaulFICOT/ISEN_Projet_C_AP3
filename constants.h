@@ -1,5 +1,5 @@
-#ifndef CONSTANT
-#define CONSTANT
+#ifndef CONSTANTS
+#define CONSTANTS
 
 #define MAX_CHARGES_NUMBER 100
 #define COULOMB_CONST 8.987551787368176E9
@@ -7,7 +7,7 @@
 #define CHARGE_RADIUS 14
 
 /*
-    Window's size constant
+    Window's size constants
 */
 #define WINDOW_WIDTH  800
 #define WINDOW_HEIGHT 480

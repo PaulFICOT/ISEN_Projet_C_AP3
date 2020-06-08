@@ -5,7 +5,7 @@
 
 #include "charge.h"
 #include "vector.h"
-#include "../../constant.h"
+#include "../../constants.h"
 #include "linked_list.h"
 
 typedef struct charge_system_ charge_system;

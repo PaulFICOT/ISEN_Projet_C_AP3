@@ -2,8 +2,8 @@
 #define CHARGE
 
 #include "coordinate.h"
-#include "enums.h"
-#include "../../constant.h"
+#include "../../enums.h"
+#include "../../constants.h"
 
 typedef struct charge_ charge;
 
