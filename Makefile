@@ -20,6 +20,7 @@ logic/sources/vector.c \
 logic/sources/charge_system.c \
 logic/sources/charge.c \
 logic/sources/linked_list.c \
+middleware/sources/logger.c \
 main.c
 
 # Add \ at the end of the line to put each filename on a newline
@@ -32,6 +33,7 @@ vector.o \
 charge.o \
 charge_system.o \
 linked_list.o \
+logger.o \
 main.o
 
 all: $(EXEC)
