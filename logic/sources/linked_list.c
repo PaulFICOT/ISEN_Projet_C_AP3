@@ -139,10 +139,14 @@ void print_int(linked_list *l) {
 void delete(linked_list **l) {
     (*l)->next->prev = (*l)->prev;
     (*l)->prev->next = (*l)->next;
+
     if (is_first(*l)) {
         *l = (*l)->next;
     } else {
         *l = (*l)->prev;
+    }
+    if (length(*l) == 0) {
+        (*l) = NULL;
     }
 }
 
