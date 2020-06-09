@@ -20,6 +20,17 @@ void add_charge(charge_system* c_s, charge* ch) {
     push(c_s->charges, ch);
 }
 
+void delete_charge(charge_system* c_s, charge* c) {
+    backtrack(&c_s->charges);
+    while (has_next(c_s->charges) && current_charge(c_s) != c) {
+        forward(&c_s->charges);
+    }
+    if (current_charge(c_s) != c) {
+        return;
+    }
+    delete(&c_s->charges);
+}
+
 vector* superposition_law(charge_system* c_s, charge* mobile_charge) {
     vector* v = malloc(sizeof(vector));
     v->start = mobile_charge->position;
