@@ -20,12 +20,12 @@ void add_charge(charge_system* c_s, charge* ch) {
     push(c_s->charges, ch);
 }
 
-void delete_charge(charge_system* c_s, charge* c) {
+void delete_charge(charge_system* c_s, charge* ch) {
     backtrack(&c_s->charges);
-    while (has_next(c_s->charges) && current_charge(c_s) != c) {
-        forward(&c_s->charges);
+    while (has_next(c_s->charges) && current_charge(c_s) != ch) {
+        forward(&c_s->charges, 1);
     }
-    if (current_charge(c_s) != c) {
+    if (current_charge(c_s) != ch) {
         return;
     }
     delete(&c_s->charges);
