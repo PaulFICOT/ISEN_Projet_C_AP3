@@ -2,14 +2,14 @@
 #include <stdio.h>
 
 /*
-    Show the create charge's window
+    Show the charge's window
     widget (GtkWidget *) -> Widget of create charge button
-    window_create_charge (GtkWidget *) -> Widget of create charge's window
+    window_charge (GtkWidget *) -> Widget of charge's window
 */
-void display_window_create_charge_button(GtkWidget *widget, GtkWidget* window_create_charge) {
+void display_charge_window_button(GtkWidget *widget, GtkWidget* window_charge) {
     /* Unused parameter but required field */
     (void) widget;
-    gtk_widget_show_all(window_create_charge);
+    gtk_widget_show_all(window_charge);
 }
 
 /*
@@ -77,6 +77,34 @@ void create_charge_button(GtkWidget *widget) {
     gtk_entry_set_text(GTK_ENTRY(entry_force), "0");
     gtk_entry_set_text(GTK_ENTRY(entry_weight), "0");
     gtk_switch_set_active(GTK_SWITCH(btn_switch), FALSE);
+
+    /* Hide the window */
+    gtk_widget_hide(g_object_get_data(G_OBJECT(widget), "window"));
+}
+
+void modify_charge_button(GtkWidget *widget) {
+    charge *a_charge = g_object_get_data(G_OBJECT(widget), "a_charge");
+    charge_system* main_charge_system = g_object_get_data(G_OBJECT(widget), "charge_system");
+
+    delete_charge(main_charge_system, a_charge);
+
+    if (charge_is_placeable(main_charge_system, a_charge->position)) {
+        create_charge_button(widget);
+    }else {
+        add_charge(main_charge_system, a_charge);
+    }
+
+    redraw_surface(g_object_get_data(G_OBJECT(widget), "area"), main_charge_system);
+}
+
+void delete_charge_button(GtkWidget *widget) {
+    charge_system* main_charge_system = g_object_get_data(G_OBJECT(widget), "charge_system");
+
+    /* WIP delete function */
+    delete_charge(main_charge_system, g_object_get_data(G_OBJECT(widget), "a_charge"));
+
+    /* Refresh the surface */
+    redraw_surface(g_object_get_data(G_OBJECT(widget), "area"), main_charge_system);
 
     /* Hide the window */
     gtk_widget_hide(g_object_get_data(G_OBJECT(widget), "window"));

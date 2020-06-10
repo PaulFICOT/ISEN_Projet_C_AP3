@@ -9,8 +9,8 @@
 #include "../../constants.h"
 
 void activate(GtkApplication *app);
-gboolean hide_create_charge_window(GtkWidget *widget);
+gboolean hide_charge_window(GtkWidget *widget);
 void check_insert_entry(GtkWidget *widget, gchar *new_text);
-GtkWidget* init_create_charge_window(GtkWidget* area, charge_system* main_charge_system);
+GtkWidget* init_charge_window(GtkWidget* area, charge_system* main_charge_system, charge* a_charge);
 
 #endif

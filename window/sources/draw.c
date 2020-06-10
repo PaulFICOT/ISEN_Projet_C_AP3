@@ -2,6 +2,7 @@
 
 /* Surface cairo to contain charges */
 static cairo_surface_t *surface = NULL;
+static GtkWidget *window_charge = NULL;
 
 /* 
   Initialize a surface
@@ -152,13 +153,18 @@ void redraw_surface(GtkWidget *widget, charge_system *main_charge_system) {
   main_charge_system (charge_system *) -> The system charge with all charges
 */
 gboolean clicked(GtkWidget *widget, GdkEventButton *mouse, charge_system *main_charge_system) {
-  /* Unused parameter but required field */
-  (void) widget;
   coordinate* coord = coordinate_create((mouse->x - (WINDOW_WIDTH/2.0)) / 8.0, ((WINDOW_HEIGHT/2.0) - mouse->y) / 8.0);
   charge* a_charge = get_charge(main_charge_system, coord);
 
+  if (window_charge != NULL) {
+    gtk_widget_hide(window_charge);
+    window_charge = NULL;
+  }
+
   if (a_charge != NULL) {
-    printf("Charge force -> %lf\n", a_charge->force);
+    window_charge = init_charge_window(widget, main_charge_system, a_charge);
+    gtk_widget_show_all(GTK_WIDGET(window_charge));
+    gtk_window_set_keep_above(GTK_WINDOW(window_charge), TRUE);
   }
 
   /* Stop other handlers from being invoked for the event */

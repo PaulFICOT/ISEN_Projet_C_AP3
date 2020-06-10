@@ -43,7 +43,7 @@ void activate(GtkApplication *app) {
   gtk_widget_set_size_request(GTK_WIDGET(btn_reset), 100, 45);
 
   btn_create = gtk_button_new_with_label("Create charge");
-  g_signal_connect(btn_create, "clicked", G_CALLBACK(display_window_create_charge_button), init_create_charge_window(area, main_charge_system));
+  g_signal_connect(btn_create, "clicked", G_CALLBACK(display_charge_window_button), init_charge_window(area, main_charge_system, NULL));
   gtk_widget_set_size_request(GTK_WIDGET(btn_create), 100, 45);
 
   btn_start = gtk_button_new_with_label("Start");
@@ -69,7 +69,7 @@ void activate(GtkApplication *app) {
   Hide the create charge window
   widget (GtkWidget *) -> The object which received the signal
 */
-gboolean hide_create_charge_window(GtkWidget *widget) {
+gboolean hide_charge_window(GtkWidget *widget) {
     gtk_widget_hide(widget);
     return TRUE;
 }
@@ -94,14 +94,14 @@ void check_insert_entry(GtkWidget *widget, gchar *new_text) {
 }
 
 /* 
-  Configure create charge window with differents widgets, then return it
+  Configure a charge window with differents widgets, then return it
   area (GtkWidget *) -> Widget of drawing area
   main_charge_system (charge_system *) -> The charge system which contains all charges
+  a_charge (charge *) -> The charge to modify if NULL it's a create charge window
 */
-GtkWidget* init_create_charge_window(GtkWidget* area, charge_system* main_charge_system) {
-  GtkWidget *window_create_charge;
+GtkWidget* init_charge_window(GtkWidget* area, charge_system* main_charge_system, charge* a_charge) {
+  GtkWidget *window_charge;
   GtkWidget *grid;
-  GtkWidget *btn_create;
   GtkWidget *label_x;
   GtkWidget *spin_x;
   GtkWidget *label_y;
@@ -112,39 +112,58 @@ GtkWidget* init_create_charge_window(GtkWidget* area, charge_system* main_charge
   GtkWidget *entry_weight;
   GtkWidget *label_switch;
   GtkWidget *btn_switch;
+  GtkWidget *btn_charge;
 
   /* Initialize and set up each widget */
 
-  window_create_charge = gtk_window_new(GTK_WINDOW_TOPLEVEL);
-  gtk_window_set_default_size(GTK_WINDOW(window_create_charge), WINDOW_CREATE_CHARGE_WIDTH, WINDOW_CREATE_CHARGE_HEIGHT);
-  gtk_container_set_border_width(GTK_CONTAINER(window_create_charge), 10);
-  gtk_window_set_resizable (GTK_WINDOW(window_create_charge), FALSE);
-  gtk_window_set_position(GTK_WINDOW(window_create_charge), GTK_WIN_POS_CENTER);
-  gtk_window_set_title(GTK_WINDOW (window_create_charge), "Create charge");
-  g_signal_connect(GTK_WINDOW(window_create_charge), "delete-event", G_CALLBACK(hide_create_charge_window), NULL);
+  window_charge = gtk_window_new(GTK_WINDOW_TOPLEVEL);
+  gtk_window_set_default_size(GTK_WINDOW(window_charge), WINDOW_CHARGE_WIDTH, WINDOW_CHARGE_HEIGHT);
+  gtk_container_set_border_width(GTK_CONTAINER(window_charge), 10);
+  gtk_window_set_resizable (GTK_WINDOW(window_charge), FALSE);
+  gtk_window_set_position(GTK_WINDOW(window_charge), GTK_WIN_POS_CENTER);
+  g_signal_connect(GTK_WINDOW(window_charge), "delete-event", G_CALLBACK(hide_charge_window), NULL);
 
   label_x = gtk_label_new("Coordinate x");
   spin_x = gtk_spin_button_new_with_range(-50, 50, 0.01);
-  gtk_spin_button_set_value(GTK_SPIN_BUTTON(spin_x), 0);
 
   label_y = gtk_label_new("Coordinate y");
   spin_y = gtk_spin_button_new_with_range(-30, 30, 0.01);
-  gtk_spin_button_set_value(GTK_SPIN_BUTTON(spin_y), 0);
 
   label_force = gtk_label_new("Force");
   entry_force = gtk_entry_new();
-  gtk_entry_set_text(GTK_ENTRY(entry_force), "0");
+  gtk_entry_set_max_length (GTK_ENTRY(entry_force), 30);
   g_signal_connect(entry_force, "insert-text", G_CALLBACK(check_insert_entry), NULL);
 
   label_weight = gtk_label_new("Weight");
   entry_weight = gtk_entry_new();
-  gtk_entry_set_text(GTK_ENTRY(entry_weight), "0");
+  gtk_entry_set_max_length (GTK_ENTRY(entry_weight), 30);
   g_signal_connect(entry_weight, "insert-text", G_CALLBACK(check_insert_entry), NULL);
 
   label_switch = gtk_label_new("Fixed charge ?");
   btn_switch = gtk_switch_new();
 
-  btn_create = gtk_button_new_with_label("Create charge");
+  if (a_charge) {
+    /* Convert double to char* */
+    char charge_force[30];
+    sprintf(charge_force, "%lf", a_charge->force);
+    char charge_weight[30];
+    sprintf(charge_weight, "%lf", a_charge->weight);
+
+    gtk_window_set_title(GTK_WINDOW (window_charge), "Modify charge");
+    gtk_spin_button_set_value(GTK_SPIN_BUTTON(spin_x), a_charge->position->x);
+    gtk_spin_button_set_value(GTK_SPIN_BUTTON(spin_y), a_charge->position->y);
+    gtk_entry_set_text(GTK_ENTRY(entry_force), charge_force);
+    gtk_entry_set_text(GTK_ENTRY(entry_weight), charge_weight);
+    gtk_switch_set_active(GTK_SWITCH(btn_switch), a_charge->is_fixed);
+    btn_charge = gtk_button_new_with_label("Modify charge");
+  }else {
+    gtk_window_set_title(GTK_WINDOW (window_charge), "Create charge");
+    gtk_spin_button_set_value(GTK_SPIN_BUTTON(spin_x), 0);
+    gtk_spin_button_set_value(GTK_SPIN_BUTTON(spin_y), 0);
+    gtk_entry_set_text(GTK_ENTRY(entry_force), "0");
+    gtk_entry_set_text(GTK_ENTRY(entry_weight), "0");
+    btn_charge = gtk_button_new_with_label("Create charge");
+  }
 
   grid = gtk_grid_new();
   gtk_grid_set_column_homogeneous(GTK_GRID(grid), TRUE);
@@ -159,16 +178,34 @@ GtkWidget* init_create_charge_window(GtkWidget* area, charge_system* main_charge
   gtk_grid_attach(GTK_GRID(grid), GTK_WIDGET(entry_weight), 0, 7, 2, 1);
   gtk_grid_attach(GTK_GRID(grid), GTK_WIDGET(label_switch), 0, 8, 2, 1);
   gtk_grid_attach(GTK_GRID(grid), GTK_WIDGET(btn_switch), 0, 9, 2, 1);
-  gtk_grid_attach(GTK_GRID(grid), GTK_WIDGET(btn_create), 0, 10, 2, 1);
+  gtk_grid_attach(GTK_GRID(grid), GTK_WIDGET(btn_charge), 0, 10, 2, 1);
 
-  g_object_set_data(G_OBJECT(btn_create), "grid", grid);
-  g_object_set_data(G_OBJECT(btn_create), "area", area);
-  g_object_set_data(G_OBJECT(btn_create), "window", window_create_charge);
-  g_object_set_data(G_OBJECT(btn_create), "charge_system", main_charge_system);
-  g_signal_connect(btn_create, "clicked", G_CALLBACK(create_charge_button), NULL);
+  if (a_charge) {
+    /* Create delete button */
+    GtkWidget *btn_delete = gtk_button_new_with_label("Delete charge");
+    g_object_set_data(G_OBJECT(btn_delete), "area", area);
+    g_object_set_data(G_OBJECT(btn_delete), "charge_system", main_charge_system);
+    g_object_set_data(G_OBJECT(btn_delete), "window", window_charge);
+    g_object_set_data(G_OBJECT(btn_delete), "a_charge", a_charge);
+    g_signal_connect(btn_delete, "clicked", G_CALLBACK(delete_charge_button), NULL);
+    gtk_grid_attach(GTK_GRID(grid), GTK_WIDGET(btn_delete), 0, 11, 2, 1);
 
-  gtk_container_add(GTK_CONTAINER(window_create_charge), grid);
+    g_object_set_data(G_OBJECT(btn_charge), "grid", grid);
+    g_object_set_data(G_OBJECT(btn_charge), "area", area);
+    g_object_set_data(G_OBJECT(btn_charge), "window", window_charge);
+    g_object_set_data(G_OBJECT(btn_charge), "charge_system", main_charge_system);
+    g_object_set_data(G_OBJECT(btn_charge), "a_charge", a_charge);
+    g_signal_connect(btn_charge, "clicked", G_CALLBACK(modify_charge_button), NULL);
+  } else {
+    g_object_set_data(G_OBJECT(btn_charge), "grid", grid);
+    g_object_set_data(G_OBJECT(btn_charge), "area", area);
+    g_object_set_data(G_OBJECT(btn_charge), "window", window_charge);
+    g_object_set_data(G_OBJECT(btn_charge), "charge_system", main_charge_system);
+    g_signal_connect(btn_charge, "clicked", G_CALLBACK(create_charge_button), NULL);
+  }
 
-  return window_create_charge;
+  gtk_container_add(GTK_CONTAINER(window_charge), grid);
+
+  return window_charge;
 }
 
