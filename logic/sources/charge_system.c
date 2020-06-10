@@ -92,3 +92,11 @@ charge* get_charge(charge_system* c_s, coordinate* coord) {
 void reset_charge_system(charge_system* c_s) {
     c_s->charges = NULL;
 }
+
+void print_charge(charge_system *c_s) {
+    while (has_next(c_s->charges)) {
+        printf("%i\n", current_charge(c_s) == NULL);
+        printf("(%f, %f)\n", current_charge(c_s)->position->x, current_charge(c_s)->position->y);
+        forward(&c_s->charges, 1);
+    }
+}

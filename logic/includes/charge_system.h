@@ -94,4 +94,9 @@ charge* get_charge(charge_system* c_s, coordinate* coord);
  * @param c_s the charge_system
  */
 void reset_charge_system(charge_system* c_s);
+
+/**
+ * print the charges in the charges linked_list
+ */
+void print_charge(charge_system* c_s);
 #endif
