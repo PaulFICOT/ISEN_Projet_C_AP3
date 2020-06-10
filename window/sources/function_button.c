@@ -2,11 +2,11 @@
 #include <stdio.h>
 
 /*
-    Show the charge's window
-    widget (GtkWidget *) -> Widget of create charge button
-    window_charge (GtkWidget *) -> Widget of charge's window
+    Show the window
+    widget (GtkWidget *) -> Widget of clicked button
+    window_charge (GtkWidget *) -> Widget of the window
 */
-void display_charge_window_button(GtkWidget *widget, GtkWidget* window_charge) {
+void display_window_button(GtkWidget *widget, GtkWidget* window_charge) {
     /* Unused parameter but required field */
     (void) widget;
     gtk_widget_show_all(window_charge);
@@ -71,7 +71,7 @@ void create_charge_button(GtkWidget *widget) {
         draw_mobile_charge(area, coord_x, coord_y);
     }
 
-    /* Reset widgets' value */ 
+    /* Reset widgets' values */ 
     gtk_spin_button_set_value(GTK_SPIN_BUTTON(spin_x), 0.0);
     gtk_spin_button_set_value(GTK_SPIN_BUTTON(spin_y), 0.0);
     gtk_entry_set_text(GTK_ENTRY(entry_force), "0");
@@ -105,6 +105,39 @@ void delete_charge_button(GtkWidget *widget) {
 
     /* Refresh the surface */
     redraw_surface(g_object_get_data(G_OBJECT(widget), "area"), main_charge_system);
+
+    /* Hide the window */
+    gtk_widget_hide(g_object_get_data(G_OBJECT(widget), "window"));
+}
+
+/*
+    Generate charge with random characteristics
+    widget (GtkWidget *) -> Widget of generate button
+*/
+void generate_charge_button(GtkWidget *widget) {    
+    /* Get all parameters */
+    GtkWidget *grid = g_object_get_data(G_OBJECT(widget), "grid");
+    GtkWidget *area = g_object_get_data(G_OBJECT(widget), "area");
+    charge_system* main_charge_system = g_object_get_data(G_OBJECT(widget), "charge_system");
+
+    /* Get number of charge to generate */
+    GtkWidget *spin = gtk_grid_get_child_at(GTK_GRID(grid), 0, 1);
+    gdouble nbr_charge = gtk_spin_button_get_value(GTK_SPIN_BUTTON(spin));
+
+    /* Generate charge and check if it is placeable before add it in charge system */
+    while (nbr_charge != 0) {
+        charge *new_charge = random_charge();
+        if (charge_is_placeable(main_charge_system, new_charge->position)) {
+            add_charge(main_charge_system, new_charge);
+            nbr_charge--;
+        }
+    }
+
+    /* refresh surface with new charges */
+    redraw_surface(area, main_charge_system);
+
+    /* Reset widgets' value */ 
+    gtk_spin_button_set_value(GTK_SPIN_BUTTON(spin), 0);
 
     /* Hide the window */
     gtk_widget_hide(g_object_get_data(G_OBJECT(widget), "window"));

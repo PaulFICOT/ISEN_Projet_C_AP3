@@ -10,6 +10,7 @@ void activate(GtkApplication *app) {
   GtkWidget *grid;
   GtkWidget *hbtnbox;
   GtkWidget *btn_reset;
+  GtkWidget *btn_generate;
   GtkWidget *btn_create;
   GtkWidget *btn_start;
 
@@ -42,8 +43,12 @@ void activate(GtkApplication *app) {
   g_signal_connect(btn_reset, "clicked", G_CALLBACK(clear_surface_button), NULL);
   gtk_widget_set_size_request(GTK_WIDGET(btn_reset), 100, 45);
 
+  btn_generate = gtk_button_new_with_label("Generate charge(s)");
+  g_signal_connect(btn_generate, "clicked", G_CALLBACK(display_window_button), init_generate_window(area, main_charge_system));
+  gtk_widget_set_size_request(GTK_WIDGET(btn_generate), 100, 45);
+
   btn_create = gtk_button_new_with_label("Create charge");
-  g_signal_connect(btn_create, "clicked", G_CALLBACK(display_charge_window_button), init_charge_window(area, main_charge_system, NULL));
+  g_signal_connect(btn_create, "clicked", G_CALLBACK(display_window_button), init_charge_window(area, main_charge_system, NULL));
   gtk_widget_set_size_request(GTK_WIDGET(btn_create), 100, 45);
 
   btn_start = gtk_button_new_with_label("Start");
@@ -53,6 +58,7 @@ void activate(GtkApplication *app) {
   gtk_widget_set_size_request(GTK_WIDGET(btn_start), 100, 45);
 
   gtk_box_pack_start(GTK_BOX(hbtnbox), btn_reset, FALSE, FALSE, 0);
+  gtk_box_pack_start(GTK_BOX(hbtnbox), btn_generate, FALSE, FALSE, 0);
   gtk_box_pack_start(GTK_BOX(hbtnbox), btn_create, FALSE, FALSE, 0);
   gtk_box_pack_start(GTK_BOX(hbtnbox), btn_start, FALSE, FALSE, 0);
 
@@ -66,10 +72,10 @@ void activate(GtkApplication *app) {
 }
 
 /* 
-  Hide the create charge window
+  Hide the window
   widget (GtkWidget *) -> The object which received the signal
 */
-gboolean hide_charge_window(GtkWidget *widget) {
+gboolean hide_window(GtkWidget *widget) {
     gtk_widget_hide(widget);
     return TRUE;
 }
@@ -121,7 +127,7 @@ GtkWidget* init_charge_window(GtkWidget* area, charge_system* main_charge_system
   gtk_container_set_border_width(GTK_CONTAINER(window_charge), 10);
   gtk_window_set_resizable (GTK_WINDOW(window_charge), FALSE);
   gtk_window_set_position(GTK_WINDOW(window_charge), GTK_WIN_POS_CENTER);
-  g_signal_connect(GTK_WINDOW(window_charge), "delete-event", G_CALLBACK(hide_charge_window), NULL);
+  g_signal_connect(GTK_WINDOW(window_charge), "delete-event", G_CALLBACK(hide_window), NULL);
 
   label_x = gtk_label_new("Coordinate x");
   spin_x = gtk_spin_button_new_with_range(-50, 50, 0.01);
@@ -209,3 +215,45 @@ GtkWidget* init_charge_window(GtkWidget* area, charge_system* main_charge_system
   return window_charge;
 }
 
+/* 
+  Configure a generate charge window with differents widgets, then return it
+  area (GtkWidget *) -> Widget of drawing area
+  main_charge_system (charge_system *) -> The charge system which contains all charges 
+*/
+GtkWidget* init_generate_window(GtkWidget* area, charge_system* main_charge_system) {
+  GtkWidget *window;
+  GtkWidget *grid;
+  GtkWidget *label;
+  GtkWidget *spin;
+  GtkWidget *btn;
+
+  /* Initialize and set up each widget */
+
+  window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
+  gtk_container_set_border_width(GTK_CONTAINER(window), 10);
+  gtk_window_set_resizable (GTK_WINDOW(window), FALSE);
+  gtk_window_set_position(GTK_WINDOW(window), GTK_WIN_POS_CENTER);
+  gtk_window_set_title(GTK_WINDOW (window), "Generate charge(s)");
+  g_signal_connect(GTK_WINDOW(window), "delete-event", G_CALLBACK(hide_window), NULL);
+
+  label = gtk_label_new("How many charges should we generate ?");
+  spin = gtk_spin_button_new_with_range(1, MAX_ENTRIES, 1);
+  btn = gtk_button_new_with_label("Generate");
+
+  grid = gtk_grid_new();
+  gtk_grid_set_column_homogeneous(GTK_GRID(grid), TRUE);
+  gtk_grid_set_row_spacing(GTK_GRID(grid), 5);
+  gtk_grid_attach(GTK_GRID(grid), GTK_WIDGET(label), 0, 0, 2, 1);
+  gtk_grid_attach(GTK_GRID(grid), GTK_WIDGET(spin), 0, 1, 2, 1);
+  gtk_grid_attach(GTK_GRID(grid), GTK_WIDGET(btn), 0, 2, 2, 1);
+
+  g_object_set_data(G_OBJECT(btn), "grid", grid);
+  g_object_set_data(G_OBJECT(btn), "area", area);
+  g_object_set_data(G_OBJECT(btn), "window", window);
+  g_object_set_data(G_OBJECT(btn), "charge_system", main_charge_system);
+  g_signal_connect(btn, "clicked", G_CALLBACK(generate_charge_button), NULL);
+
+  gtk_container_add(GTK_CONTAINER(window), grid);
+
+  return window;
+}
