@@ -7,8 +7,6 @@ typedef struct vector_ vector;
 struct vector_ {
     coordinate* start;
     coordinate* end;
-    double direction;
-    double magnitude;
 };
 
 /**
@@ -20,19 +18,11 @@ struct vector_ {
  * 
  * @return a new vector instance
  */
-vector* vector_create(coordinate* s, coordinate* e, double direction, double magnitude);
+vector* vector_create(coordinate* s, coordinate* e);
 
-/**
- * Calculate the direction of a vector given two points
- * 
- * @param first_point a point
- * @param second_point a point
- * 
- * @return an angle representing the direction
- */
-double get_direction(coordinate* first_point, coordinate* second_point);
+vector* vector_create_from_straight_line(coordinate* s, double slope, double magnitude);
 
-coordinate* calculate_end_point(coordinate* a, double slope, double magnitude);
+double calculate_magnitude(vector* v);
 
 double calculate_slope(coordinate* a, coordinate* b);
 #endif

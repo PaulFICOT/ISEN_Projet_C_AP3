@@ -1,27 +1,25 @@
 #include "../includes/vector.h"
+#include "../includes/coordinate.h"
 #include <math.h>
 #include <stdlib.h>
 
-vector* vector_create(coordinate* s, coordinate* e, double direction, double magnitude) {
+vector* vector_create(coordinate* s, coordinate* e) {
     vector* v = malloc(sizeof(vector));
     v->start = s;
     v->end = e;
-    v->direction = direction;
-    v->magnitude = magnitude;
     return v;
 }
 
-double get_direction(coordinate* a, coordinate* b) {
-    double result = (b->y - a->y) / (b->x - a->x);
-    return isfinite(result) && !isnan(result) ? result : 0;
+vector* vector_create_from_straight_line(coordinate* s, double slope, double magnitude) {
+    coordinate* e = malloc(sizeof(coordinate));
+    e->x = magnitude / slope;
+    e->y = slope * e->x + (-slope * s->x + s->y);
+
+    return vector_create(s, e);
 }
 
-coordinate* calculate_end_point(coordinate* a, double slope, double magnitude) {
-    coordinate* c = malloc(sizeof(coordinate));
-    c->x = magnitude / slope;
-    c->y = slope * c->x + (-slope * a->x + a->y);
-
-    return c;
+double calculate_magnitude(vector* v) {
+    return two_points_distance(v->start, v->end);
 }
 
 double calculate_slope(coordinate* a, coordinate* b) {

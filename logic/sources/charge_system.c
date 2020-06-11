@@ -42,12 +42,12 @@ vector* superposition_law(charge_system* c_s, charge* mobile_charge) {
         sum_slopes += calculate_slope(mobile_charge->position, (current_charge(c_s))->position);
         forward(&(c_s->charges), 1);
     }
-    return vector_create(mobile_charge->position, calculate_end_point(mobile_charge->position, sum_slopes, magnitude), sum_slopes / (charges_length - 1), magnitude);
+    return vector_create_from_straight_line(mobile_charge->position, sum_slopes / (charges_length - 1), magnitude);
 }
 
 void calculate_next_speed(charge_system* c_s, charge* c) {
     vector* v = superposition_law(c_s, c);
-    c->speeds[c->speeds_index+1] = (v->magnitude / c->weight) * (c->speeds_index + 1) + c->speeds[c->speeds_index];
+    c->speeds[c->speeds_index+1] = (calculate_magnitude(v) / c->weight) * (c->speeds_index + 1) + c->speeds[c->speeds_index];
     c->speeds_index++;
 }
 
@@ -56,9 +56,10 @@ void calculate_next_pose(charge_system* c_s, charge* c) {
         calculate_next_speed(c_s, c);
     }
     vector* v = superposition_law(c_s, c);
+    double magnitude = calculate_magnitude(v);
     c->positions[c->positions_index+1] = coordinate_create(
-        0.5 * (v->magnitude / c->weight) * pow(c->positions_index, 2) + c->speeds[c->speeds_index] * c->positions_index + c->positions[c->positions_index]->x,
-        0.5 * (v->magnitude / c->weight) * pow(c->positions_index, 2) + c->speeds[c->speeds_index] * c->positions_index + c->positions[c->positions_index]->y
+        0.5 * (magnitude / c->weight) * pow(c->positions_index, 2) + c->speeds[c->speeds_index] * c->positions_index + c->positions[c->positions_index]->x,
+        0.5 * (magnitude / c->weight) * pow(c->positions_index, 2) + c->speeds[c->speeds_index] * c->positions_index + c->positions[c->positions_index]->y
     );
     c->positions_index++;
 }
