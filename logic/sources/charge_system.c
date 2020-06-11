@@ -32,10 +32,10 @@ void delete_charge(charge_system* c_s, charge* ch) {
 }
 
 vector* superposition_law(charge_system* c_s, charge* mobile_charge) {
-    if (length(c_s->charges < 2)) {
+    if (length(c_s->charges) < 2) {
         return NULL;
     }
-    
+
     double magnitude = 0.0;
     double sum_slopes = 0.0;
 
