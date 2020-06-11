@@ -42,7 +42,6 @@ vector* superposition_law(charge_system* c_s, charge* mobile_charge) {
         sum_slopes += calculate_slope(mobile_charge->position, (current_charge(c_s))->position);
         forward(&(c_s->charges), 1);
     }
-
     return vector_create(mobile_charge->position, calculate_end_point(mobile_charge->position, sum_slopes, magnitude), sum_slopes / (charges_length - 1), magnitude);
 }
 

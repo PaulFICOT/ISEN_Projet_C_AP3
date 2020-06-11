@@ -25,5 +25,6 @@ coordinate* calculate_end_point(coordinate* a, double slope, double magnitude) {
 }
 
 double calculate_slope(coordinate* a, coordinate* b) {
-    return (a->y - b->y) / (a->x - b->x);
+    double result = (a->y - b->y) / (a->x - b->x);
+    return isfinite(result) && !isnan(result) ? result : 0;
 }
