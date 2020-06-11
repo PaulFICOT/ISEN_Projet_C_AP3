@@ -45,6 +45,8 @@ Inside the terminal, type `./projetc.bin`. If you've followed carefully every st
 
 ## Use the program
 
+***
+
 ### Create a specific charge
 
 Click on the `create charge(s)` button.
@@ -70,7 +72,17 @@ Once it is done, click on the `Modify charge` button.
   
 If you want to delete the charge, click on the `Delete charge` button.
 
-![](pictures/create_charge.png)
+![](pictures/delete_charge.png)
+
+<div style="page-break-after: always;"></div>
+
+### Generate a random charge system
+
+If you want to generate a random charge system to try the program without creating each charge one by one, click on the `Generate charge(s)` button.
+
+Then, select the number of charge you want to randomly generate.
+
+![](pictures/random_charge.png)
 
 
 ### Reset the grid

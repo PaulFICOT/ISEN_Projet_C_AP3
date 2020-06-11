@@ -8,5 +8,7 @@ gtk/
 *.o
 # ignore all .bin files
 *.bin
+# ignore all .pdf files
+*.pdf
 
 .vscode/*
