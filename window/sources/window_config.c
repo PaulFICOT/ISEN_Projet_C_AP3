@@ -20,7 +20,7 @@ void activate(GtkApplication *app) {
   /* Initialize and configure each widget */
 
   window = gtk_application_window_new(app);
-  gtk_window_set_title(GTK_WINDOW (window), "Simulateur d'interaction électrostatiques");
+  gtk_window_set_title(GTK_WINDOW (window), "Electrostatique Interaction Simulator");
   gtk_widget_set_size_request(window, WINDOW_WIDTH, WINDOW_HEIGHT);
   gtk_window_set_resizable(GTK_WINDOW(window), FALSE);
 
