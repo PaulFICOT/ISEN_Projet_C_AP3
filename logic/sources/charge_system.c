@@ -32,21 +32,18 @@ void delete_charge(charge_system* c_s, charge* ch) {
 }
 
 vector* superposition_law(charge_system* c_s, charge* mobile_charge) {
-    vector* v = malloc(sizeof(vector));
-    v->start = mobile_charge->position;
     double magnitude = 0.0;
-    double sum_directions = 0.0;
+    double sum_slopes = 0.0;
 
     backtrack(&c_s->charges);
     int charges_length = length(c_s->charges);
     while (has_next(c_s->charges)) {
         magnitude += coulomb_law(current_charge(c_s), mobile_charge) * (mobile_charge->symbol == (current_charge(c_s))->symbol ? -1 : 1);
-        sum_directions += get_direction(mobile_charge->position, (current_charge(c_s))->position);
+        sum_slopes += calculate_slope(mobile_charge->position, (current_charge(c_s))->position);
         forward(&(c_s->charges), 1);
     }
-    v->magnitude = magnitude;
-    v->direction = sum_directions / (charges_length - 1);
-    return v;
+
+    return vector_create(mobile_charge->position, sum_slopes / (charges_length - 1), magnitude);
 }
 
 void calculate_next_speed(charge_system* c_s, charge* c) {

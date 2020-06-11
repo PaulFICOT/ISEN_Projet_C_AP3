@@ -20,7 +20,7 @@ struct vector_ {
  * 
  * @return a new vector instance
  */
-vector* vector_create(coordinate* c, double direction, double magnitude);
+vector* vector_create(coordinate* s, coordinate* e, double direction, double magnitude);
 
 /**
  * Calculate the direction of a vector given two points
@@ -32,4 +32,7 @@ vector* vector_create(coordinate* c, double direction, double magnitude);
  */
 double get_direction(coordinate* first_point, coordinate* second_point);
 
+coordinate* calculate_end_point(coordinate* a, double slope, double magnitude);
+
+double calculate_slope(coordinate* a, coordinate* b);
 #endif
