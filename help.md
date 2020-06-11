@@ -45,7 +45,7 @@ Inside the terminal, type `./projetc.bin`. If you've followed carefully every st
 
 ## Use the program
 
-### Create a charge
+### Create a specific charge
 
 Click on the `create charge(s)` button.
 A new window will appears and you will be able to select the different characteristics of the charge :
@@ -60,6 +60,20 @@ A new window will appears and you will be able to select the different character
 
 ![](pictures/create_charge.png)
 
+**Once all your parameters are sets, click `Create charge`, your charge is on the grid !**
+
+### Modify or delete a charge
+
+To modify the attributs of a charge or delete it, click on the charge you have placed on the grid.
+A window will pop out and you will be able to modify the charge's parameters. 
+Once it is done, click on the `Modify charge` button.
+  
+If you want to delete the charge, click on the `Delete charge` button.
+
+![](pictures/create_charge.png)
 
 
+### Reset the grid
 
+Click on the `Reset` button.
+The grid has been completed wiped from every charges.
