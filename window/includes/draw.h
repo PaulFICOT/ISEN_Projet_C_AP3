@@ -13,6 +13,7 @@ coordinate* scale_coordinate(coordinate *coord);
 void draw_fixed_charge(GtkWidget *widget, gdouble x, gdouble y);
 void draw_mobile_charge(GtkWidget *widget, gdouble x, gdouble y);
 void redraw_surface(GtkWidget *widget, charge_system* main_charge_system);
+void draw_arrow(GtkWidget *widget, vector *arrow);
 gboolean clicked(GtkWidget *widget, GdkEventButton *mouse, charge_system *main_charge_system);
 
 #endif
