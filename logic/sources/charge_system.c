@@ -1,4 +1,5 @@
 #include "../includes/charge_system.h"
+#include "constants.h"
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -89,5 +90,9 @@ void print_charge(charge_system *c_s) {
         printf("(%f, %f)\n", ((charge*) iterator->value)->position->x, ((charge*) iterator->value)->position->y);
         forward(&iterator, 1);
     }
+}
+
+float electrostatic_potential(charge* q, coordinate* m) {
+    return (q->force*q->symbol)/(4*PI*EPSILON_0*fabs(two_points_distance(q->position, m)));
 }
 

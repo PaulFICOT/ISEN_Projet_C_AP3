@@ -6,6 +6,8 @@
 #define ELEMENTARY_CHARGE 1.60217662E-19
 #define MAX_ENTRIES 50
 #define CHARGE_RADIUS 14
+#define EPSILON_0 8.85418782E-12
+#define PI 3.14159265359
 
 /*
     Window's size constants
@@ -14,5 +16,6 @@
 #define WINDOW_HEIGHT 480
 #define WINDOW_CHARGE_WIDTH  200
 #define WINDOW_CHARGE_HEIGHT 300
+
 
 #endif

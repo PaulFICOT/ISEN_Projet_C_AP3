@@ -91,7 +91,16 @@ charge* get_charge(charge_system* c_s, coordinate* coord);
 void reset_charge_system(charge_system* c_s);
 
 /**
- * print the charges in the charges linked_list
+ * Print the charges in the charges linked_list
  */
 void print_charge(charge_system* c_s);
+
+/**
+ * Calculate the electrostatic potential of a charge
+ * 
+ * @param q the charge
+ * @param m the coordinate of the other point you would like to get the electrostatic potential
+ */
+float electrostatic_potential(charge* q, coordinate* m);
+
 #endif
