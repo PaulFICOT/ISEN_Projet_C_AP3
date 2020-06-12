@@ -68,7 +68,7 @@ void create_charge_button(GtkWidget *widget) {
     /* Refresh surface */
     redraw_surface(area, main_charge_system);
 
-    /* Reset widgets' values */ 
+    /* Reset widgets' values */
     gtk_spin_button_set_value(GTK_SPIN_BUTTON(spin_x), 0.0);
     gtk_spin_button_set_value(GTK_SPIN_BUTTON(spin_y), 0.0);
     gtk_entry_set_text(GTK_ENTRY(entry_force), "0");
@@ -111,7 +111,7 @@ void delete_charge_button(GtkWidget *widget) {
     Generate charge with random characteristics
     widget (GtkWidget *) -> Widget of generate button
 */
-void generate_charge_button(GtkWidget *widget) {    
+void generate_charge_button(GtkWidget *widget) {
     /* Get all parameters */
     GtkWidget *grid = g_object_get_data(G_OBJECT(widget), "grid");
     GtkWidget *area = g_object_get_data(G_OBJECT(widget), "area");
@@ -133,7 +133,7 @@ void generate_charge_button(GtkWidget *widget) {
     /* refresh surface with new charges */
     redraw_surface(area, main_charge_system);
 
-    /* Reset widgets' value */ 
+    /* Reset widgets' value */
     gtk_spin_button_set_value(GTK_SPIN_BUTTON(spin), 0);
 
     /* Hide the window */
@@ -152,25 +152,41 @@ void clear_surface_button(GtkWidget *widget) {
 
 void start_process_button(GtkWidget *widget, gpointer data) {
     charge_system* main_charge_system = g_object_get_data(G_OBJECT(widget), "charge_system");
-    charge* a = charge_create(0, 0, POSITIVE, 5E-4, 5, 1);
-    charge* b = charge_create(15, 8, NEGATIVE, 3.7E-4, 5, 1);
-    charge* c = charge_create(5, 13, POSITIVE, 1E-4, 5, 1);
-    charge* d = charge_create(0, 4, NEGATIVE, 3.2E-4, 5, 1);
-    charge* e = charge_create(23, 1, POSITIVE, 2.4E-4, 5, 1);
-    charge* f = charge_create(-4, -16, NEGATIVE, 1.7E-4, 5, 0);
+    // charge* a = charge_create(0, 0, POSITIVE, 5E-4, 5, 1);
+    // charge* b = charge_create(15, 8, NEGATIVE, 3.7E-4, 5, 0);
+    // charge* c = charge_create(5, 13, POSITIVE, 1E-4, 5, 1);
+    // charge* d = charge_create(0, 4, NEGATIVE, 3.2E-4, 5, 1);
+    // charge* e = charge_create(23, 1, POSITIVE, 2.4E-4, 5, 1);
+    // charge* f = charge_create(-4, -16, NEGATIVE, 1.7E-4, 5, 0);
+    // add_charge(main_charge_system, a);
+    // add_charge(main_charge_system, b);
+    // add_charge(main_charge_system, c);
+    // add_charge(main_charge_system, d);
+    // add_charge(main_charge_system, e);
+    // add_charge(main_charge_system, f);
+    // redraw_surface(g_object_get_data(G_OBJECT(widget), "area"), main_charge_system);
+    // for (int i = 0; i < 5; i++) {
+    //     sleep(1);
+    //     calculate_next_pose(main_charge_system, b);
+    //     printf("%i: (%f, %f)\n", i, b->positions[b->positions_index]->x, b->positions[b->positions_index]->y);
+    //     b->position = b->positions[b->positions_index];
+    //     redraw_surface(g_object_get_data(G_OBJECT(widget), "area"), main_charge_system);
+    // }
+    // redraw_surface(g_object_get_data(G_OBJECT(widget), "area"), main_charge_system);
+    charge* a = charge_create(0, 0, POSITIVE, 3, 3E-4, 1);
+    charge* b = charge_create(-5, -5, NEGATIVE, 4, 4E-5, 0);
+    // charge* c = charge_create(5, 5, POSITIVE, 5E-4, 5, 1);
+    // charge* d = charge_create(-5, -5, NEGATIVE, 5E-4, 5, 1);
+    // charge* e = charge_create(5, 5, NEGATIVE, 5E-4, 5, 1);
     add_charge(main_charge_system, a);
     add_charge(main_charge_system, b);
-    add_charge(main_charge_system, c);
-    add_charge(main_charge_system, d);
-    add_charge(main_charge_system, e);
-    add_charge(main_charge_system, f);
     redraw_surface(g_object_get_data(G_OBJECT(widget), "area"), main_charge_system);
     for (int i = 0; i < 5; i++) {
         sleep(1);
-        calculate_next_pose(main_charge_system, f);
-        printf("%i: (%f, %f)\n", i, f->positions[f->positions_index]->x, f->positions[f->positions_index]->y);
-        f->position = f->positions[f->positions_index];
+        backtrack(&main_charge_system->charges);
+        calculate_next_pose(main_charge_system, b);
+        printf("%i: (%f, %f)\n", i, b->positions[b->positions_index]->x, b->positions[b->positions_index]->y);
+        b->position = b->positions[b->positions_index];
         redraw_surface(g_object_get_data(G_OBJECT(widget), "area"), main_charge_system);
     }
-    redraw_surface(g_object_get_data(G_OBJECT(widget), "area"), main_charge_system);
 }
