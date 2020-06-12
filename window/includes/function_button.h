@@ -11,6 +11,6 @@ void modify_charge_button(GtkWidget *widget);
 void delete_charge_button(GtkWidget *widget);
 void generate_charge_button(GtkWidget *widget);
 void clear_surface_button(GtkWidget *widget);
-void start_process_button(GtkWidget *widget, gpointer data);
+void start_process_button(GtkWidget *widget);
 
 #endif

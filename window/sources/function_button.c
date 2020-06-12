@@ -150,8 +150,18 @@ void clear_surface_button(GtkWidget *widget) {
     gtk_widget_queue_draw(g_object_get_data(G_OBJECT(widget), "area"));
 }
 
-void start_process_button(GtkWidget *widget, gpointer data) {
+void start_process_button(GtkWidget *widget) {
     charge_system* main_charge_system = g_object_get_data(G_OBJECT(widget), "charge_system");
+    GtkWidget *area = g_object_get_data(G_OBJECT(widget), "area");
+    GtkWidget *grid = g_object_get_data(G_OBJECT(widget), "grid");
+
+    /* Get all window's widgets */
+    GtkWidget *spin = gtk_grid_get_child_at(GTK_GRID(grid), 0, 1);
+    gint time = gtk_spin_button_get_value(GTK_SPIN_BUTTON(spin));
+    gtk_spin_button_set_value(GTK_SPIN_BUTTON(spin), 0);
+
+    /* Hide the window */
+    gtk_widget_hide(g_object_get_data(G_OBJECT(widget), "window"));
     // charge* a = charge_create(0, 0, POSITIVE, 5E-4, 5, 1);
     // charge* b = charge_create(15, 8, NEGATIVE, 3.7E-4, 5, 0);
     // charge* c = charge_create(5, 13, POSITIVE, 1E-4, 5, 1);
@@ -180,14 +190,15 @@ void start_process_button(GtkWidget *widget, gpointer data) {
     // charge* e = charge_create(5, 5, NEGATIVE, 5E-4, 5, 1);
     add_charge(main_charge_system, a);
     add_charge(main_charge_system, b);
-    redraw_surface(g_object_get_data(G_OBJECT(widget), "area"), main_charge_system);
+    redraw_surface(area, main_charge_system);
     struct timespec t={0,100};
-    for (int i = 0; i < 500; i++) {
+    for (int i = 0; i < (time+1); i++) {
         nanosleep(&t,0);
         backtrack(&main_charge_system->charges);
         calculate_next_pose(main_charge_system, b);
         printf("%i: (%f, %f)\n", i, b->positions[b->positions_index]->x, b->positions[b->positions_index]->y);
         b->position = b->positions[b->positions_index];
-        redraw_surface(g_object_get_data(G_OBJECT(widget), "area"), main_charge_system);
+        redraw_surface(area, main_charge_system);
     }
+    redraw_surface(area, main_charge_system);
 }
