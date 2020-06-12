@@ -1,6 +1,6 @@
 #include "../includes/window_config.h"
 
-/* 
+/*
   Configure main window with different widgets and show it
   app (GtkApplication *) -> The application to start
 */
@@ -20,7 +20,7 @@ void activate(GtkApplication *app) {
   /* Initialize and configure each widget */
 
   window = gtk_application_window_new(app);
-  gtk_window_set_title(GTK_WINDOW (window), "Simulateur d'interaction électrostatiques");
+  gtk_window_set_title(GTK_WINDOW (window), "Electrostatic Interaction Simulator");
   gtk_widget_set_size_request(window, WINDOW_WIDTH, WINDOW_HEIGHT);
   gtk_window_set_resizable(GTK_WINDOW(window), FALSE);
 
@@ -34,7 +34,7 @@ void activate(GtkApplication *app) {
   hbtnbox = gtk_button_box_new(GTK_ORIENTATION_HORIZONTAL);
   gtk_button_box_set_layout(GTK_BUTTON_BOX(hbtnbox), GTK_BUTTONBOX_CENTER);
   gtk_box_set_spacing(GTK_BOX(hbtnbox), 20);
-  gtk_widget_set_margin_bottom(GTK_WIDGET(hbtnbox), 10); 
+  gtk_widget_set_margin_bottom(GTK_WIDGET(hbtnbox), 10);
   gtk_widget_set_margin_top(GTK_WIDGET(hbtnbox), 10);
 
   btn_reset = gtk_button_new_with_label("Reset");
@@ -54,7 +54,7 @@ void activate(GtkApplication *app) {
   btn_start = gtk_button_new_with_label("Start");
   g_object_set_data(G_OBJECT(btn_start), "charge_system", main_charge_system);
   g_object_set_data(G_OBJECT(btn_start), "area", area);
-  g_signal_connect(btn_start, "clicked", G_CALLBACK(start_process_button), NULL);
+  g_signal_connect(btn_start, "clicked", G_CALLBACK(display_window_button), init_start_window(area, main_charge_system));
   gtk_widget_set_size_request(GTK_WIDGET(btn_start), 100, 45);
 
   gtk_box_pack_start(GTK_BOX(hbtnbox), btn_reset, FALSE, FALSE, 0);
@@ -71,7 +71,7 @@ void activate(GtkApplication *app) {
   gtk_widget_show_all(window);
 }
 
-/* 
+/*
   Hide the window
   widget (GtkWidget *) -> The object which received the signal
 */
@@ -80,7 +80,7 @@ gboolean hide_window(GtkWidget *widget) {
     return TRUE;
 }
 
-/* 
+/*
   Check the user's input in entry widget
   widget (GtkWidget *) -> The entry widget
   new_text (gchar *) -> Text typed by the user
@@ -99,7 +99,7 @@ void check_insert_entry(GtkWidget *widget, gchar *new_text) {
   regfree(&regex);
 }
 
-/* 
+/*
   Configure a charge window with differents widgets, then return it
   area (GtkWidget *) -> Widget of drawing area
   main_charge_system (charge_system *) -> The charge system which contains all charges
@@ -215,10 +215,10 @@ GtkWidget* init_charge_window(GtkWidget* area, charge_system* main_charge_system
   return window_charge;
 }
 
-/* 
+/*
   Configure a generate charge window with differents widgets, then return it
   area (GtkWidget *) -> Widget of drawing area
-  main_charge_system (charge_system *) -> The charge system which contains all charges 
+  main_charge_system (charge_system *) -> The charge system which contains all charges
 */
 GtkWidget* init_generate_window(GtkWidget* area, charge_system* main_charge_system) {
   GtkWidget *window;
@@ -252,6 +252,49 @@ GtkWidget* init_generate_window(GtkWidget* area, charge_system* main_charge_syst
   g_object_set_data(G_OBJECT(btn), "window", window);
   g_object_set_data(G_OBJECT(btn), "charge_system", main_charge_system);
   g_signal_connect(btn, "clicked", G_CALLBACK(generate_charge_button), NULL);
+
+  gtk_container_add(GTK_CONTAINER(window), grid);
+
+  return window;
+}
+
+/*
+  Configure a start simulation window with differents widgets, then return it
+  area (GtkWidget *) -> Widget of drawing area
+  main_charge_system (charge_system *) -> The charge system which contains all charges
+*/
+GtkWidget* init_start_window(GtkWidget* area, charge_system* main_charge_system) {
+  GtkWidget *window;
+  GtkWidget *grid;
+  GtkWidget *label;
+  GtkWidget *spin;
+  GtkWidget *btn;
+
+  /* Initialize and set up each widget */
+
+  window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
+  gtk_container_set_border_width(GTK_CONTAINER(window), 10);
+  gtk_window_set_resizable (GTK_WINDOW(window), FALSE);
+  gtk_window_set_position(GTK_WINDOW(window), GTK_WIN_POS_CENTER);
+  gtk_window_set_title(GTK_WINDOW (window), "Start simulation");
+  g_signal_connect(GTK_WINDOW(window), "delete-event", G_CALLBACK(hide_window), NULL);
+
+  label = gtk_label_new("Choose the simulation time (milliseconds)");
+  spin = gtk_spin_button_new_with_range(1, MAX_CHARGES_NUMBER, 1);
+  btn = gtk_button_new_with_label("Start");
+
+  grid = gtk_grid_new();
+  gtk_grid_set_column_homogeneous(GTK_GRID(grid), TRUE);
+  gtk_grid_set_row_spacing(GTK_GRID(grid), 5);
+  gtk_grid_attach(GTK_GRID(grid), GTK_WIDGET(label), 0, 0, 2, 1);
+  gtk_grid_attach(GTK_GRID(grid), GTK_WIDGET(spin), 0, 1, 2, 1);
+  gtk_grid_attach(GTK_GRID(grid), GTK_WIDGET(btn), 0, 2, 2, 1);
+
+  g_object_set_data(G_OBJECT(btn), "grid", grid);
+  g_object_set_data(G_OBJECT(btn), "area", area);
+  g_object_set_data(G_OBJECT(btn), "window", window);
+  g_object_set_data(G_OBJECT(btn), "charge_system", main_charge_system);
+  g_signal_connect(btn, "clicked", G_CALLBACK(start_process_button), NULL);
 
   gtk_container_add(GTK_CONTAINER(window), grid);
 

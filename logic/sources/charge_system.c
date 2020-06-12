@@ -42,16 +42,21 @@ vector* superposition_law(charge_system* c_s, charge* mobile_charge) {
     backtrack(&c_s->charges);
     int charges_length = length(c_s->charges);
     while (has_next(c_s->charges)) {
-        magnitude += coulomb_law(current_charge(c_s), mobile_charge) * (mobile_charge->symbol == (current_charge(c_s))->symbol ? -1 : 1);
-        sum_slopes += calculate_slope(mobile_charge->position, (current_charge(c_s))->position);
+        if (current_charge(c_s) != mobile_charge) {
+            double c_l = coulomb_law(current_charge(c_s), mobile_charge);
+
+            magnitude += c_l;
+            sum_slopes += calculate_slope(mobile_charge->position, (current_charge(c_s))->position);
+        }
         forward(&(c_s->charges), 1);
     }
-    return vector_create_from_straight_line(mobile_charge->position, sum_slopes / (charges_length - 1), magnitude);
+    vector* v = vector_create_from_straight_line(mobile_charge->position, magnitude, sum_slopes / (charges_length - 1));
+    return v;
 }
 
 void calculate_next_speed(charge_system* c_s, charge* c) {
     vector* v = superposition_law(c_s, c);
-    c->speeds[c->speeds_index+1] = (calculate_magnitude(v) / c->weight) * (c->speeds_index + 1) + c->speeds[c->speeds_index];
+    c->speeds[c->speeds_index+1] = (v->magnitude / c->weight) * (c->speeds_index + 1) * 0.1 + c->speeds[c->speeds_index];
     c->speeds_index++;
 }
 
@@ -60,10 +65,10 @@ void calculate_next_pose(charge_system* c_s, charge* c) {
         calculate_next_speed(c_s, c);
     }
     vector* v = superposition_law(c_s, c);
-    double magnitude = calculate_magnitude(v);
+    double t = (c->positions_index+1) * 0.1;
     c->positions[c->positions_index+1] = coordinate_create(
-        0.5 * (magnitude / c->weight) * pow(c->positions_index, 2) + c->speeds[c->speeds_index] * c->positions_index + c->positions[c->positions_index]->x,
-        0.5 * (magnitude / c->weight) * pow(c->positions_index, 2) + c->speeds[c->speeds_index] * c->positions_index + c->positions[c->positions_index]->y
+        0.5 * (v->magnitude / c->weight) * pow(t, 2) + c->speeds[c->speeds_index] * c->positions_index + c->positions[c->positions_index]->x,
+        0.5 * (v->magnitude / c->weight) * pow(t, 2) + c->speeds[c->speeds_index] * c->positions_index + c->positions[c->positions_index]->y
     );
     c->positions_index++;
 }
@@ -100,3 +105,4 @@ void print_charge(charge_system *c_s) {
         forward(&c_s->charges, 1);
     }
 }
+

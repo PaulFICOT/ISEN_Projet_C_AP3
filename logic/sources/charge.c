@@ -12,11 +12,12 @@ charge* charge_create(double x, double y, enum symbol symbol, double force, doub
     ch->positions[0] = c;
     ch->positions_index = 0;
     ch->speeds_index = 0;
+    ch->speeds[0] = 0.0;
     return ch;
 }
 
 double coulomb_law(charge* a, charge* b) {
-    double result = COULOMB_CONST * (fabs(a->force * b->force)/pow(two_points_distance(a->position, b->position), 2));
+    double result = COULOMB_CONST * (fabs((a->force + b->force) * ELEMENTARY_CHARGE)/pow(two_points_distance(a->position, b->position), 2));
     return isfinite(result) && !isnan(result) ? result : 0;
 }
 
