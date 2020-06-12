@@ -15,7 +15,6 @@ SOURCE_FILES = window/sources/window_config.c \
 window/sources/function_button.c \
 window/sources/draw.c \
 logic/sources/coordinate.c \
-logic/sources/quadratic_polynomial.c \
 logic/sources/vector.c \
 logic/sources/charge_system.c \
 logic/sources/charge.c \
@@ -27,7 +26,6 @@ O_FILES = window_config.o \
 function_button.o \
 draw.o \
 coordinate.o \
-quadratic_polynomial.o \
 vector.o \
 charge.o \
 charge_system.o \

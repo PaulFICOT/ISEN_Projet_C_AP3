@@ -2,6 +2,7 @@
 #include "../includes/coordinate.h"
 #include <math.h>
 #include <stdlib.h>
+#include <stdio.h>
 
 vector* vector_create(coordinate* s, coordinate* e, double magnitude) {
     vector* v = malloc(sizeof(vector));
