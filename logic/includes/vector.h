@@ -7,6 +7,7 @@ typedef struct vector_ vector;
 struct vector_ {
     coordinate* start;
     coordinate* end;
+    double magnitude;
 };
 
 /**
@@ -18,11 +19,9 @@ struct vector_ {
  * 
  * @return a new vector instance
  */
-vector* vector_create(coordinate* s, coordinate* e);
+vector* vector_create(coordinate* s, coordinate* e, double magnitude);
 
-vector* vector_create_from_straight_line(coordinate* s, double slope, double magnitude);
-
-double calculate_magnitude(vector* v);
+vector* vector_create_from_straight_line(coordinate* s, double magnitude, double slope);
 
 double calculate_slope(coordinate* a, coordinate* b);
 #endif
