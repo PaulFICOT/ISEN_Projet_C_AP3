@@ -81,11 +81,11 @@ gboolean hide_window(GtkWidget *widget) {
 }
 
 /*
-  Check the user's input in entry widget
-  widget (GtkWidget *) -> The entry widget
+  Check the user's input in widget
+  widget (GtkWidget *) -> The widget
   new_text (gchar *) -> Text typed by the user
 */
-void check_insert_entry(GtkWidget *widget, gchar *new_text) {
+void check_insert_widget(GtkWidget *widget, gchar *new_text) {
   regex_t regex;
   int reti;
 
@@ -113,7 +113,7 @@ GtkWidget* init_charge_window(GtkWidget* area, charge_system* main_charge_system
   GtkWidget *label_y;
   GtkWidget *spin_y;
   GtkWidget *label_force;
-  GtkWidget *entry_force;
+  GtkWidget *spin_force;
   GtkWidget *label_weight;
   GtkWidget *entry_weight;
   GtkWidget *label_switch;
@@ -136,29 +136,32 @@ GtkWidget* init_charge_window(GtkWidget* area, charge_system* main_charge_system
   spin_y = gtk_spin_button_new_with_range(-30, 30, 0.01);
 
   label_force = gtk_label_new("Force");
-  entry_force = gtk_entry_new();
-  gtk_entry_set_max_length (GTK_ENTRY(entry_force), 30);
-  g_signal_connect(entry_force, "insert-text", G_CALLBACK(check_insert_entry), NULL);
+  spin_force = gtk_spin_button_new_with_range(-10, 10, 0.1);
 
   label_weight = gtk_label_new("Weight");
   entry_weight = gtk_entry_new();
-  gtk_entry_set_max_length (GTK_ENTRY(entry_weight), 30);
-  g_signal_connect(entry_weight, "insert-text", G_CALLBACK(check_insert_entry), NULL);
+  gtk_entry_set_max_length(GTK_ENTRY(entry_weight), 50);
+  g_signal_connect(entry_weight, "insert-text", G_CALLBACK(check_insert_widget), NULL);
 
   label_switch = gtk_label_new("Fixed charge ?");
   btn_switch = gtk_switch_new();
 
   if (a_charge) {
+    double charge_force = 0.0;
+    char charge_weight[50];
+
     /* Convert double to char* */
-    char charge_force[30];
-    sprintf(charge_force, "%lf", a_charge->force);
-    char charge_weight[30];
-    sprintf(charge_weight, "%lf", a_charge->weight);
+    g_ascii_formatd(charge_weight, 50, "%g", a_charge->weight);
+
+    /* Put the sign on the number */
+    if(a_charge->symbol == NEGATIVE) {
+      charge_force = -a_charge->force;
+    }else charge_force = a_charge->force;
 
     gtk_window_set_title(GTK_WINDOW (window_charge), "Modify charge");
     gtk_spin_button_set_value(GTK_SPIN_BUTTON(spin_x), a_charge->position->x);
     gtk_spin_button_set_value(GTK_SPIN_BUTTON(spin_y), a_charge->position->y);
-    gtk_entry_set_text(GTK_ENTRY(entry_force), charge_force);
+    gtk_spin_button_set_value(GTK_SPIN_BUTTON(spin_force), charge_force);
     gtk_entry_set_text(GTK_ENTRY(entry_weight), charge_weight);
     gtk_switch_set_active(GTK_SWITCH(btn_switch), a_charge->is_fixed);
     btn_charge = gtk_button_new_with_label("Modify charge");
@@ -166,8 +169,8 @@ GtkWidget* init_charge_window(GtkWidget* area, charge_system* main_charge_system
     gtk_window_set_title(GTK_WINDOW (window_charge), "Create charge");
     gtk_spin_button_set_value(GTK_SPIN_BUTTON(spin_x), 0);
     gtk_spin_button_set_value(GTK_SPIN_BUTTON(spin_y), 0);
-    gtk_entry_set_text(GTK_ENTRY(entry_force), "0");
-    gtk_entry_set_text(GTK_ENTRY(entry_weight), "0");
+    gtk_spin_button_set_value(GTK_SPIN_BUTTON(spin_force), 0);
+    gtk_entry_set_text(GTK_ENTRY(entry_weight), "0,0");
     btn_charge = gtk_button_new_with_label("Create charge");
   }
 
@@ -179,7 +182,7 @@ GtkWidget* init_charge_window(GtkWidget* area, charge_system* main_charge_system
   gtk_grid_attach(GTK_GRID(grid), GTK_WIDGET(label_y), 0, 2, 2, 1);
   gtk_grid_attach(GTK_GRID(grid), GTK_WIDGET(spin_y), 0, 3, 2, 1);
   gtk_grid_attach(GTK_GRID(grid), GTK_WIDGET(label_force), 0, 4, 2, 1);
-  gtk_grid_attach(GTK_GRID(grid), GTK_WIDGET(entry_force), 0, 5, 2, 1);
+  gtk_grid_attach(GTK_GRID(grid), GTK_WIDGET(spin_force), 0, 5, 2, 1);
   gtk_grid_attach(GTK_GRID(grid), GTK_WIDGET(label_weight), 0, 6, 2, 1);
   gtk_grid_attach(GTK_GRID(grid), GTK_WIDGET(entry_weight), 0, 7, 2, 1);
   gtk_grid_attach(GTK_GRID(grid), GTK_WIDGET(label_switch), 0, 8, 2, 1);

@@ -10,7 +10,7 @@
 
 void activate(GtkApplication *app);
 gboolean hide_window(GtkWidget *widget);
-void check_insert_entry(GtkWidget *widget, gchar *new_text);
+void check_insert_widget(GtkWidget *widget, gchar *new_text);
 GtkWidget* init_charge_window(GtkWidget* area, charge_system* main_charge_system, charge* a_charge);
 GtkWidget* init_generate_window(GtkWidget* area, charge_system* main_charge_system);
 GtkWidget* init_start_window(GtkWidget* area, charge_system* main_charge_system);
