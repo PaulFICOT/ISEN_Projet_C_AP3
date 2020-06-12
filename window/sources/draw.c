@@ -130,7 +130,7 @@ void redraw_surface(GtkWidget *widget, charge_system *main_charge_system) {
 
   /* Draw every charges */
   linked_list* iterator = main_charge_system->charges;
-  while (has_next(iterator)) {
+  while (!is_null(iterator)) {
     if (((charge*) iterator->value)->is_fixed) {
       draw_fixed_charge(widget, ((charge*) iterator->value)->position->x, ((charge*) iterator->value)->position->y);
     } else {

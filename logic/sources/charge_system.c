@@ -25,7 +25,7 @@ vector* superposition_law(charge_system* c_s, charge* mobile_charge) {
     double sum_slopes = 0.0;
 
     linked_list* iterator = c_s->charges;
-    while (has_next(iterator)) {
+    while (!is_null(iterator)) {
         if ((charge*) iterator->value != mobile_charge) {
             double c_l = coulomb_law((charge*) iterator->value, mobile_charge);
 
@@ -59,7 +59,7 @@ void calculate_next_pose(charge_system* c_s, charge* c) {
 
 short charge_is_placeable(charge_system* c_s, coordinate* coord) {
     linked_list* iterator = c_s->charges;
-    while (has_next(iterator)) {
+    while (!is_null(iterator)) {
         if ((two_points_distance(((charge*) iterator->value)->position, coord) - (CHARGE_RADIUS/8.0) * 2.0) < 0.0) {
             return 0;
         }
@@ -70,7 +70,7 @@ short charge_is_placeable(charge_system* c_s, coordinate* coord) {
 
 charge* get_charge(charge_system* c_s, coordinate* coord) {
     linked_list* iterator = c_s->charges;
-    while (has_next(iterator)) {
+    while (!is_null(iterator)) {
         if ((two_points_distance(((charge*) iterator->value)->position, coord) - (CHARGE_RADIUS/8.0)) < 0.0) {
             return (charge*) iterator->value;
         }
@@ -85,7 +85,7 @@ void reset_charge_system(charge_system* c_s) {
 
 void print_charge(charge_system *c_s) {
     linked_list* iterator = c_s->charges;
-    while (has_next(iterator)) {
+    while (!is_null(iterator)) {
         printf("(%f, %f)\n", ((charge*) iterator->value)->position->x, ((charge*) iterator->value)->position->y);
         forward(&iterator, 1);
     }
