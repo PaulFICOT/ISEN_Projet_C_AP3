@@ -181,8 +181,9 @@ void start_process_button(GtkWidget *widget, gpointer data) {
     add_charge(main_charge_system, a);
     add_charge(main_charge_system, b);
     redraw_surface(g_object_get_data(G_OBJECT(widget), "area"), main_charge_system);
-    for (int i = 0; i < 5; i++) {
-        sleep(1);
+    struct timespec t={0,100};
+    for (int i = 0; i < 500; i++) {
+        nanosleep(&t,0);
         backtrack(&main_charge_system->charges);
         calculate_next_pose(main_charge_system, b);
         printf("%i: (%f, %f)\n", i, b->positions[b->positions_index]->x, b->positions[b->positions_index]->y);
