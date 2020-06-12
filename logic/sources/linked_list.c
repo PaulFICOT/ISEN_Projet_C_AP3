@@ -3,7 +3,7 @@
 #include "../includes/linked_list.h"
 
 linked_list* linked_list_create(void* n) {
-    linked_list *l = null_linked_list();
+    linked_list *l = malloc(sizeof(linked_list));
     l->value = n;
     return l;
 }
@@ -17,12 +17,10 @@ short has_next(linked_list* l) {
 }
 
 void push(linked_list *l, void* n) {
-    while(!is_null(l)) {
+    while(has_next(l)) {
         forward(&l, 1);
     }
-    linked_list *tmp = null_linked_list();
-    tmp->value = n;
-    tmp->next = l->next;
+    linked_list *tmp = linked_list_create(n);
     l->next = tmp;
 }
 
@@ -86,29 +84,37 @@ void delete(linked_list **l, void* e) {
         return;
     }
     if ((*l)->value == e) {
+        if (!has_next(*l)) {
+            *l = NULL;
+            return;
+        }
+
         *l = (*l)->next;
         return;
     }
-    
-    while (has_prev(*l) && (*l)->next->value != e) {
-        forward(*l, 1);
+
+    while (has_next(*l) && (*l)->next->value != e) {
+        forward(l, 1);
     }
 
-    if (!has_prev(*l)) {
+    if (!has_next(*l)) {
         return;
     }
 
-    if (is_first(*l)) {
-        *l = (*l)->next;
+    linked_list* tmp = (*l)->next;
+
+    if (!has_next((*l)->next)) {
+        (*l)->next = NULL;
+        free(tmp);
+        return;
     }
 
-    if (length(*l) == 0) {
-        (*l) = NULL;
-    }
+    (*l)->next = (*l)->next->next;
+    free(tmp);
 }
 
 void forward(linked_list **l, int n) {
-    while (n > 0 && has_next(*l)) {
+    while (n > 0 && !is_null(*l)) {
         *l = (*l)->next;
         n--;
     }
