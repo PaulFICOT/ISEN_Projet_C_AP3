@@ -4,7 +4,7 @@
 static cairo_surface_t *surface = NULL;
 static GtkWidget *window_charge = NULL;
 
-/* 
+/*
   Initialize a surface
   widget (GtkWidget *) -> The object which received the signal
 */
@@ -23,7 +23,7 @@ gboolean init_surface(GtkWidget *widget) {
   /* Add graduation background on surface */
   cairo_surface_t* image = cairo_image_surface_create_from_png("graduation.png");
   cairo_set_source_surface(cr, image, 0, 0);
-  cairo_paint(cr); 
+  cairo_paint(cr);
 
   cairo_destroy(cr);
 
@@ -31,7 +31,7 @@ gboolean init_surface(GtkWidget *widget) {
   return TRUE;
 }
 
-/* 
+/*
   Prepare surface to draw on
   widget (GtkWidget *) -> The object which received the signal
   cr (cairo_t *) -> The cairo context to draw to
@@ -46,7 +46,7 @@ gboolean prepare_surface(GtkWidget *widget, cairo_t *cr) {
   return FALSE;
 }
 
-/* 
+/*
   Clear surface
   Draw a new surface
 */
@@ -60,12 +60,12 @@ void clear_surface() {
   /* Add graduation background on surface */
   cairo_surface_t* image = cairo_image_surface_create_from_png("graduation.png");
   cairo_set_source_surface(cr, image, 0, 0);
-  cairo_paint(cr); 
+  cairo_paint(cr);
 
   cairo_destroy (cr);
 }
 
-/*  
+/*
   Scale the coordinate with the graduation
   coord (coordinate*) -> The coordinate to scale
 */
@@ -76,7 +76,7 @@ coordinate* scale_coordinate(coordinate *coord) {
   return coord;
 }
 
-/* 
+/*
   Draw fixed charge at given coordinate
   widget (GtkWidget *) -> Drawing area's widget
   x (gdouble) -> The coordinate x of the fixed charge
@@ -98,7 +98,7 @@ void draw_fixed_charge(GtkWidget *widget, gdouble x, gdouble y) {
   gtk_widget_queue_draw_area(widget, (coord->x)-CHARGE_RADIUS, (coord->y)-CHARGE_RADIUS, CHARGE_RADIUS*2, CHARGE_RADIUS*2);
 }
 
-/* 
+/*
   Draw mobile charge at given coordinate
   widget (GtkWidget *) -> Drawing area's widget
   x (gdouble) -> The coordinate x of the mobile charge
@@ -127,25 +127,25 @@ void draw_mobile_charge(GtkWidget *widget, gdouble x, gdouble y) {
 */
 void redraw_surface(GtkWidget *widget, charge_system *main_charge_system) {
   clear_surface();
-  
+
   /* Draw every charges */
-  backtrack(&(main_charge_system->charges));
-  while (has_next(main_charge_system->charges)) {
-    if (current_charge(main_charge_system)->is_fixed) {
-      draw_fixed_charge(widget, current_charge(main_charge_system)->position->x, current_charge(main_charge_system)->position->y);
+  linked_list* iterator = main_charge_system->charges;
+  while (!is_null(iterator)) {
+    if (((charge*) iterator->value)->is_fixed) {
+      draw_fixed_charge(widget, ((charge*) iterator->value)->position->x, ((charge*) iterator->value)->position->y);
     } else {
-      draw_mobile_charge(widget, current_charge(main_charge_system)->position->x, current_charge(main_charge_system)->position->y);
+      draw_mobile_charge(widget, ((charge*) iterator->value)->position->x, ((charge*) iterator->value)->position->y);
       /* WIP ARROW
-      vector *vector_charge = superposition_law(main_charge_system, current_charge(main_charge_system));
+      vector *vector_charge = superposition_law(main_charge_system, (charge*) iterator->value);
       if (vector_charge != NULL) {
         draw_arrow(widget, vector_charge);
       }*/
     }
-    forward(&(main_charge_system->charges), 1);
+    forward(&iterator, 1);
   }
 
   gtk_widget_queue_draw(widget);
-  
+
   while (gtk_events_pending()) {
     gtk_main_iteration();
   }
@@ -165,7 +165,7 @@ void draw_arrow(GtkWidget *widget, vector *arrow) {
   gtk_widget_queue_draw(widget);
 }
 
-/* 
+/*
   Display information of charge at mouse's coordinate
   widget (GtkWidget *) -> The object which received the signal
   mouse (GdkEventButton *) -> The GdkEventButton which triggered this signal

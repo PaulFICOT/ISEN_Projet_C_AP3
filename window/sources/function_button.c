@@ -83,7 +83,7 @@ void modify_charge_button(GtkWidget *widget) {
     charge *a_charge = g_object_get_data(G_OBJECT(widget), "a_charge");
     charge_system* main_charge_system = g_object_get_data(G_OBJECT(widget), "charge_system");
 
-    delete_charge(main_charge_system, a_charge);
+    delete(&main_charge_system->charges, a_charge);
 
     if (charge_is_placeable(main_charge_system, a_charge->position)) {
         create_charge_button(widget);
@@ -98,7 +98,7 @@ void delete_charge_button(GtkWidget *widget) {
     charge_system* main_charge_system = g_object_get_data(G_OBJECT(widget), "charge_system");
 
     /* WIP delete function */
-    delete_charge(main_charge_system, g_object_get_data(G_OBJECT(widget), "a_charge"));
+    delete(&main_charge_system->charges, g_object_get_data(G_OBJECT(widget), "a_charge"));
 
     /* Refresh the surface */
     redraw_surface(g_object_get_data(G_OBJECT(widget), "area"), main_charge_system);
@@ -194,7 +194,6 @@ void start_process_button(GtkWidget *widget) {
     struct timespec t={0,100};
     for (int i = 0; i < (time+1); i++) {
         nanosleep(&t,0);
-        backtrack(&main_charge_system->charges);
         calculate_next_pose(main_charge_system, b);
         printf("%i: (%f, %f)\n", i, b->positions[b->positions_index]->x, b->positions[b->positions_index]->y);
         b->position = b->positions[b->positions_index];

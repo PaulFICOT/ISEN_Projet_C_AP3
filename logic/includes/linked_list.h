@@ -5,17 +5,9 @@ typedef struct linked_list_ linked_list;
 
 struct linked_list_
 {
-    linked_list *prev;
     void* value;
     linked_list *next;
 };
-
-/**
- * Init a linked_list with every fields to NULL
- * 
- * @return a linked_list instance
- */
-linked_list* null_linked_list();
 
 /**
  * linked_list constructor.
@@ -26,34 +18,11 @@ linked_list* null_linked_list();
 linked_list* linked_list_create(void* n);
 
 /**
- * Checks if the element is the head of the list
- * 
- * @param l the linked list
- */
-short is_head(linked_list* l);
-
-/**
- * Checks if the element is the tail of the list
- * 
- * @param l the linked list
- */
-short is_tail(linked_list* l);
-
-/**
  * Checks if the linked list is null
  * 
  * @param l the linked list
  */
 short is_null(linked_list* l);
-
-/**
- * Checks if the element has a predecessor (including the head)
- * 
- * @param l the element to check
- * 
- * @return true if the element has a pedecessor
- */
-short has_prev(linked_list* l);
 
 /**
  * Checks if the element has a successor (including the tail)
@@ -63,31 +32,6 @@ short has_prev(linked_list* l);
  * @return true if the element has a successor
  */
 short has_next(linked_list* l);
-
-/**
- * Checks if the element is the last of the list (excluding the tail)
- * 
- * @param l the element to check
- * 
- * @return true if the element is the last
- */
-short is_last(linked_list* l);
-
-/**
- * Checks if the element is the first of the list (excluding the head)
- * 
- * @param l the element to check
- * 
- * @return true if the element is the first
- */
-short is_first(linked_list* l);
-
-/**
- * Rewind the linked list
- * 
- * @param l a pointer to a linked_list's pointer
- */
-void backtrack(linked_list **l);
 
 /**
  * Appends an element at the end of the linked_list
@@ -157,7 +101,7 @@ void print_int(linked_list *l);
  * 
  * @param l a pointer to a linked_list's pointer
  */
-void delete(linked_list **l);
+void delete(linked_list **l, void* e);
 
 /**
  * Move the pointer to the next element of the list
@@ -165,12 +109,5 @@ void delete(linked_list **l);
  * @param l a pointer to a linked_list's pointer
  */
 void forward(linked_list **l, int n);
-
-/**
- * Move the pointer to the previous element of the list
- * 
- * @param l a pointer to a linked_list's pointer
- */
-void backward(linked_list **l, int n);
 
 #endif
