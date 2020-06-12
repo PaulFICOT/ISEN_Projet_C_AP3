@@ -100,3 +100,4 @@ void print_charge(charge_system *c_s) {
         forward(&c_s->charges, 1);
     }
 }
+
