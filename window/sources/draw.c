@@ -135,6 +135,11 @@ void redraw_surface(GtkWidget *widget, charge_system *main_charge_system) {
       draw_fixed_charge(widget, current_charge(main_charge_system)->position->x, current_charge(main_charge_system)->position->y);
     } else {
       draw_mobile_charge(widget, current_charge(main_charge_system)->position->x, current_charge(main_charge_system)->position->y);
+      /* WIP ARROW
+      vector *vector_charge = superposition_law(main_charge_system, current_charge(main_charge_system));
+      if (vector_charge != NULL) {
+        draw_arrow(widget, vector_charge);
+      }*/
     }
     forward(&(main_charge_system->charges), 1);
   }
@@ -144,6 +149,20 @@ void redraw_surface(GtkWidget *widget, charge_system *main_charge_system) {
   while (gtk_events_pending()) {
     gtk_main_iteration();
   }
+}
+
+void draw_arrow(GtkWidget *widget, vector *arrow) {
+  coordinate *start = scale_coordinate(arrow->start);
+  coordinate *end = scale_coordinate(arrow->end);
+  cairo_t *cr = cairo_create(surface);
+
+  cairo_set_source_rgb(cr, 0, 0, 0);
+  cairo_move_to(cr, start->x, start->y);
+  cairo_line_to(cr, end->x, end->y);
+  cairo_stroke(cr);
+  cairo_destroy(cr);
+
+  gtk_widget_queue_draw(widget);
 }
 
 /* 

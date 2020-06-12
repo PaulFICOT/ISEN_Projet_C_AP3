@@ -65,11 +65,8 @@ void create_charge_button(GtkWidget *widget) {
     /* Add charge in the charge system, then draw the charge */
     add_charge(main_charge_system, new_charge);
 
-    if (is_fixed) {
-        draw_fixed_charge(area, coord_x, coord_y);
-    }else {
-        draw_mobile_charge(area, coord_x, coord_y);
-    }
+    /* Refresh surface */
+    redraw_surface(area, main_charge_system);
 
     /* Reset widgets' values */ 
     gtk_spin_button_set_value(GTK_SPIN_BUTTON(spin_x), 0.0);
