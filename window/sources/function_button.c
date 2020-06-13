@@ -1,21 +1,12 @@
 #include "../includes/function_button.h"
 #include <stdio.h>
 
-/*
-    Show the window
-    widget (GtkWidget *) -> Widget of clicked button
-    window_charge (GtkWidget *) -> Widget of the window
-*/
 void display_window_button(GtkWidget *widget, GtkWidget* window_charge) {
     /* Unused parameter but required field */
     (void) widget;
     gtk_widget_show_all(window_charge);
 }
 
-/*
-    Create a new charge, add in the system charge and draw it
-    widget (GtkWidget *) -> Widget of create button
-*/
 void create_charge_button(GtkWidget *widget) {
     /* Get all parameters */
     GtkWidget *grid = g_object_get_data(G_OBJECT(widget), "grid");
@@ -107,10 +98,6 @@ void delete_charge_button(GtkWidget *widget) {
     gtk_widget_hide(g_object_get_data(G_OBJECT(widget), "window"));
 }
 
-/*
-    Generate charge with random characteristics
-    widget (GtkWidget *) -> Widget of generate button
-*/
 void generate_charge_button(GtkWidget *widget) {
     /* Get all parameters */
     GtkWidget *grid = g_object_get_data(G_OBJECT(widget), "grid");
@@ -140,10 +127,6 @@ void generate_charge_button(GtkWidget *widget) {
     gtk_widget_hide(g_object_get_data(G_OBJECT(widget), "window"));
 }
 
-/*
-    Button's function to clear surface
-    widget (GtkWidget *) -> Widget of reset button
-*/
 void clear_surface_button(GtkWidget *widget) {
     reset_charge_system(g_object_get_data(G_OBJECT(widget), "charge_system"));
     clear_surface();

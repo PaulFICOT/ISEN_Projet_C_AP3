@@ -1,9 +1,5 @@
 #include "../includes/window_config.h"
 
-/*
-  Configure main window with different widgets and show it
-  app (GtkApplication *) -> The application to start
-*/
 void activate(GtkApplication *app) {
   GtkWidget *window;
   GtkWidget *area;
@@ -71,20 +67,11 @@ void activate(GtkApplication *app) {
   gtk_widget_show_all(window);
 }
 
-/*
-  Hide the window
-  widget (GtkWidget *) -> The object which received the signal
-*/
 gboolean hide_window(GtkWidget *widget) {
     gtk_widget_hide(widget);
     return TRUE;
 }
 
-/*
-  Check the user's input in widget
-  widget (GtkWidget *) -> The widget
-  new_text (gchar *) -> Text typed by the user
-*/
 void check_insert_widget(GtkWidget *widget, gchar *new_text) {
   regex_t regex;
   int reti;
@@ -99,12 +86,6 @@ void check_insert_widget(GtkWidget *widget, gchar *new_text) {
   regfree(&regex);
 }
 
-/*
-  Configure a charge window with differents widgets, then return it
-  area (GtkWidget *) -> Widget of drawing area
-  main_charge_system (charge_system *) -> The charge system which contains all charges
-  a_charge (charge *) -> The charge to modify if NULL it's a create charge window
-*/
 GtkWidget* init_charge_window(GtkWidget* area, charge_system* main_charge_system, charge* a_charge) {
   GtkWidget *window_charge;
   GtkWidget *grid;
@@ -218,11 +199,6 @@ GtkWidget* init_charge_window(GtkWidget* area, charge_system* main_charge_system
   return window_charge;
 }
 
-/*
-  Configure a generate charge window with differents widgets, then return it
-  area (GtkWidget *) -> Widget of drawing area
-  main_charge_system (charge_system *) -> The charge system which contains all charges
-*/
 GtkWidget* init_generate_window(GtkWidget* area, charge_system* main_charge_system) {
   GtkWidget *window;
   GtkWidget *grid;
@@ -261,11 +237,6 @@ GtkWidget* init_generate_window(GtkWidget* area, charge_system* main_charge_syst
   return window;
 }
 
-/*
-  Configure a start simulation window with differents widgets, then return it
-  area (GtkWidget *) -> Widget of drawing area
-  main_charge_system (charge_system *) -> The charge system which contains all charges
-*/
 GtkWidget* init_start_window(GtkWidget* area, charge_system* main_charge_system) {
   GtkWidget *window;
   GtkWidget *grid;
