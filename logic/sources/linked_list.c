@@ -83,13 +83,11 @@ void print_int(linked_list *l) {
 void delete(linked_list **l, void* e) {
     /* case l is null */
     if (is_null(*l)) {
-        printf("null case\n");
         return;
     }
 
     /* case e is the first elem of l */
     if ((*l)->value == e) {
-        printf("first case\n");
         /* case e is the only elem of l */
         if (!has_next(*l)) {
             *l = NULL;
@@ -107,7 +105,6 @@ void delete(linked_list **l, void* e) {
 
     /* case e isn't in l */
     if (!has_next(iterator)) {
-        printf("nope case\n");
         return;
     }
 
@@ -115,13 +112,11 @@ void delete(linked_list **l, void* e) {
 
     /* case e is the last elem of l */
     if (!has_next(iterator->next)) {
-        printf("last case\n");
         iterator->next = NULL;
         free(tmp);
         return;
     }
 
-    printf("normal case\n");
     iterator->next = iterator->next->next;
     free(tmp);
 }
