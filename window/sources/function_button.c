@@ -167,7 +167,7 @@ void start_process_button(GtkWidget *widget) {
     // }
     // redraw_surface(g_object_get_data(G_OBJECT(widget), "area"), main_charge_system);
     charge* a = charge_create(0, 0, POSITIVE, 3, 3E-4, 1);
-    charge* b = charge_create(-5, -5, NEGATIVE, 4, 4E-5, 0);
+    charge* b = charge_create(0, -5, NEGATIVE, 4, 4E-5, 0);
     // charge* c = charge_create(5, 5, POSITIVE, 5E-4, 5, 1);
     // charge* d = charge_create(-5, -5, NEGATIVE, 5E-4, 5, 1);
     // charge* e = charge_create(5, 5, NEGATIVE, 5E-4, 5, 1);
@@ -178,7 +178,7 @@ void start_process_button(GtkWidget *widget) {
     for (int i = 0; i < (time+1); i++) {
         nanosleep(&t,0);
         calculate_next_pose(main_charge_system, b);
-        printf("%i: (%f, %f)\n", i, b->positions[b->positions_index]->x, b->positions[b->positions_index]->y);
+        printf("%i: (%f, %f)\n", i, b->position->x, b->position->y);
         b->position = b->positions[b->positions_index];
         redraw_surface(area, main_charge_system);
     }

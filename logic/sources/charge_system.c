@@ -39,23 +39,17 @@ vector* superposition_law(charge_system* c_s, charge* mobile_charge) {
     return v;
 }
 
-void calculate_next_speed(charge_system* c_s, charge* c) {
-    vector* v = superposition_law(c_s, c);
-    c->speeds[c->speeds_index+1] = (v->magnitude / c->weight) * (c->speeds_index + 1) * 0.1 + c->speeds[c->speeds_index];
-    c->speeds_index++;
-}
-
 void calculate_next_pose(charge_system* c_s, charge* c) {
-    while (c->positions_index != c->speeds_index) {
-        calculate_next_speed(c_s, c);
-    }
     vector* v = superposition_law(c_s, c);
-    double t = (c->positions_index+1) * 0.1;
-    c->positions[c->positions_index+1] = coordinate_create(
-        0.5 * (v->magnitude / c->weight) * pow(t, 2) + c->speeds[c->speeds_index] * c->positions_index + c->positions[c->positions_index]->x,
-        0.5 * (v->magnitude / c->weight) * pow(t, 2) + c->speeds[c->speeds_index] * c->positions_index + c->positions[c->positions_index]->y
+    double a = (v->magnitude / c->weight);
+    c->speed = a * c->time + c->last_speed;
+    c->last_speed = c->speed;
+
+    c->position = coordinate_create(
+        0.5 * a * pow(c->time, 2) + c->speed * c->time + c->last_position->x,
+        0.5 * a * pow(c->time, 2) + c->speed * c->time + c->last_position->y
     );
-    c->positions_index++;
+    c->time += POSE_INTERVAL;
 }
 
 short charge_is_placeable(charge_system* c_s, coordinate* coord) {

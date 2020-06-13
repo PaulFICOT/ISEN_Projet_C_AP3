@@ -8,7 +8,7 @@
 #define CHARGE_RADIUS 14
 #define EPSILON_0 8.85418782E-12
 #define PI 3.14159265359
-
+#define POSE_INTERVAL 0.1
 /*
     Window's size constants
 */

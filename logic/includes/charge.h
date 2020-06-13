@@ -9,14 +9,14 @@ typedef struct charge_ charge;
 
 struct charge_ {
     coordinate* position;
+    coordinate* last_position;
+    double speed;
+    double last_speed;
     enum symbol symbol;
     double force;
     double weight;
     short is_fixed;
-    coordinate* positions[MAX_CHARGES_NUMBER];
-    int positions_index;
-    double speeds[MAX_CHARGES_NUMBER];
-    int speeds_index;
+    double time;
 };
 
 /**
