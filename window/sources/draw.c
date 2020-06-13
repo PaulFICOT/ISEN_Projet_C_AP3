@@ -120,10 +120,24 @@ void draw_arrow(GtkWidget *widget, vector *arrow) {
   coordinate *end = scale_coordinate(arrow->end);
   cairo_t *cr = cairo_create(surface);
 
+  double arrow_angle = atan2(end->y - start->y, end->x - start->x) + M_PI;
+
+  coordinate *arrow_arm_a = coordinate_create(end->x + ARROW_ARM_LENGTH * cos(arrow_angle + ARROW_DEGREES), end->y + ARROW_ARM_LENGTH * sin(arrow_angle + ARROW_DEGREES));
+  coordinate *arrow_arm_b = coordinate_create(end->x + ARROW_ARM_LENGTH * cos(arrow_angle - ARROW_DEGREES), end->y + ARROW_ARM_LENGTH * sin(arrow_angle - ARROW_DEGREES));
+
   cairo_set_source_rgb(cr, 0, 0, 0);
   cairo_move_to(cr, start->x, start->y);
   cairo_line_to(cr, end->x, end->y);
   cairo_stroke(cr);
+
+  cairo_move_to(cr, end->x, end->y);
+  cairo_line_to(cr, arrow_arm_a->x, arrow_arm_a->y);
+  cairo_stroke(cr);
+
+  cairo_move_to(cr, end->x, end->y);
+  cairo_line_to(cr, arrow_arm_b->x, arrow_arm_b->y);
+  cairo_stroke(cr);
+
   cairo_destroy(cr);
 
   gtk_widget_queue_draw(widget);
