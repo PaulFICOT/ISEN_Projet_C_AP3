@@ -179,7 +179,6 @@ void start_process_button(GtkWidget *widget) {
         nanosleep(&t,0);
         calculate_next_pose(main_charge_system, b);
         printf("%i: (%f, %f)\n", i, b->position->x, b->position->y);
-        b->position = b->positions[b->positions_index];
         redraw_surface(area, main_charge_system);
     }
     redraw_surface(area, main_charge_system);
