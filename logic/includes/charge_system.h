@@ -7,6 +7,7 @@
 #include "vector.h"
 #include "../../constants.h"
 #include "linked_list.h"
+#include "distance_converter.h"
 
 typedef struct charge_system_ charge_system;
 
@@ -97,7 +98,7 @@ void print_charge(charge_system* c_s);
 
 /**
  * Calculate the electrostatic potential of a charge
- * 
+ *
  * @param q the charge
  * @param m the coordinate of the other point you would like to get the electrostatic potential
  */
