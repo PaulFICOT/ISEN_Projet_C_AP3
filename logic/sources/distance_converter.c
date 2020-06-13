@@ -2,9 +2,9 @@
 #include <math.h>
 
 double nm_to_m(double nm) {
-    return pow(nm, -9);
+    return nm * pow(10, -9);
 }
 
 double m_to_nm(double m) {
-    return pow(m, 9);
+    return m * pow(10, 9);
 }
