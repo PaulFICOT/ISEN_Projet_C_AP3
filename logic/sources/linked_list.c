@@ -5,6 +5,7 @@
 linked_list* linked_list_create(void* n) {
     linked_list *l = malloc(sizeof(linked_list));
     l->value = n;
+    l->next = NULL;
     return l;
 }
 
