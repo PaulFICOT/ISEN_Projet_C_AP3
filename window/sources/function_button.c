@@ -73,10 +73,17 @@ void create_charge_button(GtkWidget *widget) {
 void modify_charge_button(GtkWidget *widget) {
     charge *a_charge = g_object_get_data(G_OBJECT(widget), "a_charge");
     charge_system* main_charge_system = g_object_get_data(G_OBJECT(widget), "charge_system");
+    GtkWidget *grid = g_object_get_data(G_OBJECT(widget), "grid");
+
+    /* Get new charge's coordinate */
+    GtkWidget *spin_x = gtk_grid_get_child_at(GTK_GRID(grid), 0, 1);
+    GtkWidget *spin_y = gtk_grid_get_child_at(GTK_GRID(grid), 0, 3);
+    coordinate *new_coord_charge = coordinate_create(gtk_spin_button_get_value(GTK_SPIN_BUTTON(spin_x)), gtk_spin_button_get_value(GTK_SPIN_BUTTON(spin_y)));
 
     delete(&main_charge_system->charges, a_charge);
 
-    if (charge_is_placeable(main_charge_system, a_charge->position)) {
+    /* Check if the new charge's coordinate is placeable */
+    if (charge_is_placeable(main_charge_system, new_coord_charge)) {
         create_charge_button(widget);
     }else {
         add_charge(main_charge_system, a_charge);
