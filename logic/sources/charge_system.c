@@ -29,7 +29,7 @@ vector* superposition_law(charge_system* c_s, charge* mobile_charge) {
     while (!is_null(iterator)) {
         if ((charge*) iterator->value != mobile_charge) {
             double c_l = coulomb_law((charge*) iterator->value, mobile_charge);
-
+            c_l *= ((charge*) iterator->value)->symbol == mobile_charge->symbol ? -1 : 1;
             magnitude += c_l;
             sum_slopes += calculate_slope(mobile_charge->position, ((charge*) iterator->value)->position);
         }
@@ -42,6 +42,7 @@ vector* superposition_law(charge_system* c_s, charge* mobile_charge) {
 void calculate_next_pose(charge_system* c_s, charge* c) {
     vector* v = superposition_law(c_s, c);
     double a = (v->magnitude / c->weight);
+
     c->speed = a * c->time + c->last_speed;
     c->last_speed = c->speed;
 
@@ -49,6 +50,7 @@ void calculate_next_pose(charge_system* c_s, charge* c) {
         0.5 * a * pow(c->time, 2) + c->speed * c->time + c->last_position->x,
         0.5 * a * pow(c->time, 2) + c->speed * c->time + c->last_position->y
     );
+    c->last_position = c->position;
     c->time += POSE_INTERVAL;
 }
 
