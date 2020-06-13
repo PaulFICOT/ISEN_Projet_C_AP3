@@ -27,8 +27,8 @@ short charge_is_itself(charge* a, charge* b) {
 
 charge* random_charge() {
     return charge_create(
-        rand() % 50 * (rand() % 2 == 1 ? -1 : 1),
-        rand() % 30 * (rand() % 2 == 1 ? -1 : 1),
+        rand() % 20 * (rand() % 2 == 1 ? -1 : 1),
+        rand() % 12 * (rand() % 2 == 1 ? -1 : 1),
         rand() % 2 == 1 ? POSITIVE : NEGATIVE,
         rand() % 9 * 10^(-rand()%4),
         rand() % 9 * 10^(-rand()%4),

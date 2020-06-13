@@ -111,10 +111,10 @@ GtkWidget* init_charge_window(GtkWidget* area, charge_system* main_charge_system
   g_signal_connect(GTK_WINDOW(window_charge), "delete-event", G_CALLBACK(hide_window), NULL);
 
   label_x = gtk_label_new("Coordinate x");
-  spin_x = gtk_spin_button_new_with_range(-50, 50, 0.01);
+  spin_x = gtk_spin_button_new_with_range(-20, 20, 0.01);
 
   label_y = gtk_label_new("Coordinate y");
-  spin_y = gtk_spin_button_new_with_range(-30, 30, 0.01);
+  spin_y = gtk_spin_button_new_with_range(-12, 12, 0.01);
 
   label_force = gtk_label_new("Force");
   spin_force = gtk_spin_button_new_with_range(-10, 10, 0.1);

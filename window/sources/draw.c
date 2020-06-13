@@ -51,8 +51,8 @@ void clear_surface() {
 }
 
 coordinate* scale_coordinate(coordinate *coord) {
-  coord->x = (WINDOW_WIDTH/2.0) + (coord->x * 8.0);
-  coord->y = (WINDOW_HEIGHT/2.0) - (coord->y * 8.0);
+  coord->x = (WINDOW_WIDTH/2.0) + (coord->x * 20.0);
+  coord->y = (WINDOW_HEIGHT/2.0) - (coord->y * 20.0);
 
   return coord;
 }
@@ -144,7 +144,7 @@ void draw_arrow(GtkWidget *widget, vector *arrow) {
 }
 
 gboolean clicked(GtkWidget *widget, GdkEventButton *mouse, charge_system *main_charge_system) {
-  coordinate* coord = coordinate_create((mouse->x - (WINDOW_WIDTH/2.0)) / 8.0, ((WINDOW_HEIGHT/2.0) - mouse->y) / 8.0);
+  coordinate* coord = coordinate_create((mouse->x - (WINDOW_WIDTH/2.0)) / 20.0, ((WINDOW_HEIGHT/2.0) - mouse->y) / 20.0);
   charge* a_charge = get_charge(main_charge_system, coord);
 
   if (window_charge != NULL) {
