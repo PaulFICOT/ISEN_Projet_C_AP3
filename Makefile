@@ -11,26 +11,28 @@ GTK_LDFLAGS = `pkg-config --libs gtk+-3.0`
 LDFLAGS = $(ERROR_FLAGS) $(GTK_LDFLAGS) $(LIB_FLAGS)
 
 # Add \ at the end of the line to put each filename on a newline
-SOURCE_FILES = window/sources/window_config.c \
-window/sources/function_button.c \
+SOURCE_FILES = main.c \
 window/sources/draw.c \
-logic/sources/coordinate.c \
 logic/sources/vector.c \
-logic/sources/charge_system.c \
 logic/sources/charge.c \
+logic/sources/coordinate.c \
 logic/sources/linked_list.c \
-main.c
+logic/sources/charge_system.c \
+window/sources/window_config.c \
+window/sources/function_button.c \
+logic/sources/distance_converter.c
 
 # Add \ at the end of the line to put each filename on a newline
-O_FILES = window_config.o \
-function_button.o \
+O_FILES = main.o \
 draw.o \
-coordinate.o \
-vector.o \
 charge.o \
-charge_system.o \
+vector.o \
+coordinate.o \
 linked_list.o \
-main.o
+charge_system.o \
+window_config.o \
+function_button.o \
+distance_converter.o
 
 all: $(EXEC)
 
