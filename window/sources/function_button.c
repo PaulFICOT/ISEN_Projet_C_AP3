@@ -27,6 +27,12 @@ void create_charge_button(GtkWidget *widget) {
     gdouble weight = g_strtod(gtk_entry_get_text(GTK_ENTRY(entry_weight)), NULL);
     gboolean is_fixed = gtk_switch_get_active(GTK_SWITCH(btn_switch));
 
+    int nbr_charge_system = length(main_charge_system->charges);
+
+    if ((MAX_ENTRIES - (nbr_charge_system+1)) < 0) {
+        return;
+    }
+
     /* Check if the new charge is placeable in the charge system */
     coordinate *coord = coordinate_create(coord_x, coord_y);
     if (!charge_is_placeable(main_charge_system, coord)) {
@@ -113,7 +119,12 @@ void generate_charge_button(GtkWidget *widget) {
 
     /* Get number of charge to generate */
     GtkWidget *spin = gtk_grid_get_child_at(GTK_GRID(grid), 0, 1);
-    gdouble nbr_charge = gtk_spin_button_get_value(GTK_SPIN_BUTTON(spin));
+    gint nbr_charge = gtk_spin_button_get_value(GTK_SPIN_BUTTON(spin));
+    int nbr_charge_system = length(main_charge_system->charges);
+
+    if ((MAX_ENTRIES - (nbr_charge + nbr_charge_system)) < 0) {
+        return;
+    }
 
     /* Generate charge and check if it is placeable before add it in charge system */
     while (nbr_charge != 0) {
@@ -180,6 +191,13 @@ void start_process_button(GtkWidget *widget) {
     // charge* e = charge_create(5, 5, NEGATIVE, 5E-4, 5, 1);
     add_charge(main_charge_system, a);
     add_charge(main_charge_system, b);
+
+    int nbr_charge_system = length(main_charge_system->charges);
+
+    if (nbr_charge_system == 0) {
+        return;
+    }
+
     redraw_surface(area, main_charge_system);
     struct timespec t={0,100};
     for (int i = 0; i < (time+1); i++) {
