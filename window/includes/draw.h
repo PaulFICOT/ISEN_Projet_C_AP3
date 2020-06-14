@@ -4,7 +4,6 @@
 #include "gtk/gtk.h"
 #include "window_config.h"
 #include "../../logic/includes/charge_system.h"
-#include "../../logic/includes/distance_converter.h"
 #include "../../constants.h"
 
 /**
