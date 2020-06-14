@@ -56,7 +56,9 @@ short charge_is_itself(charge* a, charge* b);
 /**
  * Generates a charge generated randomly
  *
+ * @param is_fixed 1 -> charge is fixed 0 -> charge is mobile
+ *
  * @return a charge
  */
-charge* random_charge();
+charge* random_charge(short is_fixed);
 #endif

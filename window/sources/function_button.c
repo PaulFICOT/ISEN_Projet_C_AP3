@@ -126,11 +126,18 @@ void generate_charge_button(GtkWidget *widget) {
     charge_system* main_charge_system = g_object_get_data(G_OBJECT(widget), "charge_system");
 
     /* Get number of charge to generate */
-    GtkWidget *spin = gtk_grid_get_child_at(GTK_GRID(grid), 0, 1);
-    gint nbr_charge = gtk_spin_button_get_value(GTK_SPIN_BUTTON(spin));
+    GtkWidget *spin_mobile = gtk_grid_get_child_at(GTK_GRID(grid), 0, 2);
+    GtkWidget *spin_fixed = gtk_grid_get_child_at(GTK_GRID(grid), 0, 4);
+    gint nbr_charge_mobile = gtk_spin_button_get_value(GTK_SPIN_BUTTON(spin_mobile));
+    gint nbr_charge_fixed = gtk_spin_button_get_value(GTK_SPIN_BUTTON(spin_fixed));
     int nbr_charge_system = length(main_charge_system->charges);
 
-    if ((MAX_ENTRIES - (nbr_charge + nbr_charge_system)) < 0) {
+    if (nbr_charge_mobile == 0 && nbr_charge_fixed == 0) {
+        set_log("You must add at least one charge");
+        return;
+    }
+
+    if ((MAX_ENTRIES - (nbr_charge_mobile + nbr_charge_fixed + nbr_charge_system)) < 0) {
         char *message;
         asprintf(&message, "You have exceeded the maximum number of charges, There are %d in the system and the maximum is %d.", nbr_charge_system, MAX_ENTRIES);
         set_log(message);
@@ -138,12 +145,21 @@ void generate_charge_button(GtkWidget *widget) {
         return;
     }
 
-    /* Generate charge and check if it is placeable before add it in charge system */
-    while (nbr_charge != 0) {
-        charge *new_charge = random_charge();
+    /* Generate mobile charge and check if it is placeable before add it in charge system */
+    while (nbr_charge_mobile != 0) {
+        charge *new_charge = random_charge(0);
         if (charge_is_placeable(main_charge_system, new_charge->position)) {
             add_charge(main_charge_system, new_charge);
-            nbr_charge--;
+            nbr_charge_mobile--;
+        }
+    }
+
+    /* Generate fixed charge */
+    while (nbr_charge_fixed != 0) {
+        charge *new_charge = random_charge(1);
+        if (charge_is_placeable(main_charge_system, new_charge->position)) {
+            add_charge(main_charge_system, new_charge);
+            nbr_charge_fixed--;
         }
     }
 
@@ -151,7 +167,8 @@ void generate_charge_button(GtkWidget *widget) {
     redraw_surface(area, main_charge_system);
 
     /* Reset widgets' value */
-    gtk_spin_button_set_value(GTK_SPIN_BUTTON(spin), 0);
+    gtk_spin_button_set_value(GTK_SPIN_BUTTON(spin_mobile), 0);
+    gtk_spin_button_set_value(GTK_SPIN_BUTTON(spin_fixed), 0);
 
     /* Hide the window */
     gtk_widget_hide(g_object_get_data(G_OBJECT(widget), "window"));

@@ -211,7 +211,10 @@ GtkWidget* init_generate_window(GtkWidget* area, charge_system* main_charge_syst
   GtkWidget *window;
   GtkWidget *grid;
   GtkWidget *label;
-  GtkWidget *spin;
+  GtkWidget *label_mobile;
+  GtkWidget *spin_mobile;
+  GtkWidget *label_fixed;
+  GtkWidget *spin_fixed;
   GtkWidget *btn;
 
   /* Initialize and set up each widget */
@@ -224,15 +227,24 @@ GtkWidget* init_generate_window(GtkWidget* area, charge_system* main_charge_syst
   g_signal_connect(GTK_WINDOW(window), "delete-event", G_CALLBACK(hide_window), NULL);
 
   label = gtk_label_new("How many charges should we generate ?");
-  spin = gtk_spin_button_new_with_range(1, MAX_ENTRIES, 1);
+
+  label_mobile = gtk_label_new("Mobile charge");
+  spin_mobile = gtk_spin_button_new_with_range(0, MAX_ENTRIES, 1);
+
+  label_fixed = gtk_label_new("Fixed charge");
+  spin_fixed = gtk_spin_button_new_with_range(0, MAX_ENTRIES, 1);
+
   btn = gtk_button_new_with_label("Generate");
 
   grid = gtk_grid_new();
   gtk_grid_set_column_homogeneous(GTK_GRID(grid), TRUE);
   gtk_grid_set_row_spacing(GTK_GRID(grid), 5);
   gtk_grid_attach(GTK_GRID(grid), GTK_WIDGET(label), 0, 0, 2, 1);
-  gtk_grid_attach(GTK_GRID(grid), GTK_WIDGET(spin), 0, 1, 2, 1);
-  gtk_grid_attach(GTK_GRID(grid), GTK_WIDGET(btn), 0, 2, 2, 1);
+  gtk_grid_attach(GTK_GRID(grid), GTK_WIDGET(label_mobile), 0, 1, 2, 1);
+  gtk_grid_attach(GTK_GRID(grid), GTK_WIDGET(spin_mobile), 0, 2, 2, 1);
+  gtk_grid_attach(GTK_GRID(grid), GTK_WIDGET(label_fixed), 0, 3, 2, 1);
+  gtk_grid_attach(GTK_GRID(grid), GTK_WIDGET(spin_fixed), 0, 4, 2, 1);
+  gtk_grid_attach(GTK_GRID(grid), GTK_WIDGET(btn), 0, 5, 2, 1);
 
   g_object_set_data(G_OBJECT(btn), "grid", grid);
   g_object_set_data(G_OBJECT(btn), "area", area);
