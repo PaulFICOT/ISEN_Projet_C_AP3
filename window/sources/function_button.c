@@ -30,12 +30,17 @@ void create_charge_button(GtkWidget *widget) {
     int nbr_charge_system = length(main_charge_system->charges);
 
     if ((MAX_ENTRIES - (nbr_charge_system+1)) < 0) {
+        char *message;
+        asprintf(&message, "You have exceeded the maximum number of charges in the system, That is %d.", MAX_ENTRIES);
+        set_log(message);
+        free(message);
         return;
     }
 
     /* Check if the new charge is placeable in the charge system */
     coordinate *coord = coordinate_create(coord_x, coord_y);
     if (!charge_is_placeable(main_charge_system, coord)) {
+        set_log("There is already a charge at the coordinate");
         return;
     }
 
@@ -74,6 +79,7 @@ void create_charge_button(GtkWidget *widget) {
 
     /* Hide the window */
     gtk_widget_hide(g_object_get_data(G_OBJECT(widget), "window"));
+    set_log("");
 }
 
 void modify_charge_button(GtkWidget *widget) {
@@ -92,6 +98,7 @@ void modify_charge_button(GtkWidget *widget) {
     if (charge_is_placeable(main_charge_system, new_coord_charge)) {
         create_charge_button(widget);
     }else {
+        set_log("There is already a charge at the coordinate");
         add_charge(main_charge_system, a_charge);
     }
 
@@ -109,6 +116,7 @@ void delete_charge_button(GtkWidget *widget) {
 
     /* Hide the window */
     gtk_widget_hide(g_object_get_data(G_OBJECT(widget), "window"));
+    set_log("");
 }
 
 void generate_charge_button(GtkWidget *widget) {
@@ -123,6 +131,10 @@ void generate_charge_button(GtkWidget *widget) {
     int nbr_charge_system = length(main_charge_system->charges);
 
     if ((MAX_ENTRIES - (nbr_charge + nbr_charge_system)) < 0) {
+        char *message;
+        asprintf(&message, "You have exceeded the maximum number of charges, There are %d in the system and the maximum is %d.", nbr_charge_system, MAX_ENTRIES);
+        set_log(message);
+        free(message);
         return;
     }
 
@@ -143,12 +155,14 @@ void generate_charge_button(GtkWidget *widget) {
 
     /* Hide the window */
     gtk_widget_hide(g_object_get_data(G_OBJECT(widget), "window"));
+    set_log("");
 }
 
 void clear_surface_button(GtkWidget *widget) {
     reset_charge_system(g_object_get_data(G_OBJECT(widget), "charge_system"));
     clear_surface();
     gtk_widget_queue_draw(g_object_get_data(G_OBJECT(widget), "area"));
+    set_log("");
 }
 
 void start_process_button(GtkWidget *widget) {
@@ -195,6 +209,7 @@ void start_process_button(GtkWidget *widget) {
     int nbr_charge_system = length(main_charge_system->charges);
 
     if (nbr_charge_system == 0) {
+        set_log("There is no charges in the system.");
         return;
     }
 
@@ -207,4 +222,5 @@ void start_process_button(GtkWidget *widget) {
         redraw_surface(area, main_charge_system);
     }
     redraw_surface(area, main_charge_system);
+    set_log("Simulation done");
 }
