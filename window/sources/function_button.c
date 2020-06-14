@@ -1,13 +1,25 @@
 #include "../includes/function_button.h"
 #include <stdio.h>
 
+static gboolean state_simulation = FALSE;
+
 void display_window_button(GtkWidget *widget, GtkWidget* window_charge) {
+    if (state_simulation) {
+        set_log("Simulation running");
+        return;
+    }
+
     /* Unused parameter but required field */
     (void) widget;
     gtk_widget_show_all(window_charge);
 }
 
 void create_charge_button(GtkWidget *widget) {
+    if (state_simulation) {
+        set_log("Simulation running");
+        return;
+    }
+
     /* Get all parameters */
     GtkWidget *grid = g_object_get_data(G_OBJECT(widget), "grid");
     GtkWidget *area = g_object_get_data(G_OBJECT(widget), "area");
@@ -83,6 +95,11 @@ void create_charge_button(GtkWidget *widget) {
 }
 
 void modify_charge_button(GtkWidget *widget) {
+    if (state_simulation) {
+        set_log("Simulation running");
+        return;
+    }
+
     charge *a_charge = g_object_get_data(G_OBJECT(widget), "a_charge");
     charge_system* main_charge_system = g_object_get_data(G_OBJECT(widget), "charge_system");
     GtkWidget *grid = g_object_get_data(G_OBJECT(widget), "grid");
@@ -106,6 +123,11 @@ void modify_charge_button(GtkWidget *widget) {
 }
 
 void delete_charge_button(GtkWidget *widget) {
+    if (state_simulation) {
+        set_log("Simulation running");
+        return;
+    }
+
     charge_system* main_charge_system = g_object_get_data(G_OBJECT(widget), "charge_system");
 
     /* WIP delete function */
@@ -120,6 +142,11 @@ void delete_charge_button(GtkWidget *widget) {
 }
 
 void generate_charge_button(GtkWidget *widget) {
+    if (state_simulation) {
+        set_log("Simulation running");
+        return;
+    }
+
     /* Get all parameters */
     GtkWidget *grid = g_object_get_data(G_OBJECT(widget), "grid");
     GtkWidget *area = g_object_get_data(G_OBJECT(widget), "area");
@@ -176,6 +203,11 @@ void generate_charge_button(GtkWidget *widget) {
 }
 
 void clear_surface_button(GtkWidget *widget) {
+    if (state_simulation) {
+        set_log("Simulation running");
+        return;
+    }
+
     reset_charge_system(g_object_get_data(G_OBJECT(widget), "charge_system"));
     clear_surface();
     gtk_widget_queue_draw(g_object_get_data(G_OBJECT(widget), "area"));
@@ -183,6 +215,11 @@ void clear_surface_button(GtkWidget *widget) {
 }
 
 void start_process_button(GtkWidget *widget) {
+    if (state_simulation) {
+        set_log("Simulation already running");
+        return;
+    }
+
     charge_system* main_charge_system = g_object_get_data(G_OBJECT(widget), "charge_system");
     GtkWidget *area = g_object_get_data(G_OBJECT(widget), "area");
     GtkWidget *grid = g_object_get_data(G_OBJECT(widget), "grid");
@@ -230,6 +267,7 @@ void start_process_button(GtkWidget *widget) {
         return;
     }
 
+    state_simulation = TRUE;
     redraw_surface(area, main_charge_system);
     struct timespec t={0,100};
     for (int i = 0; i < (time+1); i++) {
@@ -240,4 +278,9 @@ void start_process_button(GtkWidget *widget) {
     }
     redraw_surface(area, main_charge_system);
     set_log("Simulation done");
+    state_simulation = FALSE;
+}
+
+gboolean get_state_simulation() {
+    return state_simulation;
 }
