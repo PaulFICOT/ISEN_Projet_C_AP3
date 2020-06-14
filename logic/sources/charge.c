@@ -27,11 +27,11 @@ short charge_is_itself(charge* a, charge* b) {
 
 charge* random_charge(short is_fixed) {
     return charge_create(
-        rand() % 20 * (rand() % 2 == 1 ? -1 : 1),
-        rand() % 12 * (rand() % 2 == 1 ? -1 : 1),
+        rand() % 2000 * pow(10, -2) * (rand() % 2 == 1 ? -1 : 1),
+        rand() % 1200 * pow(10, -2) * (rand() % 2 == 1 ? -1 : 1),
         rand() % 2 == 1 ? POSITIVE : NEGATIVE,
-        rand() % 11 * (rand() % 2 == 1 ? -1 : 1),
-        ((rand() % 9) + 1) * pow(10,-31),
+        rand() % 1100 * pow(10, -2) * (rand() % 2 == 1 ? -1 : 1),
+        ((rand() % 9000) + 1) * pow(10,-34),
         is_fixed
     );
 }
