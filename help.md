@@ -25,24 +25,24 @@ Because is zone is a free entry, you can write the value you want `up to 50 char
 **We advise to not go for a number smaller 1E-35 because C language has some difficulties with very small numbers.**
 
 ##### Fixed charge
-Fixed charge is a switch button which allows you to choose if the charge will be static or dynamic.
-It is selected dynamic by default.
+Fixed charge is a switch button which allows you to choose if the charge will be fixed or mobile.
+It is selected mobile by default.
 
 **/!\ This is orthonormal Cartesian coordinate system**
 
-![](pictures/create_charge.png)
+![screeshot of the create charge's window](pictures/create_charge.png)
 
 **Once all your parameters are sets, click `Create charge`, your charge is on the grid !**
 
 ### Modify or delete a charge
 
 To modify the attributs of a charge or delete it, click on the charge you have placed on the grid.
-A window will pop out and you will be able to modify the charge's parameters. 
+A window will pop out and you will be able to modify the charge's parameters.
 Once it is done, click on the `Modify charge` button.
-  
+
 If you want to delete the charge, click on the `Delete charge` button.
 
-![](pictures/modify_charge.png)
+![screeshot of the modify charge's window](pictures/modify_charge.png)
 
 <div style="page-break-after: always;"></div>
 
@@ -50,10 +50,11 @@ If you want to delete the charge, click on the `Delete charge` button.
 
 If you want to generate a random charge system to try the program without creating each charge one by one, click on the `Generate charge(s)` button.
 
-Then, select the number of charge you want to randomly generate.
+Then, select the number of mobile and mobile charge you want to randomly generate.
 
-![](pictures/random_charge.png)
+**Info: During generation, charge's symbol ratio is 50 purcents negative and 50 purcents positive**
 
+![screeshot of the random charge's window](pictures/random_charge.png)
 
 ### Reset the grid
 

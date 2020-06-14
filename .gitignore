@@ -12,4 +12,5 @@ gtk/
 *.pdf
 # ignore VSCode conf file
 *.code-workspace
+#ignore VSCode conf folder
 .vscode/*
