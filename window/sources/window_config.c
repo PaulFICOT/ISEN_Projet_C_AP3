@@ -1,5 +1,7 @@
 #include "../includes/window_config.h"
 
+static GtkWidget *statusbar = NULL;
+
 void activate(GtkApplication *app) {
   GtkWidget *window;
   GtkWidget *area;
@@ -9,6 +11,7 @@ void activate(GtkApplication *app) {
   GtkWidget *btn_generate;
   GtkWidget *btn_create;
   GtkWidget *btn_start;
+  GtkWidget *box_statusbar;
 
   /* Init the charge system */
   charge_system* main_charge_system = charge_system_create();
@@ -58,9 +61,14 @@ void activate(GtkApplication *app) {
   gtk_box_pack_start(GTK_BOX(hbtnbox), btn_create, FALSE, FALSE, 0);
   gtk_box_pack_start(GTK_BOX(hbtnbox), btn_start, FALSE, FALSE, 0);
 
+  statusbar = gtk_statusbar_new();
+  box_statusbar = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0);
+  gtk_box_pack_start(GTK_BOX(box_statusbar), statusbar, TRUE, FALSE, 0);
+
   grid = gtk_grid_new();
   gtk_grid_attach(GTK_GRID(grid), GTK_WIDGET(area), 0, 0, 1, 1);
   gtk_grid_attach(GTK_GRID(grid), GTK_WIDGET(hbtnbox), 0, 1, 1, 1);
+  gtk_grid_attach(GTK_GRID(grid), GTK_WIDGET(box_statusbar), 0, 2, 1, 1);
 
   gtk_container_add(GTK_CONTAINER(window), grid);
 
@@ -273,4 +281,8 @@ GtkWidget* init_start_window(GtkWidget* area, charge_system* main_charge_system)
   gtk_container_add(GTK_CONTAINER(window), grid);
 
   return window;
+}
+
+GtkWidget* get_statusbar() {
+  return statusbar;
 }

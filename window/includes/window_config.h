@@ -63,4 +63,11 @@ GtkWidget* init_generate_window(GtkWidget* area, charge_system* main_charge_syst
  */
 GtkWidget* init_start_window(GtkWidget* area, charge_system* main_charge_system);
 
+/**
+ * Get the instance of the statusbar widget
+ *
+ * @return the current instance of the widget
+ */
+GtkWidget* get_statusbar();
+
 #endif
