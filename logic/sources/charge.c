@@ -30,8 +30,8 @@ charge* random_charge() {
         rand() % 20 * (rand() % 2 == 1 ? -1 : 1),
         rand() % 12 * (rand() % 2 == 1 ? -1 : 1),
         rand() % 2 == 1 ? POSITIVE : NEGATIVE,
-        rand() % 9 * (rand() % 2 == 1 ? -1 : 1),
-        rand() % 9 * 10^(-31),
+        rand() % 11 * (rand() % 2 == 1 ? -1 : 1),
+        ((rand() % 9) + 1) * pow(10,-31),
         rand() % 2
     );
 }
