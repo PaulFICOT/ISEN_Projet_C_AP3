@@ -88,6 +88,15 @@ void print_charge(charge_system *c_s) {
     }
 }
 
-float electrostatic_potential(charge* q, coordinate* m) {
-    return (q->force*q->symbol)/(4*PI*EPSILON_0*fabs(two_points_distance(q->position, m)));
+double electrostatic_potential(charge_system *c_s, coordinate* m) {
+
+    double elec_pot = 0;
+    linked_list* iterator = c_s->charges;
+    while (!is_null(iterator)) {
+        double elec_calc = (((charge*)iterator->value)->force);
+        elec_calc *= ((charge*) iterator->value)->symbol == 'NEGATIVE' ? -1 : 1;
+        elec_calc /= (4*PI*EPSILON_0*fabs(two_points_distance(((charge*) iterator->value)->position, m)));
+        elec_pot += elec_calc;
+    }
+    return elec_pot;
 }

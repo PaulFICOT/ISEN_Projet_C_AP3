@@ -101,6 +101,6 @@ void print_charge(charge_system* c_s);
  * @param q the charge
  * @param m the coordinate of the other point you would like to get the electrostatic potential
  */
-float electrostatic_potential(charge* q, coordinate* m);
+double electrostatic_potential(charge_system* c_s, coordinate* m);
 
 #endif
