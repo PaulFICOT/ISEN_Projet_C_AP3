@@ -283,6 +283,6 @@ GtkWidget* init_start_window(GtkWidget* area, charge_system* main_charge_system)
   return window;
 }
 
-GtkWidget* get_statusbar() {
-  return statusbar;
+void set_log(char *message) {
+  gtk_statusbar_push(GTK_STATUSBAR(statusbar), 0, message);
 }

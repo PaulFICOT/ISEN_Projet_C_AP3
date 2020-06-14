@@ -145,17 +145,24 @@ void draw_arrow(GtkWidget *widget, vector *arrow) {
 
 gboolean clicked(GtkWidget *widget, GdkEventButton *mouse, charge_system *main_charge_system) {
   coordinate* coord = coordinate_create((mouse->x - (WINDOW_WIDTH/2.0)) / 20.0, ((WINDOW_HEIGHT/2.0) - mouse->y) / 20.0);
-  charge* a_charge = get_charge(main_charge_system, coord);
+  if (mouse->button == GDK_BUTTON_PRIMARY) {
+    charge* a_charge = get_charge(main_charge_system, coord);
 
-  if (window_charge != NULL) {
-    gtk_widget_hide(window_charge);
-    window_charge = NULL;
-  }
+    if (window_charge != NULL) {
+      gtk_widget_hide(window_charge);
+      window_charge = NULL;
+    }
 
-  if (a_charge != NULL) {
-    window_charge = init_charge_window(widget, main_charge_system, a_charge);
-    gtk_widget_show_all(GTK_WIDGET(window_charge));
-    gtk_window_set_keep_above(GTK_WINDOW(window_charge), TRUE);
+    if (a_charge != NULL) {
+      window_charge = init_charge_window(widget, main_charge_system, a_charge);
+      gtk_widget_show_all(GTK_WIDGET(window_charge));
+      gtk_window_set_keep_above(GTK_WINDOW(window_charge), TRUE);
+    }
+  }else if (mouse->button == GDK_BUTTON_SECONDARY) {
+    char *message;
+    asprintf(&message, "The electrostatic potential at (%lf, %lf) is %g V", coord->x, coord->y, electrostatic_potential(main_charge_system, coord));
+    set_log(message);
+    free(message);
   }
 
   return TRUE;

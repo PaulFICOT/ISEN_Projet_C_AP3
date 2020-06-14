@@ -64,10 +64,10 @@ GtkWidget* init_generate_window(GtkWidget* area, charge_system* main_charge_syst
 GtkWidget* init_start_window(GtkWidget* area, charge_system* main_charge_system);
 
 /**
- * Get the instance of the statusbar widget
+ * Set a message given to the status bar
  *
- * @return the current instance of the widget
+ * @param message The message to display
  */
-GtkWidget* get_statusbar();
+void set_log(char *message);
 
 #endif
