@@ -51,10 +51,7 @@ void clear_surface() {
 }
 
 coordinate* scale_coordinate(coordinate *coord) {
-  coord->x = (WINDOW_WIDTH/2.0) + (coord->x * 20.0);
-  coord->y = (WINDOW_HEIGHT/2.0) - (coord->y * 20.0);
-
-  return coord;
+  return coordinate_create((WINDOW_WIDTH/2.0) + (coord->x * 20.0), (WINDOW_HEIGHT/2.0) - (coord->y * 20.0));
 }
 
 void draw_fixed_charge(GtkWidget *widget, gdouble x, gdouble y) {
@@ -99,11 +96,13 @@ void redraw_surface(GtkWidget *widget, charge_system *main_charge_system) {
       draw_fixed_charge(widget, ((charge*) iterator->value)->position->x, ((charge*) iterator->value)->position->y);
     } else {
       draw_mobile_charge(widget, ((charge*) iterator->value)->position->x, ((charge*) iterator->value)->position->y);
-      /* WIP ARROW
-      vector *vector_charge = superposition_law(main_charge_system, (charge*) iterator->value);
-      if (vector_charge != NULL) {
-        draw_arrow(widget, vector_charge);
-      }*/
+
+      if (!get_state_simulation()) {
+        vector *vector_charge = superposition_law(main_charge_system, (charge*) iterator->value);
+        if (vector_charge != NULL) {
+          draw_arrow(widget, vector_charge);
+        }
+      }
     }
     forward(&iterator, 1);
   }
@@ -118,6 +117,8 @@ void redraw_surface(GtkWidget *widget, charge_system *main_charge_system) {
 void draw_arrow(GtkWidget *widget, vector *arrow) {
   coordinate *start = scale_coordinate(arrow->start);
   coordinate *end = scale_coordinate(arrow->end);
+  end->x *= 1.1;
+  end->y *= 1.1;
   cairo_t *cr = cairo_create(surface);
 
   double arrow_angle = atan2(end->y - start->y, end->x - start->x) + M_PI;

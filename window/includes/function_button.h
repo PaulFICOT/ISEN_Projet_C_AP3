@@ -55,4 +55,11 @@ void clear_surface_button(GtkWidget *widget);
  */
 void start_process_button(GtkWidget *widget);
 
+/**
+ * Get the state of the simulation
+ *
+ * @return widget state of the simulation
+ */
+gboolean get_state_simulation();
+
 #endif
