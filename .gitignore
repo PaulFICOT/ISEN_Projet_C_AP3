@@ -10,5 +10,6 @@ gtk/
 *.bin
 # ignore all .pdf files
 *.pdf
-
+# ignore VSCode conf file
+*.code-workspace
 .vscode/*

@@ -3,18 +3,30 @@
 
 ## Use the program
 
-***
-
 ### Create a specific charge
 
 Click on the `create charge(s)` button.
 A new window will appears and you will be able to select the different characteristics of the charge :
 
-- `Coordinate x` is the abscissa of the charge,
-- `Coordinate y` is the ordinate of the charge,
-- `Force` is the force of the charge (N)
-- `Weight` is the weight of the charge (g)
-- `Fixed charge` is a switch which allow you to choose if the charge will be static or dynamic
+##### Coordinates
+The coordinates are the position of the charge on the grid.
+It's mesured in meters (m).
+You can choose coordinates between -12 and 12 for ordinate's axis and between `-20 and 20` for abscissa's axis with a `step of 0.01` meter.
+
+##### Force
+The force is the electric force of the charge, it is set in Newtons (N).
+The range is between `-10 and 10` with a `step of 0.1` Newton.
+
+##### Weight
+The weight is the mass of the charge in grams (g).
+The maximum's weight is always positive.
+Because is zone is a free entry, you can write the value you want `up to 50 characters` with "regular" notation or scientific notation.
+
+**We advise to not go for a number smaller 1E-35 because C language has some difficulties with very small numbers.**
+
+##### Fixed charge
+Fixed charge is a switch button which allows you to choose if the charge will be static or dynamic.
+It is selected dynamic by default.
 
 **/!\ This is orthonormal Cartesian coordinate system**
 
