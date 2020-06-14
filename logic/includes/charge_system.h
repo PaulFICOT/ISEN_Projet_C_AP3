@@ -7,7 +7,6 @@
 #include "vector.h"
 #include "../../constants.h"
 #include "linked_list.h"
-#include "distance_converter.h"
 
 typedef struct charge_system_ charge_system;
 

@@ -57,7 +57,7 @@ void calculate_next_pose(charge_system* c_s, charge* c) {
 short charge_is_placeable(charge_system* c_s, coordinate* coord) {
     linked_list* iterator = c_s->charges;
     while (!is_null(iterator)) {
-        if ((two_points_distance(((charge*) iterator->value)->position, coord) - nm_to_m((CHARGE_RADIUS/20.0) * 2.0)) < 0.0) {
+        if ((two_points_distance(((charge*) iterator->value)->position, coord) - (CHARGE_RADIUS/20.0) * 2.0) < 0.0) {
             return 0;
         }
         forward(&iterator, 1);
@@ -68,7 +68,7 @@ short charge_is_placeable(charge_system* c_s, coordinate* coord) {
 charge* get_charge(charge_system* c_s, coordinate* coord) {
     linked_list* iterator = c_s->charges;
     while (!is_null(iterator)) {
-        if ((two_points_distance(((charge*) iterator->value)->position, coord) - nm_to_m(CHARGE_RADIUS/20.0)) < 0.0) {
+        if ((two_points_distance(((charge*) iterator->value)->position, coord) - (CHARGE_RADIUS/20.0)) < 0.0) {
             return (charge*) iterator->value;
         }
         forward(&iterator, 1);
