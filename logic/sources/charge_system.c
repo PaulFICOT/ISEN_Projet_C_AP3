@@ -77,6 +77,7 @@ charge* get_charge(charge_system* c_s, coordinate* coord) {
 }
 
 void reset_charge_system(charge_system* c_s) {
+    free(c_s->charges);
     c_s->charges = NULL;
 }
 
