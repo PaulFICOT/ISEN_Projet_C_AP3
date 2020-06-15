@@ -25,7 +25,6 @@ vector* vector_create_from_straight_line(coordinate* s, double magnitude, double
         delta_x = magnitude *  (slope > 0 ? cos(slope) : sin(slope)) * pow(10, 9);
         delta_y = magnitude * (slope > 0 ? sin(slope) : cos(slope)) * pow(10, 9);
     }
-    printf("end: (%e, %e)\n", (fabs(s->x) - delta_x ) * (s->x > 0 ? 1 : -1) * pow(10, 9), (fabs(s->y) - delta_y) * (s->y > 0 ? 1 : -1));
     return vector_create(s, coordinate_create((fabs(s->x) - delta_x ) * (s->x > 0 ? 1 : -1), (fabs(s->y) - delta_y) * (s->y > 0 ? 1 : -1)), magnitude);
 }
 

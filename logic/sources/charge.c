@@ -5,14 +5,13 @@ charge* charge_create(double x, double y, enum symbol symbol, double force, doub
     charge* ch = malloc(sizeof(charge));
     coordinate* c = coordinate_create(x, y);
     ch->position = c;
-    ch->last_position = c;
-    ch->speed = POSE_INTERVAL;
-    ch->last_speed = 0;
+    ch->orig_position = c;
+    ch->orig_speed = 0;
     ch->symbol = symbol;
     ch->force = force;
     ch->weight = weight;
     ch->is_fixed = is_fixed;
-    ch->time = 0;
+    ch->time = POSE_INTERVAL;
     return ch;
 }
 

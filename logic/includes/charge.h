@@ -9,9 +9,8 @@ typedef struct charge_ charge;
 
 struct charge_ {
     coordinate* position;
-    coordinate* last_position;
-    double speed;
-    double last_speed;
+    coordinate* orig_position;
+    double orig_speed;
     enum symbol symbol;
     double force;
     double weight;

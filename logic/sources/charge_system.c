@@ -35,21 +35,17 @@ vector* superposition_law(charge_system* c_s, charge* mobile_charge) {
         }
         forward(&iterator, 1);
     }
+    printf("magnitude: %e\n", magnitude);
     return vector_create_from_straight_line(mobile_charge->position, magnitude, sum_slopes / (length(c_s->charges) - 1));
 }
 
 void calculate_next_pose(charge_system* c_s, charge* c) {
     vector* v = superposition_law(c_s, c);
-    double a = (v->magnitude / c->weight);
-
-    c->speed = a * c->time + c->last_speed;
-    c->last_speed = c->speed;
 
     c->position = coordinate_create(
-        0.5 * a * pow(c->time, 2) + c->speed * c->time + c->last_position->x,
-        0.5 * a * pow(c->time, 2) + c->speed * c->time + c->last_position->y
+        0.5 * (v->magnitude / c->weight) * pow(c->time, 2) + c->orig_speed * c->time + c->orig_position->x,
+        0.5 * (v->magnitude / c->weight) * pow(c->time, 2) + c->orig_speed * c->time + c->orig_position->y
     );
-    c->last_position = c->position;
     c->time += POSE_INTERVAL;
 }
 
