@@ -1,5 +1,6 @@
 #include "../includes/vector.h"
 #include "../includes/coordinate.h"
+#include "gtk/gtk.h"
 #include <math.h>
 #include <stdlib.h>
 #include <stdio.h>
@@ -13,16 +14,23 @@ vector* vector_create(coordinate* s, coordinate* e, double magnitude) {
 }
 
 vector* vector_create_from_straight_line(coordinate* s, double magnitude, double slope) {
-    double slope_angle = atan(slope);
-    int symbol = magnitude < 0 ? 1 : -1;
-    printf("slope: %f - magnitude: %f\n", slope, magnitude * pow(10, 9));
+    double delta_x, delta_y;
+    printf("slope: %e - slope angle: %f - magnitude: %e\n", slope, slope, magnitude);
+    if (slope == 0) {
+        delta_x = magnitude;
+        delta_y = s->y;
+    } else if (slope == G_PI / 2) {
+        delta_x = s->x;
+        delta_y = magnitude;
+    } else {
+        delta_x = magnitude *  (slope > 0 ? cos(slope) : sin(slope));
+        delta_y = magnitude * (slope > 0 ? sin(slope) : cos(slope));
+    }
 
-    double delta_x = magnitude * (slope < 0 ? cos(slope_angle) : sin(slope_angle)) * symbol;
-    double delta_y = magnitude * (slope < 0 ? sin(slope_angle) : cos(slope_angle)) * symbol;
-    return vector_create(s, coordinate_create(s->x - delta_x, s->y - delta_y), magnitude);
+    return vector_create(s, coordinate_create((fabs(s->x) - delta_x ) * (s->x > 0 ? 1 : -1), (fabs(s->y) - delta_y) * (s->y > 0 ? 1 : -1)), magnitude);
 }
 
 double calculate_slope(coordinate* a, coordinate* b) {
     double result = (a->y - b->y) / (a->x - b->x);
-    return isfinite(result) && !isnan(result) ? result : 0;
+    return isfinite(result) ? atan(result) : G_PI / 2;
 }
