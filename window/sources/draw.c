@@ -3,6 +3,7 @@
 /* Surface cairo to contain charges */
 static cairo_surface_t *surface = NULL;
 static GtkWidget *window_charge = NULL;
+char message[1024];
 
 gboolean init_surface(GtkWidget *widget) {
   surface = gdk_window_create_similar_surface(gtk_widget_get_window (widget),
@@ -160,10 +161,8 @@ gboolean clicked(GtkWidget *widget, GdkEventButton *mouse, charge_system *main_c
       gtk_window_set_keep_above(GTK_WINDOW(window_charge), TRUE);
     }
   }else if (mouse->button == GDK_BUTTON_SECONDARY) {
-    char *message;
-    asprintf(&message, "The electrostatic potential at (%lf, %lf) is %g V", coord->x, coord->y, electrostatic_potential(main_charge_system, coord));
+    snprintf(message, sizeof(message), "The electrostatic potential at (%lf, %lf) is %g V", coord->x, coord->y, electrostatic_potential(main_charge_system, coord));
     set_log(message);
-    free(message);
   }
 
   return TRUE;

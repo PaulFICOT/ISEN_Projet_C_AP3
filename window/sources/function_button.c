@@ -2,6 +2,7 @@
 #include <stdio.h>
 
 static gboolean state_simulation = FALSE;
+char message[1024];
 
 void display_window_button(GtkWidget *widget, GtkWidget* window_charge) {
     if (state_simulation) {
@@ -42,10 +43,8 @@ void create_charge_button(GtkWidget *widget) {
     int nbr_charge_system = length(main_charge_system->charges);
 
     if ((MAX_ENTRIES - (nbr_charge_system+1)) < 0) {
-        char *message;
-        asprintf(&message, "You have exceeded the maximum number of charges in the system, That is %d.", MAX_ENTRIES);
+        snprintf(message, sizeof(message), "You have exceeded the maximum number of charges in the system, That is %d.", MAX_ENTRIES);
         set_log(message);
-        free(message);
         return;
     }
 
@@ -165,10 +164,8 @@ void generate_charge_button(GtkWidget *widget) {
     }
 
     if ((MAX_ENTRIES - (nbr_charge_mobile + nbr_charge_fixed + nbr_charge_system)) < 0) {
-        char *message;
-        asprintf(&message, "You have exceeded the maximum number of charges, There are %d in the system and the maximum is %d.", nbr_charge_system, MAX_ENTRIES);
+        snprintf(message, sizeof(message), "You have exceeded the maximum number of charges, There are %d in the system and the maximum is %d.", nbr_charge_system, MAX_ENTRIES);
         set_log(message);
-        free(message);
         return;
     }
 
