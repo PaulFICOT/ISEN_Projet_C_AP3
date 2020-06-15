@@ -4,11 +4,12 @@
 static gboolean state_simulation = FALSE;
 char message[1024];
 
+
 void display_window_button(GtkWidget *widget, GtkWidget* window_charge) {
     if (state_simulation) {
         if (strcmp(gtk_button_get_label(GTK_BUTTON(widget)), "Stop") == 0) {
             state_simulation = FALSE;
-            set_log("Simulation has been stopped");
+            set_log("Simulation stopped");
             set_label_btn_simulation("Start");
         }else set_log("Simulation running");
         return;
@@ -44,7 +45,7 @@ void create_charge_button(GtkWidget *widget) {
     int nbr_charge_system = length(main_charge_system->charges);
 
     if ((MAX_ENTRIES - (nbr_charge_system+1)) < 0) {
-        snprintf(message, sizeof(message), "You have exceeded the maximum number of charges in the system, That is %d.", MAX_ENTRIES);
+        snprintf(message, sizeof(message), "You have exceeded the maximum number of charges in the system, which is %d.", MAX_ENTRIES);
         set_log(message);
         return;
     }
@@ -52,7 +53,7 @@ void create_charge_button(GtkWidget *widget) {
     /* Check if the new charge is placeable in the charge system */
     coordinate *coord = coordinate_create(coord_x, coord_y);
     if (!charge_is_placeable(main_charge_system, coord)) {
-        set_log("There is already a charge at the coordinate");
+        set_log("There is already a charge at these coordinates");
         return;
     }
 
@@ -115,7 +116,7 @@ void modify_charge_button(GtkWidget *widget) {
     if (charge_is_placeable(main_charge_system, new_coord_charge)) {
         create_charge_button(widget);
     }else {
-        set_log("There is already a charge at the coordinate");
+        set_log("There is already a charge at these coordinates");
         add_charge(main_charge_system, a_charge);
     }
 
@@ -165,7 +166,7 @@ void generate_charge_button(GtkWidget *widget) {
     }
 
     if ((MAX_ENTRIES - (nbr_charge_mobile + nbr_charge_fixed + nbr_charge_system)) < 0) {
-        snprintf(message, sizeof(message), "You have exceeded the maximum number of charges, There are %d in the system and the maximum is %d.", nbr_charge_system, MAX_ENTRIES);
+        snprintf(message, sizeof(message), "You have exceeded the maximum number of charges, There is %d in the system and the maximum is %d.", nbr_charge_system, MAX_ENTRIES);
         set_log(message);
         return;
     }
@@ -261,13 +262,13 @@ void start_process_button(GtkWidget *widget) {
     int nbr_charge_system = length(main_charge_system->charges);
 
     if (nbr_charge_system == 0) {
-        set_log("There is no charges in the system.");
+        set_log("There is no charge in the system.");
         return;
     }
 
     state_simulation = TRUE;
     set_label_btn_simulation("Stop");
-    set_log("Simulation has been started");
+    set_log("Simulation started");
     redraw_surface(area, main_charge_system);
     struct timespec t={0,100};
     for (int i = 0; i < time; i++) {
