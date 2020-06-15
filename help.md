@@ -14,8 +14,8 @@ It's mesured in meters (m).
 You can choose coordinates between -12 and 12 for ordinate's axis and between `-20 and 20` for abscissa's axis with a `step of 0.01` meter.
 
 ##### Force
-The force is the electric force of the charge, it is set in Newtons (N).
-The range is between `-10 and 10` with a `step of 0.1` Newton.
+The force is the electric force of the charge, it is set in Coulombs (C).
+The range is between `-10 and 10` with a `step of 0.1` Coulomb.
 
 ##### Weight
 The weight is the mass of the charge in grams (g).
