@@ -35,8 +35,7 @@ vector* superposition_law(charge_system* c_s, charge* mobile_charge) {
         }
         forward(&iterator, 1);
     }
-    vector* v = vector_create_from_straight_line(mobile_charge->position, magnitude, sum_slopes / (length(c_s->charges) - 1));
-    return v;
+    return vector_create_from_straight_line(mobile_charge->position, magnitude, sum_slopes / (length(c_s->charges) - 1));
 }
 
 void calculate_next_pose(charge_system* c_s, charge* c) {

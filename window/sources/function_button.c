@@ -270,7 +270,7 @@ void start_process_button(GtkWidget *widget) {
     set_log("Simulation has been started");
     redraw_surface(area, main_charge_system);
     struct timespec t={0,100};
-    for (int i = 0; i < (time+1); i++) {
+    for (int i = 0; i < time; i++) {
         nanosleep(&t,0);
         calculate_next_pose(main_charge_system, b);
         printf("%i: (%f, %f)\n", i, b->position->x, b->position->y);
