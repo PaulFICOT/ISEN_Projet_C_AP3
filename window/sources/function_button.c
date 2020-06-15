@@ -30,14 +30,14 @@ void create_charge_button(GtkWidget *widget) {
     /* Get all window's widgets */
     GtkWidget *spin_x = gtk_grid_get_child_at(GTK_GRID(grid), 0, 1);
     GtkWidget *spin_y = gtk_grid_get_child_at(GTK_GRID(grid), 0, 3);
-    GtkWidget *spin_force = gtk_grid_get_child_at(GTK_GRID(grid), 0, 5);
+    GtkWidget *entry_force = gtk_grid_get_child_at(GTK_GRID(grid), 0, 5);
     GtkWidget *entry_weight = gtk_grid_get_child_at(GTK_GRID(grid), 0, 7);
     GtkWidget *btn_switch = gtk_grid_get_child_at(GTK_GRID(grid), 0, 9);
 
     /* Get all widgets' value */
     gdouble coord_x = gtk_spin_button_get_value(GTK_SPIN_BUTTON(spin_x));
     gdouble coord_y = gtk_spin_button_get_value(GTK_SPIN_BUTTON(spin_y));
-    gdouble force = gtk_spin_button_get_value(GTK_SPIN_BUTTON(spin_force));
+    gdouble force = g_strtod(gtk_entry_get_text(GTK_ENTRY(entry_force)), NULL);
     gdouble weight = g_strtod(gtk_entry_get_text(GTK_ENTRY(entry_weight)), NULL);
     gboolean is_fixed = gtk_switch_get_active(GTK_SWITCH(btn_switch));
 
@@ -85,7 +85,7 @@ void create_charge_button(GtkWidget *widget) {
     /* Reset widgets' values */
     gtk_spin_button_set_value(GTK_SPIN_BUTTON(spin_x), 0.0);
     gtk_spin_button_set_value(GTK_SPIN_BUTTON(spin_y), 0.0);
-    gtk_spin_button_set_value(GTK_SPIN_BUTTON(spin_force), 0.0);
+    gtk_entry_set_text(GTK_ENTRY(entry_force), "0,0");
     gtk_entry_set_text(GTK_ENTRY(entry_weight), "0,0");
     gtk_switch_set_active(GTK_SWITCH(btn_switch), FALSE);
 
