@@ -278,7 +278,7 @@ GtkWidget* init_start_window(GtkWidget* area, charge_system* main_charge_system)
   g_signal_connect(GTK_WINDOW(window), "delete-event", G_CALLBACK(hide_window), NULL);
 
   label = gtk_label_new("Choose the simulation time (milliseconds)");
-  spin = gtk_spin_button_new_with_range(1, MAX_CHARGES_NUMBER, 1);
+  spin = gtk_spin_button_new_with_range(1, SIMULATION_TIME, 1);
   btn = gtk_button_new_with_label("Start");
 
   grid = gtk_grid_new();

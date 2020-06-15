@@ -1,7 +1,7 @@
 #ifndef CONSTANTS
 #define CONSTANTS
 
-#define MAX_CHARGES_NUMBER 1000
+#define SIMULATION_TIME 180000
 #define COULOMB_CONST 8.987551787368176E9
 #define ELEMENTARY_CHARGE 1.60217662E-19
 #define MAX_ENTRIES 50
@@ -11,6 +11,7 @@
 #define POSE_INTERVAL 0.1
 #define ARROW_ARM_LENGTH 15.0
 #define ARROW_DEGREES 0.5
+
 /*
     Window's size constants
 */
