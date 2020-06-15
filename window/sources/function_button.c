@@ -231,8 +231,8 @@ void start_process_button(GtkWidget *widget) {
     /* Hide the window */
     gtk_widget_hide(g_object_get_data(G_OBJECT(widget), "window"));
 
-    charge* a = charge_create(0, 0, POSITIVE, 10, 3E-10, 1);
-    charge* b = charge_create(2, 0, NEGATIVE, 10, 4E-11, 0);
+    charge* a = charge_create(0, 0, POSITIVE, 1E-18, 3E-10, 1);
+    charge* b = charge_create(2, 0, NEGATIVE, 3E-19, 4E-11, 0);
 
     add_charge(main_charge_system, a);
     add_charge(main_charge_system, b);
