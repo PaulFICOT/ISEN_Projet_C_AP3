@@ -15,7 +15,6 @@ You can choose coordinates between -12 and 12 for ordinate's axis and between `-
 
 ##### Charge
 The charge is set in Coulombs (C).
-The range is between `-1 and 1`.
 Because is zone is a free entry, you can write the value you want `up to 50 characters` with "regular" notation or scientific notation.
 
 ##### Weight
