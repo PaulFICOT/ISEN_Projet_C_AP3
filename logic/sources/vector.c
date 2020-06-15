@@ -16,16 +16,16 @@ vector* vector_create(coordinate* s, coordinate* e, double magnitude) {
 vector* vector_create_from_straight_line(coordinate* s, double magnitude, double slope) {
     double delta_x, delta_y;
     if (slope == 0) {
-        delta_x = magnitude;
-        delta_y = s->y;
+        delta_x = magnitude * pow(10, 9);
+        delta_y = 0;
     } else if (slope == G_PI / 2) {
-        delta_x = s->x;
-        delta_y = magnitude;
+        delta_x = 0;
+        delta_y = magnitude * pow(10, 9);
     } else {
-        delta_x = magnitude *  (slope > 0 ? cos(slope) : sin(slope));
-        delta_y = magnitude * (slope > 0 ? sin(slope) : cos(slope));
+        delta_x = magnitude *  (slope > 0 ? cos(slope) : sin(slope)) * pow(10, 9);
+        delta_y = magnitude * (slope > 0 ? sin(slope) : cos(slope)) * pow(10, 9);
     }
-
+    printf("end: (%e, %e)\n", (fabs(s->x) - delta_x ) * (s->x > 0 ? 1 : -1) * pow(10, 9), (fabs(s->y) - delta_y) * (s->y > 0 ? 1 : -1));
     return vector_create(s, coordinate_create((fabs(s->x) - delta_x ) * (s->x > 0 ? 1 : -1), (fabs(s->y) - delta_y) * (s->y > 0 ? 1 : -1)), magnitude);
 }
 
