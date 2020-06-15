@@ -6,12 +6,13 @@ char message[1024];
 
 void display_window_button(GtkWidget *widget, GtkWidget* window_charge) {
     if (state_simulation) {
-        set_log("Simulation running");
+        if (strcmp(gtk_button_get_label(GTK_BUTTON(widget)), "Stop") == 0) {
+            state_simulation = FALSE;
+            set_log("Simulation has been stopped");
+            set_label_btn_simulation("Start");
+        }else set_log("Simulation running");
         return;
     }
-
-    /* Unused parameter but required field */
-    (void) widget;
     gtk_widget_show_all(window_charge);
 }
 
@@ -265,6 +266,8 @@ void start_process_button(GtkWidget *widget) {
     }
 
     state_simulation = TRUE;
+    set_label_btn_simulation("Stop");
+    set_log("Simulation has been started");
     redraw_surface(area, main_charge_system);
     struct timespec t={0,100};
     for (int i = 0; i < (time+1); i++) {
@@ -272,10 +275,14 @@ void start_process_button(GtkWidget *widget) {
         calculate_next_pose(main_charge_system, b);
         printf("%i: (%f, %f)\n", i, b->position->x, b->position->y);
         redraw_surface(area, main_charge_system);
+        if (!state_simulation) {
+            return;
+        }
     }
     redraw_surface(area, main_charge_system);
-    set_log("Simulation done");
     state_simulation = FALSE;
+    set_log("Simulation done");
+    set_label_btn_simulation("Start");
 }
 
 gboolean get_state_simulation() {

@@ -70,4 +70,11 @@ GtkWidget* init_start_window(GtkWidget* area, charge_system* main_charge_system)
  */
 void set_log(char *message);
 
+/**
+ * Set the label of the simulation button
+ *
+ * @param label The label to set
+ */
+void set_label_btn_simulation(char *label);
+
 #endif

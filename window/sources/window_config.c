@@ -1,6 +1,7 @@
 #include "../includes/window_config.h"
 
 static GtkWidget *statusbar = NULL;
+static GtkWidget *btn_simulation = NULL;
 
 void activate(GtkApplication *app) {
   GtkWidget *window;
@@ -10,7 +11,6 @@ void activate(GtkApplication *app) {
   GtkWidget *btn_reset;
   GtkWidget *btn_generate;
   GtkWidget *btn_create;
-  GtkWidget *btn_start;
   GtkWidget *box_statusbar;
 
   /* Init the charge system */
@@ -50,16 +50,16 @@ void activate(GtkApplication *app) {
   g_signal_connect(btn_create, "clicked", G_CALLBACK(display_window_button), init_charge_window(area, main_charge_system, NULL));
   gtk_widget_set_size_request(GTK_WIDGET(btn_create), 100, 45);
 
-  btn_start = gtk_button_new_with_label("Start");
-  g_object_set_data(G_OBJECT(btn_start), "charge_system", main_charge_system);
-  g_object_set_data(G_OBJECT(btn_start), "area", area);
-  g_signal_connect(btn_start, "clicked", G_CALLBACK(display_window_button), init_start_window(area, main_charge_system));
-  gtk_widget_set_size_request(GTK_WIDGET(btn_start), 100, 45);
+  btn_simulation = gtk_button_new_with_label("Start");
+  g_object_set_data(G_OBJECT(btn_simulation), "charge_system", main_charge_system);
+  g_object_set_data(G_OBJECT(btn_simulation), "area", area);
+  g_signal_connect(btn_simulation, "clicked", G_CALLBACK(display_window_button), init_start_window(area, main_charge_system));
+  gtk_widget_set_size_request(GTK_WIDGET(btn_simulation), 100, 45);
 
   gtk_box_pack_start(GTK_BOX(hbtnbox), btn_reset, FALSE, FALSE, 0);
   gtk_box_pack_start(GTK_BOX(hbtnbox), btn_generate, FALSE, FALSE, 0);
   gtk_box_pack_start(GTK_BOX(hbtnbox), btn_create, FALSE, FALSE, 0);
-  gtk_box_pack_start(GTK_BOX(hbtnbox), btn_start, FALSE, FALSE, 0);
+  gtk_box_pack_start(GTK_BOX(hbtnbox), btn_simulation, FALSE, FALSE, 0);
 
   statusbar = gtk_statusbar_new();
   box_statusbar = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0);
@@ -297,4 +297,8 @@ GtkWidget* init_start_window(GtkWidget* area, charge_system* main_charge_system)
 
 void set_log(char *message) {
   gtk_statusbar_push(GTK_STATUSBAR(statusbar), 0, message);
+}
+
+void set_label_btn_simulation(char *label) {
+  gtk_button_set_label(GTK_BUTTON(btn_simulation), label);
 }
