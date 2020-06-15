@@ -1,4 +1,4 @@
-**Deadline : 20/06 à 0h00**  
+**Deadline : 20/06 à 0h00**
 **À envoyer par mail à olivier.cros@yncrea.fr et yannick.lambert@yncrea.fr**
 
 Un champ complet (représenté par un rectangle)
@@ -15,7 +15,7 @@ Objectif -> calculer numériquement les intéractions électrostatiques entre pl
 - [x] Lancer une simulation pour un temps donné
 - [ ] Afficher le résultat au moyen d’une interface graphique
 - [x] Générer un champ et des charges placées manuellement ou aléatoirement
-- [ ] L’affichage de la force de Coulomb associé à chaque charge en sélectionnant la charge en question
+- [x] L’affichage de la force de Coulomb associé à chaque charge en sélectionnant la charge en question
 - [x] La visualisation du mouvement des charges mobiles
 - [ ] En bonus vous pourrez afficher les lignes de champ
 - [x] En bonus vous pourrez afficher le potentiel électrostatique
