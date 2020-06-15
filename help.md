@@ -13,9 +13,10 @@ The coordinates are the position of the charge on the grid.
 It's mesured in meters (m).
 You can choose coordinates between -12 and 12 for ordinate's axis and between `-20 and 20` for abscissa's axis with a `step of 0.01` meter.
 
-##### Force
-The force is the electric force of the charge, it is set in Coulombs (C).
-The range is between `-10 and 10` with a `step of 0.1` Coulomb.
+##### Charge
+The charge is set in Coulombs (C).
+The range is between `-1 and 1`.
+Because is zone is a free entry, you can write the value you want `up to 50 characters` with "regular" notation or scientific notation.
 
 ##### Weight
 The weight is the mass of the charge in grams (g).
