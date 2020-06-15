@@ -15,7 +15,6 @@ vector* vector_create(coordinate* s, coordinate* e, double magnitude) {
 
 vector* vector_create_from_straight_line(coordinate* s, double magnitude, double slope) {
     double delta_x, delta_y;
-    printf("slope: %e - slope angle: %f - magnitude: %e\n", slope, slope, magnitude);
     if (slope == 0) {
         delta_x = magnitude;
         delta_y = s->y;
