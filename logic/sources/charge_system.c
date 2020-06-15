@@ -93,9 +93,12 @@ double electrostatic_potential(charge_system *c_s, coordinate* m) {
     double elec_pot = 0;
     linked_list* iterator = c_s->charges;
     while (!is_null(iterator)) {
-        double elec_calc = 1/(4*PI*EPSILON_0);
-        elec_calc *= (((charge*) iterator->value)->symbol == NEGATIVE ? -1 : 1)/(fabs(two_points_distance(((charge*) iterator->value)->position, m)));
-        elec_pot += elec_calc;
+        double elec_charge = ((charge*)iterator->value)->force;
+        double elec_symbol = ((charge*)iterator->value)->symbol;
+        elec_charge *= elec_symbol == NEGATIVE ? -1 : 1;
+        double elec_const = 1/(4*PI*EPSILON_0);
+        elec_charge /= (fabs(two_points_distance(((charge*) iterator->value)->position, m)));
+        elec_pot = elec_const*elec_charge;
         forward(&iterator, 1);
     }
     return elec_pot;

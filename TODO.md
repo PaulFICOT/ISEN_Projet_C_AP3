@@ -18,7 +18,7 @@ Objectif -> calculer numériquement les intéractions électrostatiques entre pl
 - [ ] L’affichage de la force de Coulomb associé à chaque charge en sélectionnant la charge en question
 - [x] La visualisation du mouvement des charges mobiles
 - [ ] En bonus vous pourrez afficher les lignes de champ
-- [ ] En bonus vous pourrez afficher le potentiel électrostatique
+- [x] En bonus vous pourrez afficher le potentiel électrostatique
 
 
 ## Les contraintes
