@@ -158,7 +158,9 @@ gboolean clicked(GtkWidget *widget, GdkEventButton *mouse, charge_system *main_c
       gtk_widget_show_all(GTK_WIDGET(window_charge));
       gtk_window_set_keep_above(GTK_WINDOW(window_charge), TRUE);
     }else {
-      if (charge_is_placeable(main_charge_system, coord)) {
+      int nbr_charge_system = length(main_charge_system->charges);
+
+      if (charge_is_placeable(main_charge_system, coord) && (MAX_ENTRIES - (nbr_charge_system + 1)) >= 0 ) {
         add_charge(main_charge_system, random_charge(coord->x, coord->y, INFINITY));
         redraw_surface(widget, main_charge_system);
       }
