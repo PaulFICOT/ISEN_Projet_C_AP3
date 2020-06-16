@@ -228,6 +228,10 @@ void start_process_button(GtkWidget *widget) {
     gint time = gtk_spin_button_get_value(GTK_SPIN_BUTTON(spin));
     gtk_spin_button_set_value(GTK_SPIN_BUTTON(spin), 0);
 
+    GtkWidget *switch_collision = gtk_grid_get_child_at(GTK_GRID(grid), 0, 3);
+    gboolean collision = gtk_switch_get_active(GTK_SWITCH(switch_collision));
+    gtk_switch_set_active(GTK_SWITCH(switch_collision), FALSE);
+
     /* Hide the window */
     gtk_widget_hide(g_object_get_data(G_OBJECT(widget), "window"));
 
@@ -246,7 +250,7 @@ void start_process_button(GtkWidget *widget) {
         linked_list* iterator = main_charge_system->charges;
         while (!is_null(iterator)) {
             if (!((charge*)iterator->value)->is_fixed) {
-                calculate_next_pose(main_charge_system, (charge*)iterator->value, 0);
+                calculate_next_pose(main_charge_system, (charge*)iterator->value, collision);
                 printf("%i: (%f, %f)\n", i, ((charge*)iterator->value)->position->x, ((charge*)iterator->value)->position->y);
             }
             forward(&iterator, 1);

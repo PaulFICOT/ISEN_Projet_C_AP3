@@ -157,6 +157,11 @@ gboolean clicked(GtkWidget *widget, GdkEventButton *mouse, charge_system *main_c
       window_charge = init_charge_window(widget, main_charge_system, a_charge);
       gtk_widget_show_all(GTK_WIDGET(window_charge));
       gtk_window_set_keep_above(GTK_WINDOW(window_charge), TRUE);
+    }else {
+      if (charge_is_placeable(main_charge_system, coord)) {
+        add_charge(main_charge_system, random_charge(coord->x, coord->y, INFINITY));
+        redraw_surface(widget, main_charge_system);
+      }
     }
   }else if (mouse->button == GDK_BUTTON_SECONDARY) {
     snprintf(message, sizeof(message), "The electrostatic potential at (%lf, %lf) is %g V", coord->x, coord->y, electrostatic_potential(main_charge_system, coord));

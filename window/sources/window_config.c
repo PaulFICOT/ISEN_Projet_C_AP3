@@ -266,6 +266,8 @@ GtkWidget* init_start_window(GtkWidget* area, charge_system* main_charge_system)
   GtkWidget *grid;
   GtkWidget *label;
   GtkWidget *spin;
+  GtkWidget *label_collision;
+  GtkWidget *btn_switch_collision;
   GtkWidget *btn;
 
   /* Initialize and set up each widget */
@@ -279,6 +281,10 @@ GtkWidget* init_start_window(GtkWidget* area, charge_system* main_charge_system)
 
   label = gtk_label_new("Choose the simulation time (milliseconds)");
   spin = gtk_spin_button_new_with_range(1, SIMULATION_TIME, 1);
+
+  label_collision = gtk_label_new("Actived collision ?");
+  btn_switch_collision = gtk_switch_new();
+
   btn = gtk_button_new_with_label("Start");
 
   grid = gtk_grid_new();
@@ -286,7 +292,9 @@ GtkWidget* init_start_window(GtkWidget* area, charge_system* main_charge_system)
   gtk_grid_set_row_spacing(GTK_GRID(grid), 5);
   gtk_grid_attach(GTK_GRID(grid), GTK_WIDGET(label), 0, 0, 2, 1);
   gtk_grid_attach(GTK_GRID(grid), GTK_WIDGET(spin), 0, 1, 2, 1);
-  gtk_grid_attach(GTK_GRID(grid), GTK_WIDGET(btn), 0, 2, 2, 1);
+  gtk_grid_attach(GTK_GRID(grid), GTK_WIDGET(label_collision), 0, 2, 2, 1);
+  gtk_grid_attach(GTK_GRID(grid), GTK_WIDGET(btn_switch_collision), 0, 3, 2, 1);
+  gtk_grid_attach(GTK_GRID(grid), GTK_WIDGET(btn), 0, 4, 2, 1);
 
   g_object_set_data(G_OBJECT(btn), "grid", grid);
   g_object_set_data(G_OBJECT(btn), "area", area);
