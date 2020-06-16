@@ -41,21 +41,41 @@ vector* superposition_law(charge_system* c_s, charge* mobile_charge) {
 void calculate_next_pose(charge_system* c_s, charge* c) {
     vector* v = superposition_law(c_s, c);
     coordinate* a = coordinate_create((v->end->x - v->start->x) / c->weight, (v->end->y - v->start->y) / c->weight);
-    printf("magnitude: %e\n", v->magnitude);
 
     c->speed = coordinate_create(
         a->x * c->time + c->last_speed->x,
         a->y * c->time + c->last_speed->y
     );
-    c->last_speed = c->speed;
 
     c->position = coordinate_create(
         0.5 * a->x * pow(c->time, 2) + c->speed->x * c->time + c->last_position->x,
         0.5 * a->y * pow(c->time, 2) + c->speed->y * c->time + c->last_position->y
     );
-    c->last_position = c->position;
+
+    if (charge_is_moveable(c_s, c->position)) {
+        free(c->last_speed);
+        free(c->last_position);
+        c->last_speed = c->speed;
+        c->last_position = c->position;
+    } else {
+        free(c->speed);
+        free(c->position);
+        c->speed = c->last_speed;
+        c->position = c->last_position;
+    }
 
     c->time += POSE_INTERVAL;
+}
+
+short charge_is_moveable(charge_system* c_s, coordinate* c) {
+    linked_list* iterator = c_s->charges;
+    while (!is_null(iterator)) {
+        if (((charge*) iterator->value)->position != c && (two_points_distance(((charge*) iterator->value)->position, c) - (CHARGE_RADIUS/20.0) * 2.0) < 0.0) {
+            return 0;
+        }
+        forward(&iterator, 1);
+    }
+    return 1;
 }
 
 short charge_is_placeable(charge_system* c_s, coordinate* coord) {

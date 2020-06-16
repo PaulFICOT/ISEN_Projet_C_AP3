@@ -13,7 +13,7 @@ struct coordinate_ {
  *
  * @param x the abscissa
  * @param y the ordinates
- * 
+ *
  * @return a new coordinate instance
  */
 coordinate* coordinate_create(double x, double y);

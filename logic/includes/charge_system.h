@@ -103,4 +103,5 @@ void print_charge(charge_system* c_s);
  */
 double electrostatic_potential(charge_system* c_s, coordinate* m);
 
+short charge_is_moveable(charge_system* c_s, coordinate* c);
 #endif
