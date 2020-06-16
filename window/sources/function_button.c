@@ -173,7 +173,7 @@ void generate_charge_button(GtkWidget *widget) {
 
     /* Generate mobile charge and check if it is placeable before add it in charge system */
     while (nbr_charge_mobile != 0) {
-        charge *new_charge = random_charge(0);
+        charge *new_charge = random_charge(INFINITY, INFINITY, 0);
         if (charge_is_placeable(main_charge_system, new_charge->position)) {
             add_charge(main_charge_system, new_charge);
             nbr_charge_mobile--;
@@ -182,7 +182,7 @@ void generate_charge_button(GtkWidget *widget) {
 
     /* Generate fixed charge */
     while (nbr_charge_fixed != 0) {
-        charge *new_charge = random_charge(1);
+        charge *new_charge = random_charge(INFINITY, INFINITY, 1);
         if (charge_is_placeable(main_charge_system, new_charge->position)) {
             add_charge(main_charge_system, new_charge);
             nbr_charge_fixed--;

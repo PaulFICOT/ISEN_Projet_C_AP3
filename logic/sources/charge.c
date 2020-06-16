@@ -25,13 +25,13 @@ short charge_is_itself(charge* a, charge* b) {
     return two_points_distance(a->position, b->position) != 0;
 }
 
-charge* random_charge(short is_fixed) {
+charge* random_charge(double x, double y, double is_fixed) {
     return charge_create(
-        rand() % 2000 * pow(10, -2) * (rand() % 2 == 1 ? -1 : 1),
-        rand() % 1200 * pow(10, -2) * (rand() % 2 == 1 ? -1 : 1),
+        !isfinite(x) ? rand() % 2000 * pow(10, -2) * (rand() % 2 == 1 ? -1 : 1) : x,
+        !isfinite(y) ? rand() % 1200 * pow(10, -2) * (rand() % 2 == 1 ? -1 : 1) : y,
         rand() % 2 == 1 ? POSITIVE : NEGATIVE,
         rand() % 10 * pow(10,-12) * (rand() % 2 == 1 ? -1 : 1),
         ((rand() % 900) + 1) * pow(10,-12),
-        is_fixed
+        !isfinite(is_fixed) ? rand() % 2 : is_fixed
     );
 }

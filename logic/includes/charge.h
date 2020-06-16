@@ -60,5 +60,5 @@ short charge_is_itself(charge* a, charge* b);
  *
  * @return a charge
  */
-charge* random_charge(short is_fixed);
+charge* random_charge(double x, double y, double is_fixed);
 #endif
