@@ -203,8 +203,9 @@ void generate_charge_button(GtkWidget *widget) {
 
 void clear_surface_button(GtkWidget *widget) {
     if (state_simulation) {
-        set_log("Simulation running");
-        return;
+        state_simulation = FALSE;
+        set_log("Simulation stopped");
+        set_label_btn_simulation("Start");
     }
 
     reset_charge_system(g_object_get_data(G_OBJECT(widget), "charge_system"));
