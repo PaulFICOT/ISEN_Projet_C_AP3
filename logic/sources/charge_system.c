@@ -52,7 +52,7 @@ void calculate_next_pose(charge_system* c_s, charge* c, short enable_collisions)
         0.5 * a->y * pow(c->time, 2) + c->speed->y * c->time + c->last_position->y
     );
 
-    if (enable_collisions && charge_is_moveable(c_s, c->position)) {
+    if (!enable_collisions && charge_is_moveable(c_s, c->position)) {
         free(c->last_speed);
         free(c->last_position);
         c->last_speed = c->speed;
