@@ -30,7 +30,7 @@ charge* random_charge(short is_fixed) {
         rand() % 2000 * pow(10, -2) * (rand() % 2 == 1 ? -1 : 1),
         rand() % 1200 * pow(10, -2) * (rand() % 2 == 1 ? -1 : 1),
         rand() % 2 == 1 ? POSITIVE : NEGATIVE,
-        rand() % 10 * pow(10,-18) * (rand() % 2 == 1 ? -1 : 1),
+        rand() % 10 * pow(10,-12) * (rand() % 2 == 1 ? -1 : 1),
         ((rand() % 900) + 1) * pow(10,-12),
         is_fixed
     );
