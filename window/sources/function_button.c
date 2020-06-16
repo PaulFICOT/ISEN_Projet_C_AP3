@@ -115,7 +115,7 @@ void modify_charge_button(GtkWidget *widget) {
     /* Check if the new charge's coordinate is placeable */
     if (charge_is_placeable(main_charge_system, new_coord_charge)) {
         create_charge_button(widget);
-    }else {
+    } else {
         set_log("There is already a charge at these coordinates");
         add_charge(main_charge_system, a_charge);
     }
@@ -245,11 +245,11 @@ void start_process_button(GtkWidget *widget) {
         nanosleep(&t,0);
         linked_list* iterator = main_charge_system->charges;
         while (!is_null(iterator)) {
-            if (((charge*)iterator->value)->is_fixed) {
-                break;
+            printf("je suis %f %f\n", ((charge*)iterator->value)->position->x, ((charge*)iterator->value)->position->y);
+            if (!((charge*)iterator->value)->is_fixed) {
+                calculate_next_pose(main_charge_system, (charge*)iterator->value);
+                printf("%i: (%f, %f)\n", i, ((charge*)iterator->value)->position->x, ((charge*)iterator->value)->position->y);
             }
-            calculate_next_pose(main_charge_system, (charge*)iterator->value);
-            printf("%i: (%f, %f)\n", i, ((charge*)iterator->value)->position->x, ((charge*)iterator->value)->position->y);
             forward(&iterator, 1);
         }
         redraw_surface(area, main_charge_system);
