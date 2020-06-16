@@ -44,21 +44,13 @@ charge* charge_create(double x, double y, enum symbol symbol, double force, doub
 double coulomb_law(charge *a, charge *b);
 
 /**
- * Check if two charges are the same
- *
- * @param a a charge
- * @param b a charge
- *
- * @return true if the two charges are the same, false otherwise
- */
-short charge_is_itself(charge* a, charge* b);
-
-/**
  * Generates a charge generated randomly
  *
+ * @param x a specified x or INFINITY to keep it random
+ * @param y a specified y or INFINITY to keep it random
  * @param is_fixed 1 -> charge is fixed 0 -> charge is mobile
  *
- * @return a charge
+ * @return a randomly created charge
  */
 charge* random_charge(double x, double y, double is_fixed);
 #endif

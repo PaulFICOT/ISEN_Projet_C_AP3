@@ -21,10 +21,6 @@ double coulomb_law(charge* a, charge* b) {
     return isfinite(result) && !isnan(result) ? result : 0;
 }
 
-short charge_is_itself(charge* a, charge* b) {
-    return two_points_distance(a->position, b->position) != 0;
-}
-
 charge* random_charge(double x, double y, double is_fixed) {
     return charge_create(
         !isfinite(x) ? rand() % 2000 * pow(10, -2) * (rand() % 2 == 1 ? -1 : 1) : x,

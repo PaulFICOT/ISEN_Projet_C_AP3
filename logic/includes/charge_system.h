@@ -22,15 +22,6 @@ struct charge_system_ {
 charge_system* charge_system_create();
 
 /**
- * Fetch the current element of the linked_list's charges
- *
- * @param c_s the charge system
- *
- * @return the current charge
- */
-charge* current_charge(charge_system* c_s);
-
-/**
  * Append a charge to the charge system
  *
  * @param c_s the charge_system
@@ -41,9 +32,8 @@ void add_charge(charge_system* c_s, charge* ch);
 /**
  * Calculate the superposition law of a group of charges on a charge
  *
+ * @param c_s the charge system
  * @param mobile_charge the charge which is subject to the law
- * @param charges the array containing the charges to apply
- * @param charges_index the index of the charges array
  *
  * @return the vector representing the superposition law
  */
@@ -52,11 +42,21 @@ vector* superposition_law(charge_system* c_s, charge* mobile_charge);
 /**
  * Calculate the position of a charge
  *
+ * @param c_s the charge system
  * @param c the charge
- * @param charges the array containing all the charges which will apply a force
- * @param charges_index the index of the charges array
+ * @param enable_collision a boolean to toggle if the charges can collide
  */
 void calculate_next_pose(charge_system* c_s, charge* c, short enable_collisions);
+
+/**
+ * Checks if a charge won't collide with another charge while its translation
+ *
+ * @param c_s the charge system
+ * @param c the charge
+ *
+ * @return 0 if there is a collision
+ */
+short charge_is_moveable(charge_system* c_s, coordinate* c);
 
 /**
  * Check if the charge is placeable at the coordinate
@@ -69,8 +69,8 @@ short charge_is_placeable(charge_system* c_s, coordinate* coord);
 /**
  * Get the charge in the charge system at the coordinate given
  *
+ * @param c_s The charge system with all charges
  * @param coord The coordinate to check
- * @param main_charge_system The charge system with all charges
  */
 charge* get_charge(charge_system* c_s, coordinate* coord);
 
@@ -83,6 +83,8 @@ void reset_charge_system(charge_system* c_s);
 
 /**
  * Print the charges in the charges linked_list
+ *
+ * @param c_s the charge system
  */
 void print_charge(charge_system* c_s);
 
@@ -94,5 +96,4 @@ void print_charge(charge_system* c_s);
  */
 double electrostatic_potential(charge_system* c_s, coordinate* m);
 
-short charge_is_moveable(charge_system* c_s, coordinate* c);
 #endif
