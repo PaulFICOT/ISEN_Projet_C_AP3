@@ -38,7 +38,7 @@ vector* superposition_law(charge_system* c_s, charge* mobile_charge) {
     return vector_create_from_straight_line(mobile_charge->position, magnitude, sum_slopes / (length(c_s->charges) - 1));
 }
 
-void calculate_next_pose(charge_system* c_s, charge* c) {
+void calculate_next_pose(charge_system* c_s, charge* c, short enable_collisions) {
     vector* v = superposition_law(c_s, c);
     coordinate* a = coordinate_create((v->end->x - v->start->x) / c->weight, (v->end->y - v->start->y) / c->weight);
 
@@ -52,7 +52,7 @@ void calculate_next_pose(charge_system* c_s, charge* c) {
         0.5 * a->y * pow(c->time, 2) + c->speed->y * c->time + c->last_position->y
     );
 
-    if (charge_is_moveable(c_s, c->position)) {
+    if (enable_collisions && charge_is_moveable(c_s, c->position)) {
         free(c->last_speed);
         free(c->last_position);
         c->last_speed = c->speed;

@@ -246,7 +246,7 @@ void start_process_button(GtkWidget *widget) {
         linked_list* iterator = main_charge_system->charges;
         while (!is_null(iterator)) {
             if (!((charge*)iterator->value)->is_fixed) {
-                calculate_next_pose(main_charge_system, (charge*)iterator->value);
+                calculate_next_pose(main_charge_system, (charge*)iterator->value, 0);
                 printf("%i: (%f, %f)\n", i, ((charge*)iterator->value)->position->x, ((charge*)iterator->value)->position->y);
             }
             forward(&iterator, 1);

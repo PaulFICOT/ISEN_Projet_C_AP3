@@ -50,22 +50,13 @@ void add_charge(charge_system* c_s, charge* ch);
 vector* superposition_law(charge_system* c_s, charge* mobile_charge);
 
 /**
- * Calculate the speed of a charge
- *
- * @param c the charge
- * @param charges the array containing all the charges which will apply a force
- * @param charges_index the index of the charges array
- */
-void calculate_next_speed(charge_system* c_s, charge* c);
-
-/**
  * Calculate the position of a charge
  *
  * @param c the charge
  * @param charges the array containing all the charges which will apply a force
  * @param charges_index the index of the charges array
  */
-void calculate_next_pose(charge_system* c_s, charge* c);
+void calculate_next_pose(charge_system* c_s, charge* c, short enable_collisions);
 
 /**
  * Check if the charge is placeable at the coordinate
