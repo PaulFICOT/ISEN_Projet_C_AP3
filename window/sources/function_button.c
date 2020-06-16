@@ -245,7 +245,6 @@ void start_process_button(GtkWidget *widget) {
         nanosleep(&t,0);
         linked_list* iterator = main_charge_system->charges;
         while (!is_null(iterator)) {
-            printf("je suis %f %f\n", ((charge*)iterator->value)->position->x, ((charge*)iterator->value)->position->y);
             if (!((charge*)iterator->value)->is_fixed) {
                 calculate_next_pose(main_charge_system, (charge*)iterator->value);
                 printf("%i: (%f, %f)\n", i, ((charge*)iterator->value)->position->x, ((charge*)iterator->value)->position->y);
