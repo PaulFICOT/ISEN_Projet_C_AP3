@@ -231,15 +231,7 @@ void start_process_button(GtkWidget *widget) {
     /* Hide the window */
     gtk_widget_hide(g_object_get_data(G_OBJECT(widget), "window"));
 
-    charge* a = charge_create(0, 0, POSITIVE, 1E-18, 3E-10, 1);
-    charge* b = charge_create(2, 0, NEGATIVE, 3E-19, 4E-11, 0);
-
-    add_charge(main_charge_system, a);
-    add_charge(main_charge_system, b);
-
-    int nbr_charge_system = length(main_charge_system->charges);
-
-    if (nbr_charge_system == 0) {
+    if (length(main_charge_system->charges) == 0) {
         set_log("There is no charge in the system.");
         return;
     }
@@ -251,8 +243,15 @@ void start_process_button(GtkWidget *widget) {
     struct timespec t={0,100};
     for (int i = 0; i < time; i++) {
         nanosleep(&t,0);
-        calculate_next_pose(main_charge_system, b);
-        printf("%i: (%f, %f)\n", i, b->position->x, b->position->y);
+        linked_list* iterator = main_charge_system->charges;
+        while (!is_null(iterator)) {
+            if (((charge*)iterator->value)->is_fixed) {
+                break;
+            }
+            calculate_next_pose(main_charge_system, (charge*)iterator->value);
+            printf("%i: (%f, %f)\n", i, ((charge*)iterator->value)->position->x, ((charge*)iterator->value)->position->y);
+            forward(&iterator, 1);
+        }
         redraw_surface(area, main_charge_system);
         if (!state_simulation) {
             return;
