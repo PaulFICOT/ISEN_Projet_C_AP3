@@ -117,7 +117,7 @@ void redraw_surface(GtkWidget *widget, charge_system *main_charge_system) {
 
 void draw_arrow(GtkWidget *widget, vector *arrow) {
   coordinate *start = scale_coordinate(arrow->start);
-  coordinate *end = scale_coordinate(coordinate_create(arrow->end->x, arrow->end->y));
+  coordinate *end = scale_coordinate(arrow->end);
   cairo_t *cr = cairo_create(surface);
 
   double arrow_angle = atan2(end->y - start->y, end->x - start->x) + M_PI;
