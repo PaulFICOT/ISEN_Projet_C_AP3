@@ -52,7 +52,7 @@ void clear_surface() {
 }
 
 coordinate* scale_coordinate(coordinate *coord) {
-  return coordinate_create((WINDOW_WIDTH/2.0) + (coord->x * 20.0), (WINDOW_HEIGHT/2.0) - (coord->y * 20.0));
+  return coordinate_create((WINDOW_WIDTH/2.0) + (m_to_nm(coord->x) * 20.0), (WINDOW_HEIGHT/2.0) - (m_to_nm(coord->y) * 20.0));
 }
 
 void draw_fixed_charge(GtkWidget *widget, gdouble x, gdouble y) {
@@ -117,7 +117,7 @@ void redraw_surface(GtkWidget *widget, charge_system *main_charge_system) {
 
 void draw_arrow(GtkWidget *widget, vector *arrow) {
   coordinate *start = scale_coordinate(arrow->start);
-  coordinate *end = scale_coordinate(coordinate_create(arrow->end->x * 2, arrow->end->y * 2));
+  coordinate *end = scale_coordinate(coordinate_create(arrow->end->x, arrow->end->y));
   cairo_t *cr = cairo_create(surface);
 
   double arrow_angle = atan2(end->y - start->y, end->x - start->x) + M_PI;
@@ -144,7 +144,7 @@ void draw_arrow(GtkWidget *widget, vector *arrow) {
 }
 
 gboolean clicked(GtkWidget *widget, GdkEventButton *mouse, charge_system *main_charge_system) {
-  coordinate* coord = coordinate_create((mouse->x - (WINDOW_WIDTH/2.0)) / 20.0, ((WINDOW_HEIGHT/2.0) - mouse->y) / 20.0);
+  coordinate* coord = coordinate_create(nm_to_m((mouse->x - (WINDOW_WIDTH/2.0)) / 20.0), nm_to_m(((WINDOW_HEIGHT/2.0) - mouse->y) / 20.0));
   if (mouse->button == GDK_BUTTON_PRIMARY) {
     charge* a_charge = get_charge(main_charge_system, coord);
 

@@ -5,6 +5,7 @@
 #include "window_config.h"
 #include "../../logic/includes/charge_system.h"
 #include "../../constants.h"
+#include "../../logic/includes/distance_converter.h"
 
 /**
  * Initialize a surface

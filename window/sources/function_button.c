@@ -51,7 +51,7 @@ void create_charge_button(GtkWidget *widget) {
     }
 
     /* Check if the new charge is placeable in the charge system */
-    coordinate *coord = coordinate_create(coord_x, coord_y);
+    coordinate *coord = coordinate_create(nm_to_m(coord_x), nm_to_m(coord_y));
     if (!charge_is_placeable(main_charge_system, coord)) {
         set_log("There is already a charge at these coordinates");
         return;
@@ -69,8 +69,8 @@ void create_charge_button(GtkWidget *widget) {
     }
 
     charge* new_charge = charge_create(
-        coord_x,
-        coord_y,
+        coord->x,
+        coord->y,
         symbol,
         fabs(force),
         weight,
@@ -108,7 +108,7 @@ void modify_charge_button(GtkWidget *widget) {
     /* Get new charge's coordinate */
     GtkWidget *spin_x = gtk_grid_get_child_at(GTK_GRID(grid), 0, 1);
     GtkWidget *spin_y = gtk_grid_get_child_at(GTK_GRID(grid), 0, 3);
-    coordinate *new_coord_charge = coordinate_create(gtk_spin_button_get_value(GTK_SPIN_BUTTON(spin_x)), gtk_spin_button_get_value(GTK_SPIN_BUTTON(spin_y)));
+    coordinate *new_coord_charge = coordinate_create(nm_to_m(gtk_spin_button_get_value(GTK_SPIN_BUTTON(spin_x))), nm_to_m(gtk_spin_button_get_value(GTK_SPIN_BUTTON(spin_y))));
 
     delete(&main_charge_system->charges, a_charge);
 

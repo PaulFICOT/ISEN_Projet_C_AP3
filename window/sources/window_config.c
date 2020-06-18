@@ -152,8 +152,8 @@ GtkWidget* init_charge_window(GtkWidget* area, charge_system* main_charge_system
     g_ascii_formatd(charge_force_string, 50, "%g", charge_force);
 
     gtk_window_set_title(GTK_WINDOW (window_charge), "Modify charge");
-    gtk_spin_button_set_value(GTK_SPIN_BUTTON(spin_x), a_charge->position->x);
-    gtk_spin_button_set_value(GTK_SPIN_BUTTON(spin_y), a_charge->position->y);
+    gtk_spin_button_set_value(GTK_SPIN_BUTTON(spin_x), m_to_nm(a_charge->position->x));
+    gtk_spin_button_set_value(GTK_SPIN_BUTTON(spin_y), m_to_nm(a_charge->position->y));
     gtk_entry_set_text(GTK_ENTRY(entry_force), charge_force_string);
     gtk_entry_set_text(GTK_ENTRY(entry_weight), charge_weight);
     gtk_switch_set_active(GTK_SWITCH(btn_switch), a_charge->is_fixed);

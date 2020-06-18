@@ -19,7 +19,8 @@ logic/sources/coordinate.c \
 logic/sources/linked_list.c \
 logic/sources/charge_system.c \
 window/sources/window_config.c \
-window/sources/function_button.c
+window/sources/function_button.c \
+logic/sources/distance_converter.c
 
 # Add \ at the end of the line to put each filename on a newline
 O_FILES = main.o \
@@ -30,7 +31,8 @@ coordinate.o \
 linked_list.o \
 charge_system.o \
 window_config.o \
-function_button.o
+function_button.o \
+distance_converter.o
 
 all: $(EXEC)
 

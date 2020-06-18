@@ -23,11 +23,11 @@ double coulomb_law(charge* a, charge* b) {
 
 charge* random_charge(double x, double y, double is_fixed) {
     return charge_create(
-        !isfinite(x) ? rand() % 2000 * pow(10, -2) * (rand() % 2 == 1 ? -1 : 1) : x,
-        !isfinite(y) ? rand() % 1200 * pow(10, -2) * (rand() % 2 == 1 ? -1 : 1) : y,
+        !isfinite(x) ? (rand() % 2000 * pow(10, -2) * (rand() % 2 == 1 ? -1 : 1)) * pow(10, -9) : x,
+        !isfinite(y) ? (rand() % 1200 * pow(10, -2) * (rand() % 2 == 1 ? -1 : 1)) * pow(10, -9) : y,
         rand() % 2 == 1 ? POSITIVE : NEGATIVE,
-        rand() % 10 * pow(10,-12) * (rand() % 2 == 1 ? -1 : 1),
-        ((rand() % 900) + 1) * pow(10,-12),
+        ((rand() % 900) + 1) * pow(10,-18) * (rand() % 2 == 1 ? -1 : 1),
+        ((rand() % 900) + 1) * pow(10,-33),
         !isfinite(is_fixed) ? rand() % 2 : is_fixed
     );
 }
