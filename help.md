@@ -30,7 +30,7 @@ It is selected mobile by default.
 
 **/!\ This is orthonormal Cartesian coordinates system**
 
-![screeshot of the create charge's window](pictures/create_charge.png)
+![screenshot of the create charge's window](pictures/create_charge.png)
 
 **Once all your parameters are sets, click `Create charge`, your charge is on the grid !**
 
@@ -42,38 +42,67 @@ Once it is done, click on the `Modify charge` button.
 
 If you want to delete the charge, click on the `Delete charge` button.
 
-![screeshot of the modify charge's window](pictures/modify_charge.png)
+![screenshot of the modify charge's window](pictures/modify_charge.png)
 
 <div style="page-break-after: always;"></div>
 
-### Generate a random charge system
+### Generate a random charge or a charge system
 
-If you want to generate a random charge system to try the program without creating each charge one by one, click on the `Generate charge(s)` button.
+##### Generate a single charge
+
+If you want to randomly `generate a single charge`, you simply have to `left click` wherever you want on the grid.
+Our program will randomly generate a charge with `random parameters` such as the `charge` and the `weight` at the `coordinates of your mouse pointer`.
+Moreover, you have a `50/50 purcents ratio `for the "`symbol`" (positive or negative) and for if the charge will be `fixed or mobile`.
+
+##### Generate a random charge system
+
+If you want to generate a `random charge system` to try the program without creating each charge one by one, click on the `Generate charge(s)` button.
 
 Then, select the number of mobile and mobile charge you want to randomly generate.
 
 **Info: During generation, charge's symbol ratio is 50 purcents negative and 50 purcents positive.**
 
-![screeshot of the random charge's window](pictures/random_charge.png)
+![screenshot of the random charge's window](pictures/random_charge.png)
 
 ### Start a simulation
 
 Once you have placed all your charges, selected all their characteristics, you can launch the simulation with the `Start` button.
+Once you have clicked on it, our system will ask you two things : 
+- if you want to `enable or disable the collision` between charges
+- the `simulation time` you want in milliseconds
+
+![screenshot of start buttons's choices](pictures/collision.png)
 
 **/!\ Once you have clicked the start button, the simulation is running, you will not be able to interact with the charges. All you will be able to do is stopping the simulation.**
 
 ### Reset the grid
 
 Click on the `Reset` button.
-The grid has been completed wiped from every charges.
+The grid will be completely wiped from all charges.
+
+### Electrostatic potential
+
+If you want to get the `electrostatic potential` on a specific point, simply `right click` on the grid and the system will calculate the electrostatic potential at the coordinates of the mouse pointer.
+The electrostatic potential will be `displayed on the bottom of the window`.
+
+![screenshot of the window with the electrostatic potential](pictures/electrostatic-potential.png)
+
+### Coulomb force
+
+The `coulomb force` is `represented on mobile charges` as a `vector directed` by the `sum of coulomb forces applied by all charges on each charge`.
+
+![screenshot of the window with the coulomb force applied on a mobile charge](pictures/coulomb_force.png)
+
+**/!\ Once the simulation has been launched, the vectors are vanished from the window.**
+
 
 ## Limits of the program
-We have set some limits in our program :
+We have set some `limits` in our program :
 
 ###### Simulation time
-We have set a maximum simulation time of 180 000 milliseconds (3 minutes).
+We have set a maximum simulation time of `180 000 milliseconds` (`3 minutes`).
 We felt that this time lapse was a decent compromise.
 
 ##### Maximum number of charges
-We have set the maximum number of charges to 50 charges in total.
+We have set the maximum number of charges to `50 charges` in total.
 In our opinion it is enough for the purpose of using which is education.
