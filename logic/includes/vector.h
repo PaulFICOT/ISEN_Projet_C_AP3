@@ -7,21 +7,35 @@ typedef struct vector_ vector;
 struct vector_ {
     coordinate* start;
     coordinate* end;
-    double magnitude;
 };
 
 /**
  * vector constructor.
  *
- * @param c the coordinates of the starting point
- * @param direction the direction of the vector (an angle)
- * @param magnitude the length of the vector
- * 
+ * @param s the coordinates of the starting point
+ * @param e the coordinates of the ending point
+ *
  * @return a new vector instance
  */
-vector* vector_create(coordinate* s, coordinate* e, double magnitude);
+vector* vector_create(coordinate* s, coordinate* e);
 
+/**
+ * vector constructor. Calculates the end point from the slope and the magnitude of the vector
+ *
+ * @param s the coordinates of the starting point
+ * @param e the coordinates of the ending point
+ *
+ * @return a new vector instance
+ */
 vector* vector_create_from_straight_line(coordinate* s, double magnitude, double slope);
 
+/**
+ * Calculate the slope of a straight line equation carrying two points
+ *
+ * @param a a point on the straight line
+ * @param b an other point on the straight line
+ *
+ * @return the slope of the line
+ */
 double calculate_slope(coordinate* a, coordinate* b);
 #endif

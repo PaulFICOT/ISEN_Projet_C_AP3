@@ -5,11 +5,10 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-vector* vector_create(coordinate* s, coordinate* e, double magnitude) {
+vector* vector_create(coordinate* s, coordinate* e) {
     vector* v = malloc(sizeof(vector));
     v->start = s;
     v->end = e;
-    v->magnitude = magnitude;
     return v;
 }
 
@@ -25,7 +24,7 @@ vector* vector_create_from_straight_line(coordinate* s, double magnitude, double
         delta_x = magnitude *  (slope > 0 ? cos(slope) : sin(slope)) * pow(10, 9);
         delta_y = magnitude * (slope > 0 ? sin(slope) : cos(slope)) * pow(10, 9);
     }
-    return vector_create(s, coordinate_create((fabs(s->x) - delta_x ) * (s->x > 0 ? 1 : -1), (fabs(s->y) - delta_y) * (s->y > 0 ? 1 : -1)), magnitude);
+    return vector_create(s, coordinate_create((fabs(s->x) - delta_x ) * (s->x > 0 ? 1 : -1), (fabs(s->y) - delta_y) * (s->y > 0 ? 1 : -1)));
 }
 
 double calculate_slope(coordinate* a, coordinate* b) {
