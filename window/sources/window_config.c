@@ -124,7 +124,7 @@ GtkWidget* init_charge_window(GtkWidget* area, charge_system* main_charge_system
   label_y = gtk_label_new("Coordinate y");
   spin_y = gtk_spin_button_new_with_range(-12, 12, 0.01);
 
-  label_force = gtk_label_new("Force");
+  label_force = gtk_label_new("Charge");
   entry_force = gtk_entry_new();
   gtk_entry_set_max_length(GTK_ENTRY(entry_force), 50);
   g_signal_connect(entry_force, "insert-text", G_CALLBACK(check_insert_widget), NULL);
