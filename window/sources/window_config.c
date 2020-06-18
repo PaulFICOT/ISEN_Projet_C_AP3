@@ -118,18 +118,18 @@ GtkWidget* init_charge_window(GtkWidget* area, charge_system* main_charge_system
   gtk_window_set_position(GTK_WINDOW(window_charge), GTK_WIN_POS_CENTER);
   g_signal_connect(GTK_WINDOW(window_charge), "delete-event", G_CALLBACK(hide_window), NULL);
 
-  label_x = gtk_label_new("Coordinate x");
+  label_x = gtk_label_new("Coordinate x (m)");
   spin_x = gtk_spin_button_new_with_range(-20, 20, 0.01);
 
-  label_y = gtk_label_new("Coordinate y");
+  label_y = gtk_label_new("Coordinate y (m)");
   spin_y = gtk_spin_button_new_with_range(-12, 12, 0.01);
 
-  label_force = gtk_label_new("Charge");
+  label_force = gtk_label_new("Charge (C)");
   entry_force = gtk_entry_new();
   gtk_entry_set_max_length(GTK_ENTRY(entry_force), 50);
   g_signal_connect(entry_force, "insert-text", G_CALLBACK(check_insert_widget), NULL);
 
-  label_weight = gtk_label_new("Weight");
+  label_weight = gtk_label_new("Weight (kg)");
   entry_weight = gtk_entry_new();
   gtk_entry_set_max_length(GTK_ENTRY(entry_weight), 50);
   g_signal_connect(entry_weight, "insert-text", G_CALLBACK(check_insert_widget), NULL);
