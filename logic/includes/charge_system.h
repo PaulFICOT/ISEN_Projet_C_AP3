@@ -15,7 +15,7 @@ struct charge_system_ {
 };
 
 /**
- * charge_system constructor.
+ * Charge_system constructor.
  *
  * @return a new charge_system instance
  */

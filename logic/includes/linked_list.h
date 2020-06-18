@@ -10,7 +10,7 @@ struct linked_list_
 };
 
 /**
- * linked_list constructor.
+ * Linked_list constructor.
  * 
  * @param n the value of the linked list
  * @return a new linked_list instance

@@ -10,7 +10,7 @@ struct vector_ {
 };
 
 /**
- * vector constructor.
+ * Vector constructor.
  *
  * @param s the coordinates of the starting point
  * @param e the coordinates of the ending point
@@ -20,7 +20,7 @@ struct vector_ {
 vector* vector_create(coordinate* s, coordinate* e);
 
 /**
- * vector constructor. Calculates the end point from the slope and the magnitude of the vector
+ * Calculates the end point from the slope and the magnitude of the vector
  *
  * @param s the coordinates of the starting point
  * @param e the coordinates of the ending point

@@ -9,7 +9,7 @@ struct coordinate_ {
 };
 
 /**
- * coordinate constructor.
+ * Coordinate constructor.
  *
  * @param x the abscissa
  * @param y the ordinates
@@ -19,7 +19,7 @@ struct coordinate_ {
 coordinate* coordinate_create(double x, double y);
 
 /**
- * calculate the distance between two points.
+ * Calculate the distance between two points.
  *
  * @param a a charge
  * @param a a charge
