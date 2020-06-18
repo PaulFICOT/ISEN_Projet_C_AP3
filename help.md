@@ -44,8 +44,6 @@ If you want to delete the charge, click on the `Delete charge` button.
 
 ![screenshot of the modify charge's window](pictures/modify_charge.png)
 
-<div style="page-break-after: always;"></div>
-
 ### Generate a random charge or a charge system
 
 ##### Generate a single charge
@@ -85,7 +83,7 @@ The grid will be completely wiped from all charges.
 If you want to get the `electrostatic potential` on a specific point, simply `right click` on the grid and the system will calculate the electrostatic potential at the coordinates of the mouse pointer.
 The electrostatic potential will be `displayed on the bottom of the window`.
 
-![screenshot of the window with the electrostatic potential](pictures/electrostatic-potential.png)
+![screenshot of the window with the electrostatic potential](pictures/electrostatic_potential.png)
 
 ### Coulomb force
 
@@ -95,11 +93,10 @@ The `coulomb force` is `represented on mobile charges` as a `vector directed` by
 
 **/!\ Once the simulation has been launched, the vectors are vanished from the window.**
 
-
 ## Limits of the program
 We have set some `limits` in our program :
 
-###### Simulation time
+##### Simulation time
 We have set a maximum simulation time of `180 000 milliseconds` (`3 minutes`).
 We felt that this time lapse was a decent compromise.
 
