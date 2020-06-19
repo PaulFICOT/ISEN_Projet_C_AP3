@@ -1,6 +1,6 @@
 # Simulateur d'interaction électrostatiques
 
-Lien de la librairie GTK (3.20) : [ici](https://download.gnome.org/sources/gtk+/3.20/gtk+-3.20.0.tar.xz "GTK 3.20") 
+Lien de la librairie GTK (3.20) : [ici](https://download.gnome.org/sources/gtk+/3.20/gtk+-3.20.0.tar.xz "GTK 3.20")
 
 
 ## Compile the project
@@ -8,8 +8,11 @@ Lien de la librairie GTK (3.20) : [ici](https://download.gnome.org/sources/gtk+/
 ## 1- Install GTK
 
 #### Mac OS
+Dowload [this](https://gitlab.gnome.org/GNOME/gtk-osx/raw/master/gtk-osx-setup.sh "GTK-OSX") and pull it in project's repository  
+Once it is done, execute theses commands in project's repository
 
 ```shell
+sh gtk-osx-setup.sh
 brew install gtk+3
 brew install gnome-icon-theme
 ```
