@@ -1,5 +1,6 @@
 #include "../includes/charge_system.h"
 #include "../../constants.h"
+#include "gtk/gtk.h"
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -29,9 +30,17 @@ vector* superposition_law(charge_system* c_s, charge* mobile_charge) {
     while (!is_null(iterator)) {
         if ((charge*) iterator->value != mobile_charge) {
             double c_l = coulomb_law((charge*) iterator->value, mobile_charge);
-            c_l *= ((charge*) iterator->value)->symbol == mobile_charge->symbol ? -1 : 1;
             magnitude += c_l;
-            sum_slopes += calculate_slope(mobile_charge->position, ((charge*) iterator->value)->position);
+            double slope = calculate_slope(mobile_charge->position, ((charge*) iterator->value)->position);
+            charge* fixed_charge = (charge*) iterator->value;
+            if (fixed_charge->symbol == mobile_charge->symbol) {
+                if (fixed_charge->position->x < mobile_charge->position->x) {
+                    slope += G_PI;
+                } else {
+                    slope += 2 * G_PI;
+                }
+            }
+            sum_slopes += slope;
         }
         forward(&iterator, 1);
     }
