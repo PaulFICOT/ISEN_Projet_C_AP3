@@ -62,4 +62,11 @@ void start_process_button(GtkWidget *widget);
  */
 gboolean get_state_simulation();
 
+/**
+ * Change the state of the simulation
+ *
+ * @param widget new state of the simulation
+ */
+void set_state_simulation(gboolean state);
+
 #endif

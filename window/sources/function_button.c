@@ -270,3 +270,7 @@ void start_process_button(GtkWidget *widget) {
 gboolean get_state_simulation() {
     return state_simulation;
 }
+
+void set_state_simulation(gboolean state) {
+    state_simulation = state;
+}
