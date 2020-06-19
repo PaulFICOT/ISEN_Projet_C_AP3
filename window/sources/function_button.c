@@ -260,10 +260,10 @@ void start_process_button(GtkWidget *widget) {
             return;
         }
     }
-    redraw_surface(area, main_charge_system);
     state_simulation = FALSE;
     set_log("Simulation done");
     set_label_btn_simulation("Start");
+    redraw_surface(area, main_charge_system);
 }
 
 gboolean get_state_simulation() {
