@@ -4,7 +4,6 @@
 static gboolean state_simulation = FALSE;
 char message[1024];
 
-
 void display_window_button(GtkWidget *widget, GtkWidget* window_charge) {
     if (state_simulation) {
         if (strcmp(gtk_button_get_label(GTK_BUTTON(widget)), "Stop") == 0) {
@@ -245,7 +244,7 @@ void start_process_button(GtkWidget *widget) {
     set_label_btn_simulation("Stop");
     set_log("Simulation started");
     redraw_surface(area, main_charge_system);
-    struct timespec t={0.5,0};
+    struct timespec t={(time_t) 0.5,0};
     for (int i = 0; i < time; i++) {
         nanosleep(&t,0);
         linked_list* iterator = main_charge_system->charges;
