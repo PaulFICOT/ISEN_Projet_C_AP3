@@ -86,9 +86,9 @@ void delete(linked_list **l, void* e) {
         return;
     }
 
-    /* case e is the first elem of l */
+    /* case e is the first element of l */
     if ((*l)->value == e) {
-        /* case e is the only elem of l */
+        /* case e is the only element of l */
         if (!has_next(*l)) {
             *l = NULL;
             return;
@@ -110,7 +110,7 @@ void delete(linked_list **l, void* e) {
 
     linked_list* tmp = iterator->next;
 
-    /* case e is the last elem of l */
+    /* case e is the last element of l */
     if (!has_next(iterator->next)) {
         iterator->next = NULL;
         free(tmp);

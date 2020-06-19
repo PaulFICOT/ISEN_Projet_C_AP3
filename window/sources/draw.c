@@ -14,7 +14,8 @@ gboolean init_surface(GtkWidget *widget) {
   cairo_t *cr = cairo_create(surface);
 
   cairo_set_source_rgb(cr, 1, 1, 1);
-  /* Paint all surface to white */
+
+  /* Paint all surface in white */
   cairo_paint(cr);
 
   /* Add graduation background on surface */
@@ -40,7 +41,7 @@ void clear_surface() {
   cairo_t *cr = cairo_create(surface);
 
   cairo_set_source_rgb(cr, 1, 1, 1);
-  /* Paint all surface to white */
+  /* Paint all surface in white */
   cairo_paint(cr);
 
   /* Add graduation background on surface */
@@ -60,7 +61,7 @@ void draw_fixed_charge(GtkWidget *widget, gdouble x, gdouble y) {
   coordinate* coord = scale_coordinate(coordinate_create(x, y));
 
   cairo_set_source_rgb(cr, 0.50, 0.50, 0.50);
-  /* Draw a sphere of radius CHARGE_RADIUS */
+  /* Draw a sphere of a radius CHARGE_RADIUS */
   cairo_arc(cr ,coord->x ,coord->y ,CHARGE_RADIUS ,0 , 2*G_PI);
   cairo_fill(cr);
   cairo_set_source_rgb(cr, 1, 1, 1);
@@ -76,7 +77,7 @@ void draw_mobile_charge(GtkWidget *widget, gdouble x, gdouble y) {
   coordinate* coord = scale_coordinate(coordinate_create(x, y));
 
   cairo_set_source_rgb(cr, 0.93, 0.83, 0.83);
-  /* Draw a sphere of radius CHARGE_RADIUS */
+  /* Draw a sphere of a radius CHARGE_RADIUS */
   cairo_arc(cr ,coord->x ,coord->y ,CHARGE_RADIUS ,0 , 2*G_PI);
   cairo_fill(cr);
   cairo_set_source_rgb(cr, 1, 1, 1);

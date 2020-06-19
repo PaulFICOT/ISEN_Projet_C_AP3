@@ -57,7 +57,7 @@ void create_charge_button(GtkWidget *widget) {
         return;
     }
 
-    /* Init variables for the new charge */
+    /* Initialize variables for the new charge */
     enum symbol symbol;
 
     if (force > 0) {
@@ -83,7 +83,7 @@ void create_charge_button(GtkWidget *widget) {
     /* Refresh surface */
     redraw_surface(area, main_charge_system);
 
-    /* Reset widgets' values */
+    /* Reset widgets's values */
     gtk_spin_button_set_value(GTK_SPIN_BUTTON(spin_x), 0.0);
     gtk_spin_button_set_value(GTK_SPIN_BUTTON(spin_y), 0.0);
     gtk_entry_set_text(GTK_ENTRY(entry_force), "0,0");
@@ -105,14 +105,14 @@ void modify_charge_button(GtkWidget *widget) {
     charge_system* main_charge_system = g_object_get_data(G_OBJECT(widget), "charge_system");
     GtkWidget *grid = g_object_get_data(G_OBJECT(widget), "grid");
 
-    /* Get new charge's coordinate */
+    /* Get new charge's coordinates */
     GtkWidget *spin_x = gtk_grid_get_child_at(GTK_GRID(grid), 0, 1);
     GtkWidget *spin_y = gtk_grid_get_child_at(GTK_GRID(grid), 0, 3);
     coordinate *new_coord_charge = coordinate_create(nm_to_m(gtk_spin_button_get_value(GTK_SPIN_BUTTON(spin_x))), nm_to_m(gtk_spin_button_get_value(GTK_SPIN_BUTTON(spin_y))));
 
     delete(&main_charge_system->charges, a_charge);
 
-    /* Check if the new charge's coordinate is placeable */
+    /* Check if the new charge's coordinates is placeable */
     if (charge_is_placeable(main_charge_system, new_coord_charge)) {
         create_charge_button(widget);
     } else {
@@ -131,7 +131,7 @@ void delete_charge_button(GtkWidget *widget) {
 
     charge_system* main_charge_system = g_object_get_data(G_OBJECT(widget), "charge_system");
 
-    /* WIP delete function */
+    /* delete function */
     delete(&main_charge_system->charges, g_object_get_data(G_OBJECT(widget), "a_charge"));
 
     /* Refresh the surface */
@@ -171,7 +171,7 @@ void generate_charge_button(GtkWidget *widget) {
         return;
     }
 
-    /* Generate mobile charge and check if it is placeable before add it in charge system */
+    /* Generate mobile charge and check if it is placeable before adding it in charge system */
     while (nbr_charge_mobile != 0) {
         charge *new_charge = random_charge(INFINITY, INFINITY, 0);
         if (charge_is_placeable(main_charge_system, new_charge->position)) {

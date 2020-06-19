@@ -13,11 +13,10 @@ void activate(GtkApplication *app) {
   GtkWidget *btn_create;
   GtkWidget *box_statusbar;
 
-  /* Init the charge system */
+  /* Initialize the charge system */
   charge_system* main_charge_system = charge_system_create();
 
   /* Initialize and configure each widget */
-
   window = gtk_application_window_new(app);
   gtk_window_set_title(GTK_WINDOW (window), "Electrostatic Interaction Simulator");
   gtk_widget_set_size_request(window, WINDOW_WIDTH, WINDOW_HEIGHT);
@@ -110,7 +109,6 @@ GtkWidget* init_charge_window(GtkWidget* area, charge_system* main_charge_system
   GtkWidget *btn_charge;
 
   /* Initialize and set up each widget */
-
   window_charge = gtk_window_new(GTK_WINDOW_TOPLEVEL);
   gtk_window_set_default_size(GTK_WINDOW(window_charge), WINDOW_CHARGE_WIDTH, WINDOW_CHARGE_HEIGHT);
   gtk_container_set_border_width(GTK_CONTAINER(window_charge), 10);
@@ -222,7 +220,6 @@ GtkWidget* init_generate_window(GtkWidget* area, charge_system* main_charge_syst
   GtkWidget *btn;
 
   /* Initialize and set up each widget */
-
   window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
   gtk_container_set_border_width(GTK_CONTAINER(window), 10);
   gtk_window_set_resizable (GTK_WINDOW(window), FALSE);
@@ -271,7 +268,6 @@ GtkWidget* init_start_window(GtkWidget* area, charge_system* main_charge_system)
   GtkWidget *btn;
 
   /* Initialize and set up each widget */
-
   window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
   gtk_container_set_border_width(GTK_CONTAINER(window), 10);
   gtk_window_set_resizable (GTK_WINDOW(window), FALSE);
