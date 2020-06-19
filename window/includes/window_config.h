@@ -9,6 +9,13 @@
 #include "../../constants.h"
 
 /**
+ * Check the state of the simualation and close the main window
+ *
+ * @param window The main window
+ */
+gboolean close_main_window(GtkWidget *window);
+
+/**
  * Configure main window with different widgets and show it
  *
  * @param app The application to start

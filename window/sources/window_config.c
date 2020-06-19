@@ -3,6 +3,15 @@
 static GtkWidget *statusbar = NULL;
 static GtkWidget *btn_simulation = NULL;
 
+gboolean close_main_window(GtkWidget *window) {
+    /* If the simulation is activated then we disable the simulation before to close the window */
+    if (get_state_simulation()) {
+      set_state_simulation(FALSE);
+    }
+    gtk_widget_destroy(window);
+    return TRUE;
+}
+
 void activate(GtkApplication *app) {
   GtkWidget *window;
   GtkWidget *area;
@@ -21,6 +30,7 @@ void activate(GtkApplication *app) {
   gtk_window_set_title(GTK_WINDOW (window), "Electrostatic Interaction Simulator");
   gtk_widget_set_size_request(window, WINDOW_WIDTH, WINDOW_HEIGHT);
   gtk_window_set_resizable(GTK_WINDOW(window), FALSE);
+  g_signal_connect(GTK_WINDOW(window), "delete-event", G_CALLBACK(close_main_window), NULL);
 
   area = gtk_drawing_area_new();
   gtk_widget_set_size_request(area, WINDOW_WIDTH, WINDOW_HEIGHT);
