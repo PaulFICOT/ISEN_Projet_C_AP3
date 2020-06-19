@@ -245,14 +245,14 @@ void start_process_button(GtkWidget *widget) {
     set_label_btn_simulation("Stop");
     set_log("Simulation started");
     redraw_surface(area, main_charge_system);
-    struct timespec t={0,100};
+    struct timespec t={0.5,0};
     for (int i = 0; i < time; i++) {
         nanosleep(&t,0);
         linked_list* iterator = main_charge_system->charges;
         while (!is_null(iterator)) {
             if (!((charge*)iterator->value)->is_fixed) {
                 calculate_next_pose(main_charge_system, (charge*)iterator->value, collision);
-                printf("%i: (%f, %f)\n", i, ((charge*)iterator->value)->position->x, ((charge*)iterator->value)->position->y);
+                // printf("%i: (%f, %f)\n", i, ((charge*)iterator->value)->position->x, ((charge*)iterator->value)->position->y);
             }
             forward(&iterator, 1);
         }
