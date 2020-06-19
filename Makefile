@@ -10,6 +10,10 @@ CFLAGS = $(ERROR_FLAGS) $(GTK_CFLAGS) $(LIB_FLAGS)
 GTK_LDFLAGS = `pkg-config --libs gtk+-3.0`
 LDFLAGS = $(ERROR_FLAGS) $(GTK_LDFLAGS) $(LIB_FLAGS)
 
+HEADERS = my_header.h \
+my_header.h \
+my_other_header.h
+
 # Add \ at the end of the line to put each filename on a newline
 SOURCE_FILES = main.c \
 window/sources/draw.c \
@@ -34,9 +38,22 @@ window_config.o \
 function_button.o \
 distance_converter.o
 
+# Add \ at the end of the line to put each filename on a newline
+HEADER_FILES = constants.h \
+enums.h \
+window/includes/draw.h \
+logic/includes/vector.h \
+logic/includes/charge.h \
+logic/includes/coordinate.h \
+logic/includes/linked_list.h \
+logic/includes/charge_system.h \
+window/includes/window_config.h \
+window/includes/function_button.h \
+logic/includes/distance_converter.h
+
 all: $(EXEC)
 
-$(EXEC): $(SOURCE_FILES)
+$(EXEC): $(SOURCE_FILES) $(HEADER_FILES)
 	$(CC) -c $(SOURCE_FILES) $(CFLAGS)
 	$(CC) -o $(EXEC) $(O_FILES) $(LDFLAGS) && make clean
 
