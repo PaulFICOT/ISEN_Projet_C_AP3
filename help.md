@@ -71,7 +71,7 @@ Once you have clicked on it, our system will ask you two things :
 
 ![screenshot of start buttons's choices](pictures/collision.png)
 
-**/!\ Once you have clicked the start button, the simulation is running, you will not be able to interact with the charges. All you will be able to do is stopping the simulation.**
+**/!\ Once you have clicked the start button, the simulation is running, you will not be able to interact with the charges. All you will be able to do is stopping the simulation or resetting the system.**
 
 ### Reset the grid
 
