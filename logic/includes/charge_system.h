@@ -2,11 +2,13 @@
 #define CHARGE_SYSTEM
 
 #include <math.h>
-
+#include <stdio.h>
+#include <stdlib.h>
+#include "gtk/gtk.h"
 #include "charge.h"
 #include "vector.h"
-#include "../../constants.h"
 #include "linked_list.h"
+#include "../../constants.h"
 #include "distance_converter.h"
 
 typedef struct charge_system_ charge_system;

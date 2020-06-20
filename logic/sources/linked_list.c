@@ -1,5 +1,3 @@
-#include <stdio.h>
-#include <stdlib.h>
 #include "../includes/linked_list.h"
 
 linked_list* linked_list_create(void* n) {

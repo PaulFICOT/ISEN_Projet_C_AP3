@@ -1,8 +1,8 @@
 #ifndef CONFIG
 #define CONFIG
 
-#include "gtk/gtk.h"
 #include <regex.h>
+#include "gtk/gtk.h"
 #include "./draw.h"
 #include "./function_button.h"
 #include "../../logic/includes/charge_system.h"

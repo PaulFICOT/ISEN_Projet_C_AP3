@@ -1,9 +1,10 @@
 #ifndef BUTTON
 #define BUTTON
 
+#include <unistd.h>
+#include <stdio.h>
 #include "gtk/gtk.h"
 #include "window_config.h"
-#include <unistd.h>
 
 /**
  * Show the window

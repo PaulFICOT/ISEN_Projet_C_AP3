@@ -1,5 +1,4 @@
 #include "../includes/function_button.h"
-#include <stdio.h>
 
 static gboolean state_simulation = FALSE;
 char message[1024];

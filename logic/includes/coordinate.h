@@ -1,6 +1,10 @@
 #ifndef COORDINATE
 #define COORDINATE
 
+#include <math.h>
+#include <stddef.h>
+#include <stdlib.h>
+
 typedef struct coordinate_ coordinate;
 
 struct coordinate_ {

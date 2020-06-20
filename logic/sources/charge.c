@@ -1,6 +1,5 @@
 #include "../includes/charge.h"
-#include <stdlib.h>
-#include <math.h>
+
 charge* charge_create(double x, double y, enum symbol symbol, double force, double weight, short is_fixed) {
     charge* ch = malloc(sizeof(charge));
     coordinate* c = coordinate_create(x, y);

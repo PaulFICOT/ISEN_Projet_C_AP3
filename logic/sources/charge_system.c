@@ -1,8 +1,4 @@
 #include "../includes/charge_system.h"
-#include "../../constants.h"
-#include "gtk/gtk.h"
-#include <stdio.h>
-#include <stdlib.h>
 
 charge_system* charge_system_create() {
     charge_system* s = malloc(sizeof(charge_system));
@@ -128,7 +124,7 @@ double electrostatic_potential(charge_system *c_s, coordinate* m) {
         elec_charge *= elec_symbol == NEGATIVE ? -1 : 1;
         double elec_const = 1/(4*PI*EPSILON_0);
         elec_charge /= (fabs(two_points_distance(((charge*) iterator->value)->position, m)));
-        elec_pot = elec_const*elec_charge;
+        elec_pot += elec_const*elec_charge;
         forward(&iterator, 1);
     }
     return elec_pot;

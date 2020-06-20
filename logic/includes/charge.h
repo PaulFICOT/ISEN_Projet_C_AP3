@@ -1,6 +1,8 @@
 #ifndef CHARGE
 #define CHARGE
 
+#include <math.h>
+#include <stdlib.h>
 #include "coordinate.h"
 #include "../../enums.h"
 #include "../../constants.h"

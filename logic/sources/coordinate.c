@@ -1,7 +1,4 @@
 #include "../includes/coordinate.h"
-#include <math.h>
-#include <stddef.h>
-#include <stdlib.h>
 
 coordinate* coordinate_create(double x, double y) {
     coordinate* c = malloc(sizeof(coordinate));
