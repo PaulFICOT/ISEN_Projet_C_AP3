@@ -52,7 +52,7 @@ vector* superposition_law(charge_system* c_s, charge* mobile_charge);
 void calculate_next_pose(charge_system* c_s, charge* c, short enable_collisions);
 
 /**
- * Checks if a charge won't collide with another charge while its translation
+ * Checks if a charge won't collides with another charge while its translation
  *
  * @param c_s the charge system
  * @param c the charge
@@ -94,7 +94,7 @@ void print_charge(charge_system* c_s);
 /**
  * Calculate the electrostatic potential of a charge
  *
- * @param q the charge
+ * @param c_s the charge system
  * @param m the coordinate of the other point you would like to get the electrostatic potential
  */
 double electrostatic_potential(charge_system* c_s, coordinate* m);

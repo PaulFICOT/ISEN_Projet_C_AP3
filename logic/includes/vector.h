@@ -27,7 +27,8 @@ vector* vector_create(coordinate* s, coordinate* e);
  * Calculates the end point from the slope and the magnitude of the vector
  *
  * @param s the coordinates of the starting point
- * @param e the coordinates of the ending point
+ * @param magnitude the lenght of the vector (the distance between the start and the end points)
+ * @param angle the direction of the vector (the angle of the straight line carrying the start and end points)
  *
  * @return a new vector instance
  */
