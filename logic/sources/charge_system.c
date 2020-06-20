@@ -24,23 +24,24 @@ vector* superposition_law(charge_system* c_s, charge* mobile_charge) {
     }
 
     double magnitude = 0.0;
-    double sum_slopes = 0.0;
+    double sum_angles = 0.0;
 
     linked_list* iterator = c_s->charges;
     while (!is_null(iterator)) {
         charge* fixed_charge = (charge*) iterator->value;
-        if ((charge*) iterator->value != mobile_charge) {
-            double c_l = coulomb_law((charge*) iterator->value, mobile_charge);
+        if (fixed_charge != mobile_charge) {
+            double c_l = coulomb_law(fixed_charge, mobile_charge);
             magnitude += c_l;
-            double slope = calculate_slope(mobile_charge->position, ((charge*) iterator->value)->position);
-            if (fixed_charge->symbol == mobile_charge->symbol && fixed_charge->position->x > mobile_charge->position->x || fixed_charge->symbol != mobile_charge->symbol && fixed_charge->position->x < mobile_charge->position->x) {
-                slope += G_PI;
+            double slope_angle = calculate_slope_angle(mobile_charge->position, fixed_charge->position);
+            if ((fixed_charge->symbol == mobile_charge->symbol && (fixed_charge->position->x > mobile_charge->position->x || (fixed_charge->position->x == mobile_charge->position->x && fixed_charge->position->y > fixed_charge->position->y)))
+            || (fixed_charge->symbol != mobile_charge->symbol && (fixed_charge->position->x < mobile_charge->position->x || (fixed_charge->position->x == mobile_charge->position->x && fixed_charge->position->y < mobile_charge->position->y)))) {
+                slope_angle += G_PI;
             }
-            sum_slopes += slope;
+            sum_angles += slope_angle;
         }
         forward(&iterator, 1);
     }
-    return vector_create_from_straight_line(mobile_charge->position, magnitude, sum_slopes / (length(c_s->charges) - 1));
+    return vector_create_from_straight_line(mobile_charge->position, magnitude, sum_angles / (length(c_s->charges) - 1));
 }
 
 void calculate_next_pose(charge_system* c_s, charge* c, short enable_collisions) {

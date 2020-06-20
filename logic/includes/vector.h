@@ -27,7 +27,7 @@ vector* vector_create(coordinate* s, coordinate* e);
  *
  * @return a new vector instance
  */
-vector* vector_create_from_straight_line(coordinate* s, double magnitude, double slope);
+vector* vector_create_from_straight_line(coordinate* s, double magnitude, double angle);
 
 /**
  * Calculate the slope of a straight line equation carrying two points
@@ -37,5 +37,5 @@ vector* vector_create_from_straight_line(coordinate* s, double magnitude, double
  *
  * @return the slope of the line
  */
-double calculate_slope(coordinate* a, coordinate* b);
+double calculate_slope_angle(coordinate* a, coordinate* b);
 #endif
