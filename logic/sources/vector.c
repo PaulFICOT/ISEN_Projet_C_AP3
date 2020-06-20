@@ -15,7 +15,6 @@ vector* vector_create(coordinate* s, coordinate* e) {
 vector* vector_create_from_straight_line(coordinate* s, double magnitude, double slope) {
     double delta_x, delta_y;
     short symbol = slope > 180 ? -1 : 1;
-    short symbol = 1;
 
     if (slope == 0 || slope == 180) {
         delta_x = magnitude;
