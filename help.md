@@ -18,7 +18,7 @@ The force is the coulomb force of the charge, it is set in Coulombs (C).
 Because this zone is a free entry type zone, you can write the value you want `up to 50 characters` with "regular" notation or scientific notation.
 
 ##### Weight
-The weight is the mass of the charge in grams (g).
+The weight is the mass of the charge in grams (kg).
 The maximum's weight is always positive.
 Because this zone is a free entry type zone, you can write the value you want `up to 50 characters` with "regular" notation or scientific notation.
 
@@ -65,7 +65,7 @@ Then, select the number of mobile and mobile charge you want to randomly generat
 ### Start a simulation
 
 Once you have placed all your charges, selected all their characteristics, you can launch the simulation with the `Start` button.
-Once you have clicked on it, our system will ask you two things : 
+Once you have clicked on it, our system will ask you two things :
 - if you want to `enable or disable the collision` between charges
 - the `simulation time` you want in milliseconds
 
