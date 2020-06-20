@@ -19,25 +19,26 @@ vector* superposition_law(charge_system* c_s, charge* mobile_charge) {
         return NULL;
     }
 
+    double magnitude = 0.0;
     double sum_sin = 0.0;
     double sum_cos = 0.0;
-    double magnitude = 0.0;
     linked_list* iterator = c_s->charges;
     while (!is_null(iterator)) {
         charge* fixed_charge = (charge*) iterator->value;
         if (fixed_charge != mobile_charge) {
-            double c_l = coulomb_law(fixed_charge, mobile_charge);
-            magnitude += c_l;
+            short same_symbol = fixed_charge->symbol == mobile_charge->symbol;
+            magnitude += coulomb_law(fixed_charge, mobile_charge) * (same_symbol ? -1 : 1);
             double slope_angle = calculate_slope_angle(mobile_charge->position, fixed_charge->position);
-            if ((fixed_charge->symbol == mobile_charge->symbol && (fixed_charge->position->x > mobile_charge->position->x || (fixed_charge->position->x == mobile_charge->position->x && fixed_charge->position->y > fixed_charge->position->y)))
-            || (fixed_charge->symbol != mobile_charge->symbol && (fixed_charge->position->x < mobile_charge->position->x || (fixed_charge->position->x == mobile_charge->position->x && fixed_charge->position->y < mobile_charge->position->y)))) {
+            if ((same_symbol && (fixed_charge->position->x > mobile_charge->position->x || (fixed_charge->position->x == mobile_charge->position->x && fixed_charge->position->y > mobile_charge->position->y)))
+            || (!same_symbol && (fixed_charge->position->x < mobile_charge->position->x || (fixed_charge->position->x == mobile_charge->position->x && fixed_charge->position->y < mobile_charge->position->y)))) {
                 slope_angle += G_PI;
             }
-            sum_angles += slope_angle;
+            sum_sin += sin(slope_angle);
+            sum_cos += cos(slope_angle);
         }
         forward(&iterator, 1);
     }
-    return vector_create_from_straight_line(mobile_charge->position, magnitude, sum_angles / (length(c_s->charges) - 1));
+    return vector_create_from_straight_line(mobile_charge->position, fabs(magnitude), atan2(sum_sin / (length(c_s->charges) - 1), sum_cos / (length(c_s->charges) - 1)));
 }
 
 void calculate_next_pose(charge_system* c_s, charge* c, short enable_collisions) {
