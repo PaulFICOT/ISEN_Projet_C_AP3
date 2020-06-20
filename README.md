@@ -28,3 +28,6 @@ Inside the project's root folder, simply type `make` in the terminal
 ## Run the project
 ***
 Inside the terminal, type `./projetc.bin`. If you've followed carefully every steps the program should starts fine.
+
+## Documentation
+To get more informations on every features, please take a look on `help.md`
