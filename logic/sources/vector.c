@@ -14,7 +14,6 @@ vector* vector_create(coordinate* s, coordinate* e) {
 
 vector* vector_create_from_straight_line(coordinate* s, double magnitude, double slope) {
     double delta_x, delta_y;
-    short symbol = slope > 180 ? -1 : 1;
 
     if (slope == 0 || slope == 180) {
         delta_x = magnitude;
@@ -23,15 +22,13 @@ vector* vector_create_from_straight_line(coordinate* s, double magnitude, double
         delta_x = 0;
         delta_y = magnitude;
     } else {
-        delta_x = magnitude * cos(slope) * symbol;
-        delta_y = magnitude * sin(slope) * symbol;
+        delta_x = magnitude * cos(slope);
+        delta_y = magnitude * sin(slope);
     }
-    printf("angle next: %f\n", slope * 180 / G_PI);
     return vector_create(s, coordinate_create(s->x + delta_x, s->y + delta_y));
 }
 
 double calculate_slope(coordinate* a, coordinate* b) {
     double result = (a->y - b->y) / (a->x - b->x);
-    printf("angle prev: %f\n", atan(result) * 180 / G_PI);
     return isfinite(result) ? atan(result) : G_PI / 2;
 }

@@ -28,17 +28,13 @@ vector* superposition_law(charge_system* c_s, charge* mobile_charge) {
 
     linked_list* iterator = c_s->charges;
     while (!is_null(iterator)) {
+        charge* fixed_charge = (charge*) iterator->value;
         if ((charge*) iterator->value != mobile_charge) {
             double c_l = coulomb_law((charge*) iterator->value, mobile_charge);
             magnitude += c_l;
             double slope = calculate_slope(mobile_charge->position, ((charge*) iterator->value)->position);
-            charge* fixed_charge = (charge*) iterator->value;
-            if (fixed_charge->symbol == mobile_charge->symbol) {
-                if (fixed_charge->position->x < mobile_charge->position->x) {
-                    slope += G_PI;
-                } else {
-                    slope += 2 * G_PI;
-                }
+            if (fixed_charge->symbol == mobile_charge->symbol && fixed_charge->position->x > mobile_charge->position->x || fixed_charge->symbol != mobile_charge->symbol && fixed_charge->position->x < mobile_charge->position->x) {
+                slope += G_PI;
             }
             sum_slopes += slope;
         }
