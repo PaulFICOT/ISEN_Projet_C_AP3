@@ -167,7 +167,7 @@ gboolean clicked(GtkWidget *widget, GdkEventButton *mouse, charge_system *main_c
       }
     }
   }else if (mouse->button == GDK_BUTTON_SECONDARY) {
-    snprintf(message, sizeof(message), "The electrostatic potential at (%lf, %lf) is %g V", coord->x, coord->y, electrostatic_potential(main_charge_system, coord));
+    snprintf(message, sizeof(message), "The electrostatic potential at (%lf, %lf) is %g V", m_to_nm(coord->x), m_to_nm(coord->y), electrostatic_potential(main_charge_system, coord));
     set_log(message);
   }
 
