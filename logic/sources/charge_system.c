@@ -19,7 +19,9 @@ vector* superposition_law(charge_system* c_s, charge* mobile_charge) {
         return NULL;
     }
 
-    double magnitude, sum_sin, sum_cos = 0.0;
+    double magnitude = 0.0;
+    double sum_sin = 0.0;
+    double sum_cos = 0.0;
     linked_list* iterator = c_s->charges;
     while (!is_null(iterator)) {
         charge* fixed_charge = (charge*) iterator->value;
