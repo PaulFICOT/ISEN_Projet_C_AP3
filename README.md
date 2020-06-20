@@ -1,6 +1,6 @@
-# Simulateur d'interaction électrostatiques
+# Electrostatic interaction simulator
 
-Lien de la librairie GTK (3.20) : [ici](https://download.gnome.org/sources/gtk+/3.20/gtk+-3.20.0.tar.xz "GTK 3.20")
+Like of the library (3.20) : [ici](https://download.gnome.org/sources/gtk+/3.20/gtk+-3.20.0.tar.xz "GTK 3.20")
 
 
 ## Compile the project
